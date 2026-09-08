@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {LESSONS,MAIMONIDES_WORKS,AUTHORS,lessonsFor,workForUrl} from '../app/study.ts';
 import {CORPUS_WORKS} from '../app/corpus.ts';
-const WORKS=[...MAIMONIDES_WORKS,...CORPUS_WORKS];
+const WORKS=MAIMONIDES_WORKS; // the library; CORPUS_WORKS is generated but not surfaced yet
 import {LEXICON} from '../app/lexicon.ts';
 import {CLASSICAL} from '../app/classical.ts';
 import {prepareMarkdown,termPattern} from '../app/reader-text.ts';
@@ -48,5 +48,6 @@ for(const work of WORKS){
  if(!fs.existsSync(new URL(work.dir+'/',content))){absent++;continue;}
  for(const ch of work.chapters){assert.ok(fs.existsSync(new URL(`${work.dir}/${ch.file}`,content)),`${work.id}: missing ${ch.file}`);checked++;}
 }
+for(const w of CORPUS_WORKS)assert.ok(w.id&&w.dir&&w.chapters.length,`corpus work malformed: ${w.id}`);
 const mapped=WORKS.filter(w=>lessonsFor(w.id).length).length;
-console.log(`Study layer: ${AUTHORS.length} authors, ${WORKS.length} works (${mapped} with anatomy mapping), ${LESSONS.length} lessons, ${Object.keys(LEXICON).length} lexicon terms, ${Object.keys(CLASSICAL).length} classical notes. ${checked} chapter files found locally${absent?`, ${absent} works without a local corpus`:''}.`);
+console.log(`Study layer: ${AUTHORS.length} authors, ${WORKS.length} works (${mapped} with anatomy mapping), ${LESSONS.length} lessons, ${Object.keys(LEXICON).length} lexicon terms, ${Object.keys(CLASSICAL).length} classical notes. ${checked} chapter files found locally${absent?`, ${absent} works without a local corpus`:''}. ${CORPUS_WORKS.length} generated corpus works held back.`);

@@ -6,7 +6,7 @@ Adam is a fork of [Human Atlas](https://github.com/ashemag/human-atlas) (MIT), w
 
 ## The study layer
 
-- **Works and chapters.** A library of texts, each chapter loading in a reading pane beside the body. The Maimonides medical works (nine treatises), the whole Hippocratic corpus (51 works, Greek with English versions) and, when present, Galen and Avicenna.
+- **Works and chapters.** A library of texts, each chapter loading in a reading pane beside the body. The library is **Maimonides**: the nine medical works of volume 1, chapter by chapter. Hippocrates, Galen and Avicenna appear as background information only; their corpora can be registered later (see below) but are not surfaced.
 - **Lessons.** A chapter can be mapped to the anatomy it discusses. Opening it highlights the organ under discussion in **teal** and related structures in **amber**, sets the visible layers so nothing hides them, and shows a short note on what to look at. *On Asthma* is fully mapped: its introduction and thirteen chapters.
 - **Live terms.** Every anatomical word in the text — lungs, windpipe, brain, stomach, liver, spleen, gall, bowels, testicles, skin, pores… — is a link. Tap it and the structure lights up, with a card that sets the modern anatomy beside the **classical view**: faculty, temperament and the Galenic account of what the organ does. The classical vocabulary is in `app/lexicon.ts`; the notes in `app/classical.ts`.
 - **Juxtaposition everywhere.** Tapping a structure on the body opens the usual detail panel, now with the classical view added when one exists.
@@ -27,13 +27,11 @@ The texts are **not in this repository**. Adam reads them from `content/`, which
 ```sh
 mkdir -p content
 ln -s ~/Maimonides-Medical-Works-Vol1 content/maimonides     # 84 chapter files, one per chapter
-ln -s ~/AncientMedicine/02-hippocrates content/hippocrates   # 51 works, per-version files
-ln -s ~/AncientMedicine/03-galen content/galen               # optional
-ln -s ~/AncientMedicine/04-avicenna content/avicenna         # optional
-npm run corpus     # regenerates app/corpus.ts from content/hippocrates, galen, avicenna
 ```
 
-Maimonides is registered by hand in `app/study.ts` (chapter files, titles, page numbers, lessons). The Greek and Arabic corpora are registered automatically from each work's `00-index.md`. The production build ships the atlas but no texts; the reader says so when a chapter is missing.
+Maimonides is registered by hand in `app/study.ts` (chapter files, titles, page numbers, lessons). The production build ships the atlas but no texts; the reader says so when a chapter is missing.
+
+Later, when the other physicians join the library: symlink `content/hippocrates`, `content/galen`, `content/avicenna` and run `npm run corpus`, which regenerates `app/corpus.ts` from each work's `00-index.md`. The generated list is validated but not shown until it is composed into the library in `app/page.tsx`.
 
 Why this split: the Maimonides translation (Gerrit Bos, Brill 2021) is in copyright, so it stays on your machine. The Hippocrates and Galen texts come from Perseus and First1KGreek (CC-BY-SA-4.0), with machine translations from the Greek where no public-domain English exists; Avicenna from OpenITI (CC-BY-NC-SA-4.0).
 

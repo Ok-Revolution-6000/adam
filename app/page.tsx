@@ -11,12 +11,12 @@ import {Combobox,ComboboxInput,ComboboxContent,ComboboxList,ComboboxItem,Combobo
 import AnatomyScene from './scene';
 import Reader from './reader';
 import {classical} from './classical';
-import {CORPUS_WORKS} from './corpus';
 import {AUTHORS,MAIMONIDES_WORKS,chapterUrl,lessonFor,workForUrl,type Lesson,type Work} from './study';
 import {DEFAULT_VISIBLE,SYSTEMS,EXPLANATIONS,explanation,type Atlas,type Concept,type SceneState,type SystemId,type View} from './anatomy';
 type Panel='layers'|'search'|'study'|null;
 interface Reading {work:Work;file:string}
-const WORKS:Work[]=[...MAIMONIDES_WORKS,...CORPUS_WORKS];
+/** The study library. Only Maimonides for now; the other physicians appear as background information (see AUTHORS). */
+const WORKS:Work[]=MAIMONIDES_WORKS;
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,selected:[],secondary:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 export default function Home(){
  const detailTitle=useRef<HTMLHeadingElement>(null);

@@ -13,9 +13,9 @@ export interface Lesson {id:string;work:string;file:string;title:string;/** what
 
 export const AUTHORS:Author[]=[
  {id:'maimonides',name:'Maimonides',dates:'1138–1204',note:'The medical works, in Gerrit Bos’s translation from the Arabic.'},
- {id:'hippocrates',name:'Hippocrates',dates:'c. 460–370 BCE',note:'The Hippocratic corpus: 51 works in Greek, each with an English version.'},
- {id:'galen',name:'Galen',dates:'129–c. 216',note:'99 works in Greek; English versions exist for a few. Add the corpus under content/galen to read them here.'},
- {id:'avicenna',name:'Avicenna',dates:'980–1037',note:'The Canon of Medicine and other works in Arabic. Add the corpus under content/avicenna to read them here.'},
+ {id:'hippocrates',name:'Hippocrates',dates:'c. 460–370 BCE',note:'The father of the art. Maimonides comments on his Aphorisms and cites him throughout. Background only for now; the library is Maimonides.'},
+ {id:'galen',name:'Galen',dates:'129–c. 216',note:'The authority behind almost every physiological claim in these texts: humours, faculties, pneuma, the three principal organs. Background only for now.'},
+ {id:'avicenna',name:'Avicenna',dates:'980–1037',note:'Author of the Canon, the systematic summa of Galenic medicine that Maimonides’ contemporaries studied. Background only for now.'},
 ];
 
 /** Layer presets used by lessons so the highlighted organs are not hidden behind muscle and vessels. */
@@ -29,7 +29,7 @@ const ch=(file:string,title:string,subtitle?:string,page?:number):Chapter=>({fil
 const num=(n:number)=>['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty','Twenty-First','Twenty-Second','Twenty-Third','Twenty-Fourth','Twenty-fifth'][n-1];
 const ordinal=(n:number)=>['first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth','eleventh','twelfth','thirteenth','fourteenth','fifteenth','sixteenth','seventeenth','eighteenth','nineteenth','twentieth','twenty-first','twenty-second','twenty-third','twenty-fourth','twenty-fifth'][n-1];
 
-/** Hand-registered works. The Greek and Arabic corpora are generated into app/corpus.ts and composed in page.tsx. */
+/** The library. Other corpora can be generated into app/corpus.ts by scripts/build-corpus-index.mjs, but are not surfaced yet. */
 export const MAIMONIDES_WORKS:Work[]=[
  {id:'maimonides-front',author:'maimonides',number:0,title:'Editor’s preface and introduction',dir:'maimonides/00-front-matter',source:BOS,chapters:[
   ch('02-preface.md','Preface',undefined,11),ch('03-introduction.md','Introduction','Gerrit Bos on the medical works, their transmission and this edition',1)]},
