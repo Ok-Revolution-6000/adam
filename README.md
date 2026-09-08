@@ -1,64 +1,70 @@
-# Human Atlas
+# Adam
 
-An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Take the BodyParts3D adult male reference apart into **2,234 individually selectable meshes**, explore **15 anatomical systems**, and search **3,432 named concepts**.
+An interactive 3D anatomy companion for studying the classical physicians. Read Maimonides, Hippocrates, Galen and Avicenna with the structures they discuss lit up on the body, and see the modern description of each organ beside the classical understanding of it.
 
-**[Explore the live demo](https://human-atlas-seven.vercel.app)**
+Adam is a fork of [Human Atlas](https://github.com/ashemag/human-atlas) (MIT), which renders the BodyParts3D adult male reference as **2,234 individually selectable meshes** with 15 system layers, search and exploded views. Adam adds a study layer on top of it.
 
-## Explore
+## The study layer
 
-- Orbit, zoom, and select structures directly on the body.
-- Toggle individual systems or use skeleton and organ presets.
-- Move from assembled anatomy to a spaced inventory of every visible piece.
-- Search anatomical names and source identifiers.
-- Isolate a selected structure and read its details.
-- Use compact controls and detail panels on mobile.
+- **Works and chapters.** A library of texts, each chapter loading in a reading pane beside the body. The Maimonides medical works (nine treatises), the whole Hippocratic corpus (51 works, Greek with English versions) and, when present, Galen and Avicenna.
+- **Lessons.** A chapter can be mapped to the anatomy it discusses. Opening it highlights the organ under discussion in **teal** and related structures in **amber**, sets the visible layers so nothing hides them, and shows a short note on what to look at. *On Asthma* is fully mapped: its introduction and thirteen chapters.
+- **Live terms.** Every anatomical word in the text — lungs, windpipe, brain, stomach, liver, spleen, gall, bowels, testicles, skin, pores… — is a link. Tap it and the structure lights up, with a card that sets the modern anatomy beside the **classical view**: faculty, temperament and the Galenic account of what the organ does. The classical vocabulary is in `app/lexicon.ts`; the notes in `app/classical.ts`.
+- **Juxtaposition everywhere.** Tapping a structure on the body opens the usual detail panel, now with the classical view added when one exists.
 
 ## Run locally
 
-Requires Node.js 22.13 or newer. No API keys or accounts are needed.
+Requires Node.js 22.13 or newer.
 
 ```sh
 npm ci
-npm run dev
+npm run dev        # http://localhost:3016
 ```
 
-Open http://localhost:3016. To build the static site, run `npm run build`; the output is in `dist/`.
+### Adding the texts
+
+The texts are **not in this repository**. Adam reads them from `content/`, which is gitignored, and serves them only from the development server. Symlink or copy a corpus in:
+
+```sh
+mkdir -p content
+ln -s ~/Maimonides-Medical-Works-Vol1 content/maimonides     # 84 chapter files, one per chapter
+ln -s ~/AncientMedicine/02-hippocrates content/hippocrates   # 51 works, per-version files
+ln -s ~/AncientMedicine/03-galen content/galen               # optional
+ln -s ~/AncientMedicine/04-avicenna content/avicenna         # optional
+npm run corpus     # regenerates app/corpus.ts from content/hippocrates, galen, avicenna
+```
+
+Maimonides is registered by hand in `app/study.ts` (chapter files, titles, page numbers, lessons). The Greek and Arabic corpora are registered automatically from each work's `00-index.md`. The production build ships the atlas but no texts; the reader says so when a chapter is missing.
+
+Why this split: the Maimonides translation (Gerrit Bos, Brill 2021) is in copyright, so it stays on your machine. The Hippocrates and Galen texts come from Perseus and First1KGreek (CC-BY-SA-4.0), with machine translations from the Greek where no public-domain English exists; Avicenna from OpenITI (CC-BY-NC-SA-4.0).
 
 ## Validate
 
 ```sh
-npm run check
-node scripts/validate-atlas.mjs
-node scripts/validate-interactions.mjs
-npm run build
+npm run check      # TypeScript
+npm run validate   # atlas buffers, exploded layouts and interactions, then the study layer
 ```
 
-Validation covers mesh buffers, names and concept membership, nonoverlapping exploded layouts at desktop and mobile aspect ratios, search and inspection contracts, and tap-versus-drag handling. Browser interaction checks have exercised selection, system controls, search, isolation, rotation, and 390×844, 320×568, and 844×390 layouts. Phone controls stay clear of the exploded inventory, and isolated structures fit the space above or beside the detail panel. Physical-device performance and real multitouch hardware have not been tested.
-
-## Anatomy data
-
-The current viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. It does not represent every human structure or variation. Individual source meshes are distinct from named concepts, which may group multiple meshes. Descriptions distinguish general system context from individual organ explanations.
-
-Geometry is simplified for browser performance while retaining every source mesh. The packaged model contains 2,288,268 triangles and downloads approximately 33 MB of compressed geometry. Full credits, source links, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
-
-This is an educational explorer, not a diagnostic or surgical tool.
+The study validator checks that every atlas concept name referenced by lessons, the lexicon and the classical notes exists in `atlas.json`; that lesson and work ids are unique; that the term matcher prefers longer terms and respects word boundaries; that front matter and navigation lines are stripped; and, when a corpus is present, that every registered chapter file exists.
 
 ## How it works
 
-Geometry is merged into batches. Per-structure GPU textures control translation, visibility, and selection, while component geometry supports accurate picking. Exploded layouts pack only the visible pieces. Rendering updates when the scene changes; orbit controls remain responsive without thousands of separate draw calls.
+- `app/study.ts` — authors, works, chapters and lessons. A lesson is `{work, file, focus:[{role, concepts}], systems, theme}`; concepts are atlas concept names resolved at runtime.
+- `app/lexicon.ts` — classical term → concept names. `app/reader-text.ts` turns matches in the rendered chapter into buttons.
+- `app/classical.ts` — the classical view of each organ, written for study, shown beside the modern description.
+- `app/reader.tsx` — the reading pane; fetches `/content/<dir>/<file>`, renders markdown, links terms, keeps printed page numbers and CTS citation anchors as small labels, and follows the corpus's own relative links between chapters and versions.
+- `app/scene.tsx` — the selection texture now carries a role channel; the shader mixes teal for the structure under discussion and amber for related anatomy.
+- `vite.config.ts` — a development-only middleware that serves `content/` under `/content/`, refusing paths that escape it.
+- `scripts/build-corpus-index.mjs` — generates `app/corpus.ts` from the Greek and Arabic corpora.
 
-The optional WebMCP tools expose anatomy search and inspection in compatible browsers. The visible interface works without them.
+## Roadmap
 
-## Rebuilding geometry
+- Map the remaining Maimonides works: *On Hemorrhoids*, *On Coitus*, *On the Regimen of Health*, the *Medical Aphorisms* (organs, humours, pulse, urine…), the *Commentary on the Aphorisms*.
+- Hippocratic lessons, starting from *On the Nature of Man* (the humours), *On the Sacred Disease* (the brain), *On the Heart*, *On Glands*, *On Anatomy*.
+- Galen translations, then Avicenna's *Canon* Book I.
+- A humours and faculties overlay: the four humours, the three pneumata and the principal organs as a layer on the body.
 
-The repository includes browser-ready geometry. Rebuilding it is optional: obtain the official BodyParts3D OBJ archive and English metadata tables, prepare the joined concepts and display-system mappings, run `scripts/convert-anatomy.py`, then `node scripts/optimize-anatomy.mjs` and `node scripts/compress-models.mjs`. Simplification uses a 0.2% relative error limit per structure.
+## Anatomy data and credits
 
-## Deploy
+Adam's application code is MIT, as is the Human Atlas it forks (© Chaz Shemag). The anatomy is **BodyParts3D 4.0**, © The Database Center for Life Science, licensed CC BY 4.0; full credits and adaptation notes are in [ATTRIBUTION.md](public/ATTRIBUTION.md). Preserve the attribution when redistributing the data.
 
-Import this repository into Vercel as a Vite project. The included `vercel.json` configures `npm ci`, `npm run build`, and the `dist` output directory. It can also be served by a static host.
-
-## License
-
-Original application code is released under the [MIT License](LICENSE). **The anatomy data has its own CC BY 4.0 license**; preserve the attribution when redistributing it. Third-party dependencies retain their respective licenses.
-
-Issues and pull requests are welcome. Please include reproduction steps and browser/device details for interaction problems.
+The classical notes summarise Galenic physiology as the medieval physicians used it. They are historical explanations for study, not medical advice. This is an educational explorer, not a diagnostic or surgical tool.

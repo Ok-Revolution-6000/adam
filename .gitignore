@@ -37,3 +37,6 @@ next-env.d.ts
 /outputs/
 /work/
 *.tsbuildinfo
+
+# private study corpus (symlinked or copied in; never committed)
+/content/

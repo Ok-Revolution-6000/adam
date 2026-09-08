@@ -1,5 +1,5 @@
 {
-  "name": "anatomy-studio",
+  "name": "adam",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -9,7 +9,9 @@
     "dev": "vite --host 0.0.0.0 --port 3016",
     "build": "vite build",
     "build:vercel": "vite build",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "corpus": "node scripts/build-corpus-index.mjs",
+    "validate": "node scripts/validate-atlas.mjs && node scripts/validate-interactions.mjs && node scripts/validate-study.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -22,6 +24,7 @@
     "embla-carousel-react": "8.5.2",
     "input-otp": "1.4.2",
     "lucide-react": "1.31.0",
+    "marked": "^18.0.12",
     "react": "19.2.6",
     "react-day-picker": "9.8.1",
     "react-dom": "19.2.6",
@@ -54,5 +57,6 @@
     "wrangler": "4.92.0"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "Adam: an interactive 3D anatomy companion for studying Maimonides, Hippocrates, Galen and Avicenna."
 }
