@@ -20,8 +20,8 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
   renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<768?1.5:2));renderer.setClearColor('#f2f3f3');renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;el.appendChild(renderer.domElement);
   renderer.domElement.setAttribute('aria-label','Interactive human anatomy. Drag to orbit, pinch or scroll to zoom, and tap a structure to inspect it.');
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(34,1,.005,100),controls=new OrbitControls(camera,renderer.domElement);
-  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.addEventListener('change',()=>{dirty=true;});
-  let camGoal:{target:T.Vector3;position:T.Vector3}|null=null;controls.addEventListener('start',()=>{camGoal=null;});
+  camera.position.set(1.4,1.05,3.6);controls.target.set(0,.85,0);controls.enableDamping=true;controls.dampingFactor=.085;controls.minDistance=.07;controls.maxDistance=40;controls.maxPolarAngle=Math.PI*.96;controls.zoomToCursor=true;controls.addEventListener('change',()=>{dirty=true;});
+  let camGoal:{target:T.Vector3;position:T.Vector3}|null=null,camGoalAt=0;controls.addEventListener('start',()=>{camGoal=null;});
   const pmrem=new T.PMREMGenerator(renderer),room=new RoomEnvironment(),env=pmrem.fromScene(room,.04);scene.environment=env.texture;room.dispose();pmrem.dispose();
   scene.add(new T.HemisphereLight(0xffffff,0xa7acb2,1.05));
   const key=new T.DirectionalLight(0xfffaf4,2.3);key.position.set(-2,4,3);scene.add(key);
@@ -76,13 +76,14 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
    lastState=null;loaded++;onProgress(Math.round(loaded/atlas.chunks.length*100));dirty=true;
   };
   (async()=>{try{let cursor=0;await Promise.all(Array.from({length:3},async()=>{while(cursor<atlas.chunks.length){const i=cursor++;await loadChunk(i);}}));if(!disposed){ready=true;dirty=true;}}catch(e){if(!disposed)onError(e instanceof Error?e.message:'Could not load the anatomy.');}})();
-  const fit=(view:string,extent=0,smooth=false)=>{
+  const fit=(view:string,extent=0,smooth=false,keepDirection=false)=>{
    const aspect=camera.aspect,mobile=el.clientWidth<768,normalDistance=mobile?Math.max(4.5,1.8*el.clientHeight/Math.max(160,el.clientHeight-350)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))):4;
    const reservedHeight=mobile?350:270;const availableAspect=Math.max(.35,(el.clientWidth-(mobile?40:340))/Math.max(160,el.clientHeight-reservedHeight));const atlasDistance=Math.max(packingHeight,packingWidth/availableAspect)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*(el.clientHeight/Math.max(160,el.clientHeight-reservedHeight))*1.08;
    const distance=T.MathUtils.lerp(normalDistance,Math.max(.2,atlasDistance),extent);if(extent>.8)view='front';
-   const direction=view==='front'?new T.Vector3(0,.02,1):view==='back'?new T.Vector3(0,.02,-1):view==='side'?new T.Vector3(1,.02,0):new T.Vector3(.35,.06,1).normalize();
+   const current=camera.position.clone().sub(controls.target);
+   const direction=keepDirection&&current.lengthSq()>1e-8?current.normalize():view==='front'?new T.Vector3(0,.02,1):view==='back'?new T.Vector3(0,.02,-1):view==='side'?new T.Vector3(1,.02,0):new T.Vector3(.35,.06,1).normalize();
    const target=new T.Vector3(extent>.1&&el.clientWidth>767?-packingWidth*.12:0,extent>.1||mobile?.85:.68,0),position=target.clone().addScaledVector(direction,distance);
-   if(smooth){camGoal={target,position};}else{camGoal=null;controls.target.copy(target);camera.position.copy(position);controls.update();}dirty=true;
+   if(smooth){camGoal={target,position};camGoalAt=performance.now();}else{camGoal=null;controls.target.copy(target);camera.position.copy(position);controls.update();}dirty=true;
   };
   const resize=()=>{layoutKey='';lastState=null;renderer.setPixelRatio(Math.min(devicePixelRatio,el.clientWidth<768||el.clientHeight<600?1.5:2));camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();renderer.setSize(el.clientWidth,el.clientHeight);fit(latest.current.view,amount);};const observer=new ResizeObserver(resize);observer.observe(el);
   const raycaster=new T.Raycaster(),pointer=new T.Vector2(),tap=new PointerTap(),worldBox=new T.Box3(),hitPoint=new T.Vector3();
@@ -124,21 +125,21 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
    const layers=[...used].sort((a,b)=>a-b),count=layers.length;if(!count){peel=null;return;}
    // Compress to the layers actually present; when building back, inner layers return first.
    atlas.parts.forEach((_,i)=>{if(rank[i]<0)return;const k=layers.indexOf(rank[i]);rank[i]=s.isolate?k:count-1-k;});
-   peel={start:performance.now(),duration:Math.min(3000,Math.max(900,count*420)),rank,count};
+   peel={start:performance.now()+(s.isolate?0:550),duration:Math.min(3000,Math.max(900,count*420)),rank,count};
   };
   const peelValue=(i:number,isolate:boolean)=>{
-   if(!peel||peel.rank[i]<0)return -1;const t=Math.min(1,(performance.now()-peel.start)/peel.duration),k=peel.rank[i];
+   if(!peel||peel.rank[i]<0)return -1;const t=Math.max(0,Math.min(1,(performance.now()-peel.start)/peel.duration)),k=peel.rank[i];
    const v=T.MathUtils.smoothstep(t,k/peel.count,(k+1)/peel.count);return isolate?1-v:v;
   };
   const clock=new T.Clock();let lastExtent=-1;
   const animate=()=>{
    if(disposed)return;frame=requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05),s=latest.current;
-   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.secondary!==s.secondary;
+   const changed=lastState?.visible!==s.visible||lastState?.selected!==s.selected||lastState?.isolate!==s.isolate||lastState?.secondary!==s.secondary||lastState?.hidden!==s.hidden;
    const moving=Math.abs(amount-s.explode)>.0001;
    if(moving){amount=T.MathUtils.damp(amount,s.explode,8,dt);dirty=true;}
    if(peel&&performance.now()-peel.start>=peel.duration){peel=null;dirty=true;}
    if(changed||moving||peel||lastExtent<0){
-    const visible=new Set(s.visible),selection=new Set(s.selected),secondary=new Set(s.secondary??[]);
+    const visible=new Set(s.visible),selection=new Set(s.selected),secondary=new Set(s.secondary??[]),hidden=new Set(s.hidden??[]);
     if(lastState&&lastState.isolate!==s.isolate)startPeel(s,visible,selection);
     const visibleParts=atlas.parts.filter(p=>s.isolate?selection.has(p.id):visible.has(p.system)||selection.has(p.id));
     const nextLayoutKey=visibleParts.map(p=>p.id).join(',')+':'+camera.aspect.toFixed(3);
@@ -148,7 +149,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
      const c=centers[i],destination=offsets[i];let dx=0,dy=0,dz=0;
      if(amount<=.45){const t=amount/.45;const group=SYSTEMS.findIndex(sys=>sys.id===p.system);const angle=group/SYSTEMS.length*Math.PI*2;dx=Math.sin(angle)*t*.48;dy=(c.y-.85)*t*.28;dz=Math.cos(angle)*t*.48;}
      else {const t=(amount-.45)/.55,group=SYSTEMS.findIndex(sys=>sys.id===p.system),angle=group/SYSTEMS.length*Math.PI*2;dx=T.MathUtils.lerp(Math.sin(angle)*.48,destination.x-c.x,t);dy=T.MathUtils.lerp((c.y-.85)*.28,destination.y-c.y,t);dz=T.MathUtils.lerp(Math.cos(angle)*.48,-c.z,t);}
-     const selected=selection.has(p.id);let v=(s.isolate?selected:visible.has(p.system)||selected)?1:0;const pv=peelValue(i,s.isolate);if(pv>=0){v=pv;const lift=(1-v)*.1;dx+=drift[i].x*lift;dz+=drift[i].z*lift;dy+=lift*.15;}
+     const selected=selection.has(p.id);let v=(s.isolate?selected:visible.has(p.system)||selected)?1:0;const pv=peelValue(i,s.isolate);if(pv>=0){v=pv;const lift=(1-v)*.1;dx+=drift[i].x*lift;dz+=drift[i].z*lift;dy+=lift*.15;}if(hidden.has(p.id))v=0;
      data.set([dx,dy,dz,v],i*4);selectedData[i*4]=selected?255:0;selectedData[i*4+1]=selected&&secondary.has(p.id)?255:0;
      markerPositions.set(data[i*4+3]>.5?[c.x+dx,c.y+dy,c.z+dz]:[10000,10000,10000],i*3);const mesh=pickers[i];if(mesh){mesh.position.set(dx,dy,dz);mesh.updateMatrix();mesh.updateMatrixWorld(true);}
     });partTexture.needsUpdate=true;selectionTexture.needsUpdate=true;markerGeometry.attributes.position.needsUpdate=true;lastState=s;lastExtent=amount;dirty=true;
@@ -158,12 +159,12 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
    const isolateKey=s.isolate?s.selected.join(',')+':'+s.reset+':'+s.inspectorOpen+':'+camera.aspect:'';
    if(isolateKey!==lastIsolate||(s.isolate&&moving)){
     if(s.isolate){const box=new T.Box3();atlas.parts.forEach((p,i)=>{if(s.selected.includes(p.id))box.union(bounds[i].clone().translate(new T.Vector3(data[i*4],data[i*4+1],data[i*4+2])));});
-     if(!box.isEmpty()){const center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());const w=el.clientWidth,h=el.clientHeight,mobile=w<768,landscape=w>h&&h<=600;let left=20,right=w-20,top=mobile?175:110,bottom=h-170;if(s.inspectorOpen){if(landscape){right=w-335;top=100;bottom=h-125;}else if(mobile){const sheet=document.querySelector('.detail-sheet')?.getBoundingClientRect(),header=document.querySelector('.identity')?.getBoundingClientRect();top=(header?.bottom??94)+16;bottom=(sheet?.top??h*.58-139)-16;}else{right=w-370;left=w>1100?285:25;}}const availableWidth=Math.max(150,right-left),availableHeight=Math.max(40,bottom-top);camera.setViewOffset(w,h,w/2-(left+right)/2,h/2-(top+bottom)/2,w,h);const distance=Math.max(.07,Math.max(size.y*h/availableHeight,size.x*w/availableWidth/camera.aspect,size.z)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*1.35);controls.maxDistance=Math.max(40,distance*2);camGoal={target:center,position:center.clone().add(new T.Vector3(.2,.1,1).normalize().multiplyScalar(distance))};dirty=true;}
-    }else if(lastIsolate){camera.clearViewOffset();fit(s.view,amount,true);}
+     if(!box.isEmpty()){const center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());const w=el.clientWidth,h=el.clientHeight,mobile=w<768,landscape=w>h&&h<=600;let left=20,right=w-20,top=mobile?175:110,bottom=h-170;if(s.inspectorOpen){if(landscape){right=w-335;top=100;bottom=h-125;}else if(mobile){const sheet=document.querySelector('.detail-sheet')?.getBoundingClientRect(),header=document.querySelector('.identity')?.getBoundingClientRect();top=(header?.bottom??94)+16;bottom=(sheet?.top??h*.58-139)-16;}else{right=w-370;left=w>1100?285:25;}}const availableWidth=Math.max(150,right-left),availableHeight=Math.max(40,bottom-top);camera.setViewOffset(w,h,w/2-(left+right)/2,h/2-(top+bottom)/2,w,h);const distance=Math.max(.07,Math.max(size.y*h/availableHeight,size.x*w/availableWidth/camera.aspect,size.z)/(2*Math.tan(T.MathUtils.degToRad(camera.fov/2)))*1.35);controls.maxDistance=Math.max(40,distance*2);const dir=camera.position.clone().sub(controls.target);if(dir.lengthSq()<1e-8)dir.set(.2,.1,1);dir.normalize();camGoal={target:center,position:center.clone().addScaledVector(dir,distance)};camGoalAt=peel&&s.isolate?peel.start+peel.duration:performance.now();dirty=true;}
+    }else if(lastIsolate){camera.clearViewOffset();fit(s.view,amount,true,true);}
     lastIsolate=isolateKey;
    }
    controls.enableRotate=amount<.8;controls.mouseButtons.LEFT=amount<.8?T.MOUSE.ROTATE:T.MOUSE.PAN;controls.touches.ONE=amount<.8?T.TOUCH.ROTATE:T.TOUCH.PAN;ground.visible=platform.visible=ring.visible=innerRing.visible=amount<.5&&!(s.isolate&&!peel);
-   if(camGoal){const g=camGoal,l=6;controls.target.set(T.MathUtils.damp(controls.target.x,g.target.x,l,dt),T.MathUtils.damp(controls.target.y,g.target.y,l,dt),T.MathUtils.damp(controls.target.z,g.target.z,l,dt));camera.position.set(T.MathUtils.damp(camera.position.x,g.position.x,l,dt),T.MathUtils.damp(camera.position.y,g.position.y,l,dt),T.MathUtils.damp(camera.position.z,g.position.z,l,dt));if(camera.position.distanceTo(g.position)<.002&&controls.target.distanceTo(g.target)<.002){controls.target.copy(g.target);camera.position.copy(g.position);camGoal=null;}dirty=true;}markers.visible=amount>.75;controls.autoRotate=s.rotate&&!s.isolate&&amount<.4;controls.autoRotateSpeed=.65;controls.update();if(controls.autoRotate)dirty=true;
+   if(camGoal&&performance.now()>=camGoalAt){const g=camGoal,l=6;controls.target.set(T.MathUtils.damp(controls.target.x,g.target.x,l,dt),T.MathUtils.damp(controls.target.y,g.target.y,l,dt),T.MathUtils.damp(controls.target.z,g.target.z,l,dt));camera.position.set(T.MathUtils.damp(camera.position.x,g.position.x,l,dt),T.MathUtils.damp(camera.position.y,g.position.y,l,dt),T.MathUtils.damp(camera.position.z,g.position.z,l,dt));if(camera.position.distanceTo(g.position)<.002&&controls.target.distanceTo(g.target)<.002){controls.target.copy(g.target);camera.position.copy(g.position);camGoal=null;}dirty=true;}markers.visible=amount>.75;controls.autoRotate=s.rotate&&!s.isolate&&amount<.4;controls.autoRotateSpeed=.65;controls.update();if(controls.autoRotate)dirty=true;
    if(dirty){renderer.render(scene,camera);targets=[];if(amount>.45){const hasSolid=atlas.parts.some((p,i)=>p.system!=='integumentary'&&data[i*4+3]>.5);atlas.parts.forEach((p,i)=>{if(data[i*4+3]<.5||(hasSolid&&p.system==='integumentary'))return;let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;for(let corner=0;corner<8;corner++){projected.set(p.bounds[(corner&1)?1:0][0]+data[i*4],p.bounds[(corner&2)?1:0][1]+data[i*4+1],p.bounds[(corner&4)?1:0][2]+data[i*4+2]).project(camera);const x=(projected.x+1)*el.clientWidth/2,y=(1-projected.y)*el.clientHeight/2;left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}projected.copy(centers[i]).add(new T.Vector3(data[i*4],data[i*4+1],data[i*4+2])).project(camera);if(projected.z< -1||projected.z>1)return;targets.push({index:i,x:(projected.x+1)*el.clientWidth/2,y:(1-projected.y)*el.clientHeight/2,left,right,top,bottom});});}dirty=false;}
 
   };animate();

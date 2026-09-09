@@ -18,11 +18,8 @@ export const AUTHORS:Author[]=[
  {id:'avicenna',name:'Avicenna',dates:'980–1037',note:'Author of the Canon, the systematic summa of Galenic medicine that Maimonides’ contemporaries studied. Background only for now.'},
 ];
 
-/** Layer presets used by lessons so the highlighted organs are not hidden behind muscle and vessels. */
-export const CHEST_VIEW:SystemId[]=['skeletal','respiratory','cardiac','nervous','digestive'];
-export const ORGANS_VIEW:SystemId[]=['cardiac','respiratory','digestive','urinary','endocrine','reproductive','lymphatic','nervous'];
-export const BELLY_VIEW:SystemId[]=['digestive','cardiac','respiratory','urinary','endocrine','lymphatic','nervous','venous'];
-export const BODY_VIEW:SystemId[]=['skeletal','cardiac','respiratory','digestive','urinary','endocrine','reproductive','lymphatic','nervous','integumentary'];
+/** Layers shown by lessons: the skeleton and every organ system, without the muscles, vessels and skin that would hide them. */
+export const STUDY_VIEW:SystemId[]=['skeletal','cardiac','respiratory','digestive','urinary','endocrine','reproductive','lymphatic','nervous','sensory'];
 
 const BOS='The Medical Works of Moses Maimonides, vol. 1, tr. Gerrit Bos (Brill, 2021)';
 const ch=(file:string,title:string,subtitle?:string,page?:number):Chapter=>({file,title,subtitle,page,lang:'eng'});
@@ -93,46 +90,46 @@ export const MAIMONIDES_WORKS:Work[]=[
 
 const lung=['right lung','left lung'];
 export const LESSONS:Lesson[]=[
- {id:'asthma-intro',work:'maimonides-asthma',file:'00-index.md',title:'Introduction',systems:CHEST_VIEW,
+ {id:'asthma-intro',work:'maimonides-asthma',file:'00-index.md',title:'Introduction',systems:STUDY_VIEW,
   theme:'Maimonides is treating a patient whose attacks come with the seasons. He explains the disease as a defluxion: superfluities gathered in the brain descend into the chest and fill the lungs, so that breathing labours. The head is the source, the lungs the site, and the road between them the windpipe.',
   focus:[{role:'primary',concepts:['brain',...lung]},{role:'secondary',concepts:['trachea','skull','thoracic wall']}]},
- {id:'asthma-1',work:'maimonides-asthma',file:'01-chapter-one.md',title:'Chapter One',systems:CHEST_VIEW,
+ {id:'asthma-1',work:'maimonides-asthma',file:'01-chapter-one.md',title:'Chapter One',systems:STUDY_VIEW,
   theme:'A weak organ keeps receiving the body’s superfluities; regimen cannot cure the weakness but can reduce what flows to it. The organs in question are the brain, which sheds the defluxion, and the lungs, which receive it. Everything that follows about food is about lowering the supply.',
   focus:[{role:'primary',concepts:['brain',...lung]},{role:'secondary',concepts:['stomach']}]},
- {id:'asthma-2',work:'maimonides-asthma',file:'02-chapter-two.md',title:'Chapter Two',systems:BELLY_VIEW,
+ {id:'asthma-2',work:'maimonides-asthma',file:'02-chapter-two.md',title:'Chapter Two',systems:STUDY_VIEW,
   theme:'Foods are judged by the humour they generate and by the vapours they send upward. The stomach performs the first coction and the liver the second; what they make badly rises to the head and returns as catarrh to the windpipe and lungs.',
   focus:[{role:'primary',concepts:['stomach','liver']},{role:'secondary',concepts:['brain','trachea',...lung]}]},
- {id:'asthma-3',work:'maimonides-asthma',file:'03-chapter-three.md',title:'Chapter Three',systems:BELLY_VIEW,
+ {id:'asthma-3',work:'maimonides-asthma',file:'03-chapter-three.md',title:'Chapter Three',systems:STUDY_VIEW,
   theme:'A catalogue of everyday foods sorted by what they do to the digestion: which thicken the humours, which produce vapours, which are easy on the stomach and liver. Read it with the organs of digestion in view, and the lungs and head as the places the harm ends up.',
   focus:[{role:'primary',concepts:['stomach','liver']},{role:'secondary',concepts:['brain',...lung,'thoracic wall']}]},
- {id:'asthma-4',work:'maimonides-asthma',file:'04-chapter-four.md',title:'Chapter Four',systems:BELLY_VIEW,
+ {id:'asthma-4',work:'maimonides-asthma',file:'04-chapter-four.md',title:'Chapter Four',systems:STUDY_VIEW,
   theme:'Recipes for dishes that are light for the stomach and that help thin and expel the matter in the chest. The stomach is the organ being managed; the liver and the lungs are the beneficiaries.',
   focus:[{role:'primary',concepts:['stomach']},{role:'secondary',concepts:['liver',...lung]}]},
- {id:'asthma-5',work:'maimonides-asthma',file:'05-chapter-five.md',title:'Chapter Five',systems:BELLY_VIEW,
+ {id:'asthma-5',work:'maimonides-asthma',file:'05-chapter-five.md',title:'Chapter Five',systems:STUDY_VIEW,
   theme:'How much to eat is set by the strength of the stomach, not by appetite. Distension impairs every function of the organ. The chapter also assumes the three digestions: in the stomach, then in the liver, then in the veins that feed the body.',
   focus:[{role:'primary',concepts:['stomach']},{role:'secondary',concepts:['liver','small intestine','large intestine','systemic venous system']}]},
- {id:'asthma-6',work:'maimonides-asthma',file:'06-chapter-six.md',title:'Chapter Six',systems:BELLY_VIEW,
+ {id:'asthma-6',work:'maimonides-asthma',file:'06-chapter-six.md',title:'Chapter Six',systems:STUDY_VIEW,
   theme:'When to eat: one meal should be fully digested before the next arrives, and the stomach should never be loaded when the body is about to sleep or exert itself. Everything here is about the stomach’s timing.',
   focus:[{role:'primary',concepts:['stomach']},{role:'secondary',concepts:['liver']}]},
- {id:'asthma-7',work:'maimonides-asthma',file:'07-chapter-seven.md',title:'Chapter Seven',systems:BELLY_VIEW,
+ {id:'asthma-7',work:'maimonides-asthma',file:'07-chapter-seven.md',title:'Chapter Seven',systems:STUDY_VIEW,
   theme:'Water and wine are judged by how they pass through the stomach and liver and by what they do to the heat of the heart and the moisture of the lungs. Urine, produced by the kidneys and stored in the bladder, is the sign of how drink is being handled.',
   focus:[{role:'primary',concepts:['stomach','liver']},{role:'secondary',concepts:['heart',...lung,'kidney','urinary bladder']}]},
- {id:'asthma-8',work:'maimonides-asthma',file:'08-chapter-eight.md',title:'Chapter Eight',systems:CHEST_VIEW,
+ {id:'asthma-8',work:'maimonides-asthma',file:'08-chapter-eight.md',title:'Chapter Eight',systems:STUDY_VIEW,
   theme:'Air is the food of the pneuma. Clean, temperate air entering through the nose and windpipe nourishes the heart and lungs and clears the head, while the passions of the soul move the heart and its heat. The chapter joins environment and emotion in one regimen.',
   focus:[{role:'primary',concepts:[...lung,'heart']},{role:'secondary',concepts:['brain','nose','trachea']}]},
- {id:'asthma-9',work:'maimonides-asthma',file:'09-chapter-nine.md',title:'Chapter Nine',systems:BELLY_VIEW,
+ {id:'asthma-9',work:'maimonides-asthma',file:'09-chapter-nine.md',title:'Chapter Nine',systems:STUDY_VIEW,
   theme:'Retention and evacuation: keeping the belly soft so that superfluities leave by the bowel instead of rising as vapour to the brain. Bile from the gallbladder provokes the gut; the kidneys and bladder carry off the watery part; vomiting and clysters are the tools.',
   focus:[{role:'primary',concepts:['stomach','small intestine','large intestine','rectum']},{role:'secondary',concepts:['gallbladder','kidney','urinary bladder','brain']}]},
- {id:'asthma-10',work:'maimonides-asthma',file:'10-chapter-ten.md',title:'Chapter Ten',systems:BODY_VIEW,
+ {id:'asthma-10',work:'maimonides-asthma',file:'10-chapter-ten.md',title:'Chapter Ten',systems:STUDY_VIEW,
   theme:'Sleep after a meal fills the brain with vapours; baths and rubbing open the pores of the skin and draw superfluities outward; intercourse spends the body’s heat and moisture and weakens the brain and nerves. The chapter moves between the head, the skin and the generative organs.',
   focus:[{role:'primary',concepts:['brain','testis','seminal vesicle','prostate']},{role:'secondary',concepts:['skin','stomach','skull']}]},
- {id:'asthma-11',work:'maimonides-asthma',file:'11-chapter-eleven.md',title:'Chapter Eleven',systems:CHEST_VIEW,
+ {id:'asthma-11',work:'maimonides-asthma',file:'11-chapter-eleven.md',title:'Chapter Eleven',systems:STUDY_VIEW,
   theme:'The rules of treatment: strengthen the brain so that it sheds less, strengthen the lungs so that they receive less, and treat what is descending differently from what already sits in the chest. The two organs of the disease are the whole subject.',
   focus:[{role:'primary',concepts:['brain',...lung]},{role:'secondary',concepts:['skull','tracheobronchial tree','thoracic wall']}]},
- {id:'asthma-12',work:'maimonides-asthma',file:'12-chapter-twelve.md',title:'Chapter Twelve',systems:CHEST_VIEW,
+ {id:'asthma-12',work:'maimonides-asthma',file:'12-chapter-twelve.md',title:'Chapter Twelve',systems:STUDY_VIEW,
   theme:'The pharmacy of the treatise: decoctions to coct and thin the matter in the lungs, electuaries and lozenges held in the mouth, fumigations breathed in through the nose. Follow each remedy along its path — mouth or nostrils, windpipe, bronchi, lung.',
   focus:[{role:'primary',concepts:[...lung,'tracheobronchial tree']},{role:'secondary',concepts:['brain','mouth','nose','thoracic wall']}]},
- {id:'asthma-13',work:'maimonides-asthma',file:'13-chapter-thirteen.md',title:'Chapter Thirteen',systems:ORGANS_VIEW,
+ {id:'asthma-13',work:'maimonides-asthma',file:'13-chapter-thirteen.md',title:'Chapter Thirteen',systems:STUDY_VIEW,
   theme:'Hortatory rules for everyone: the stomach as the root of health, the three principal organs — brain, heart, liver — as what the physician protects, and the discipline of the physician himself. The longest chapter, and the one that ranges over the whole body.',
   focus:[{role:'primary',concepts:['stomach','heart','brain','liver']},{role:'secondary',concepts:[...lung]}]},
 ];
