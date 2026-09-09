@@ -79,8 +79,8 @@ export default function Home(){
   {progress<100&&!error&&<div className="loading glass" role="status"><Activity size={18}/><div><strong>Preparing the anatomy</strong><span>{progress}% · Loading {atlas?.parts.length.toLocaleString()??'2,234'} pieces</span><div className="loading-track"><i style={{width:`${progress}%`}}/></div></div></div>}
   {error&&<div className="loading glass error" role="alert"><p>{error}</p><Button variant="ghost" onClick={()=>location.reload()}>Reload viewer</Button></div>}
   {reading&&chapter&&author&&<Reader url={chapterUrl(reading.work,reading.file)} onTerm={onTerm} onNavigate={onNavigate} header={<div className="reader-head">
-   <div className="eyebrow">{author.name} · {reading.work.title}</div>
-   <h2>{chapter.title}</h2>{chapter.subtitle&&<p className="reader-subtitle">{chapter.subtitle}</p>}
+   <div className="eyebrow">{author.name} · {chapter.title}</div>
+   <h2>{reading.work.title}</h2><p className="reader-subtitle">{reading.work.source}</p>
    <div className="reader-nav"><Button variant="ghost" aria-label="Previous chapter" disabled={chapterIndex<=0} onClick={()=>go(-1)}><ChevronLeft size={16}/></Button><Button variant="ghost" aria-label="Next chapter" disabled={chapterIndex>=reading.work.chapters.length-1} onClick={()=>go(1)}><ChevronRight size={16}/></Button><Button variant="ghost" aria-label="Close the text" onClick={closeReader}><X size={16}/></Button></div>
    {lesson&&!focusNote&&<div className="lesson-focus">{(['primary','secondary'] as const).map(role=>{const names=lesson.focus.filter(f=>f.role===role).flatMap(f=>f.concepts);return names.length?<div className="focus-row" key={role}><span className={`focus-dot ${role}`}/><b>{names.join(', ')}</b></div>:null;})}<p>{lesson.theme}</p></div>}
    {focusNote&&(()=>{const c=focusNote.concepts.find(x=>organNote(x.name))??focusNote.concepts[0];const sys=parts.get(c.elements[0])?.system??'connective';const note=organNote(c.name);const sameName=c.name.toLowerCase()===focusNote.term.toLowerCase()||c.name.toLowerCase()===focusNote.term.toLowerCase().replace(/s$/,'');return <div className="juxta">
