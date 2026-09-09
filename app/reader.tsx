@@ -27,7 +27,10 @@ export default function Reader({url,onTerm,onNavigate,header}:ReaderProps){
   }).catch(e=>{if(e.name!=='AbortError'){setHtml('');setStatus('error');}});
   return()=>abort.abort();
  },[url]);
- useEffect(()=>{const el=body.current;if(!el||status!=='ready')return;linkTerms(el,LEXICON);el.scrollTop=0;},[html,status]);
+ const article=useRef<HTMLElement>(null);
+ // React 19 re-applies dangerouslySetInnerHTML on every render, which would erase the term links; the
+ // article's content is therefore written here, once per chapter, and React never touches its children.
+ useEffect(()=>{const el=article.current,scroller=body.current;if(!el)return;el.innerHTML=status==='ready'?html:'';if(status==='ready')linkTerms(el,LEXICON);if(scroller)scroller.scrollTop=0;},[html,status]);
  const click=(e:MouseEvent<HTMLDivElement>)=>{
   const t=e.target as HTMLElement;
   const term=t.closest('button.term') as HTMLButtonElement|null;
@@ -42,7 +45,7 @@ export default function Reader({url,onTerm,onNavigate,header}:ReaderProps){
    {status==='loading'&&<p className="reader-note">Opening the text…</p>}
    {status==='missing'&&<div className="reader-note"><p><strong>This text is not in this build.</strong></p><p>Adam keeps the study corpus outside the repository. Run the app locally with the texts placed under <code>content/</code> and this chapter will open here, with every anatomical term linked to the body.</p></div>}
    {status==='error'&&<p className="reader-note">The chapter could not be loaded. Check that the development server is running.</p>}
-   {status==='ready'&&<article className="prose-classical" dangerouslySetInnerHTML={{__html:html}}/>}
+   <article className="prose-classical" ref={article} hidden={status!=='ready'}/>
   </div>
  </div>;
 }

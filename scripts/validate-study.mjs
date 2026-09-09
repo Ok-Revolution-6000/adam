@@ -4,7 +4,7 @@ import {LESSONS,MAIMONIDES_WORKS,AUTHORS,lessonsFor,workForUrl} from '../app/stu
 import {CORPUS_WORKS} from '../app/corpus.ts';
 const WORKS=MAIMONIDES_WORKS; // the library; CORPUS_WORKS is generated but not surfaced yet
 import {LEXICON} from '../app/lexicon.ts';
-import {CLASSICAL} from '../app/classical.ts';
+import {ORGAN_NOTES} from '../app/organ-notes.ts';
 import {prepareMarkdown,termPattern} from '../app/reader-text.ts';
 
 const atlas=JSON.parse(fs.readFileSync(new URL('../public/models/atlas.json',import.meta.url)));
@@ -14,7 +14,7 @@ const check=(where,list)=>{for(const n of list)if(!names.has(n))missing.add(`${w
 
 // Every concept name referenced by the study layer must resolve in the atlas.
 for(const [term,list] of Object.entries(LEXICON)){assert.equal(term,term.toLowerCase(),`lexicon key not lower-case: ${term}`);check(`lexicon "${term}"`,list);}
-for(const name of Object.keys(CLASSICAL))check('classical',[name]);
+for(const [name,n] of Object.entries(ORGAN_NOTES)){check('organ notes',[name]);assert.ok(n.classical?.note&&n.modern?.function&&n.modern?.type&&n.modern?.note,`organ note incomplete: ${name}`);}
 const ids=new Set();
 for(const lesson of LESSONS){
  assert.ok(!ids.has(lesson.id),`duplicate lesson id ${lesson.id}`);ids.add(lesson.id);
@@ -50,4 +50,4 @@ for(const work of WORKS){
 }
 for(const w of CORPUS_WORKS)assert.ok(w.id&&w.dir&&w.chapters.length,`corpus work malformed: ${w.id}`);
 const mapped=WORKS.filter(w=>lessonsFor(w.id).length).length;
-console.log(`Study layer: ${AUTHORS.length} authors, ${WORKS.length} works (${mapped} with anatomy mapping), ${LESSONS.length} lessons, ${Object.keys(LEXICON).length} lexicon terms, ${Object.keys(CLASSICAL).length} classical notes. ${checked} chapter files found locally${absent?`, ${absent} works without a local corpus`:''}. ${CORPUS_WORKS.length} generated corpus works held back.`);
+console.log(`Study layer: ${AUTHORS.length} authors, ${WORKS.length} works (${mapped} with anatomy mapping), ${LESSONS.length} lessons, ${Object.keys(LEXICON).length} lexicon terms, ${Object.keys(ORGAN_NOTES).length} organ notes (classical + modern). ${checked} chapter files found locally${absent?`, ${absent} works without a local corpus`:''}. ${CORPUS_WORKS.length} generated corpus works held back.`);
