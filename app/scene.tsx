@@ -117,7 +117,7 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
   const drift=atlas.parts.map((_,i)=>{const c=centers[i],r=Math.hypot(c.x,c.z);return r<.05?new T.Vector3(0,0,1):new T.Vector3(c.x/r,0,c.z/r);});
   let peel:{start:number;duration:number;rank:Float32Array;count:number}|null=null;
   const startPeel=(s:SceneState,visible:Set<SystemId>,selection:Set<string>)=>{
-   const targetSystems=new Set(atlas.parts.filter(p=>selection.has(p.id)).map(p=>p.system));
+   const targetSystems=new Set<string>(atlas.parts.filter(p=>selection.has(p.id)).map(p=>p.system));
    const order=[...PEEL_ORDER.filter(x=>!targetSystems.has(x)),...PEEL_ORDER.filter(x=>targetSystems.has(x))];
    const rank=new Float32Array(atlas.parts.length).fill(-1),used=new Set<number>();
    atlas.parts.forEach((p,i)=>{if(selection.has(p.id)||!visible.has(p.system))return;const k=order.indexOf(p.system);if(k<0)return;rank[i]=k;used.add(k);});
