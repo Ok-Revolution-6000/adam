@@ -6,7 +6,7 @@ import type {SystemId,View} from './anatomy';
 export type AuthorId='maimonides'|'hippocrates'|'galen'|'avicenna';
 export interface Author {id:AuthorId;name:string;dates:string;note:string}
 export interface Chapter {file:string;title:string;subtitle?:string;page?:number;lang?:'eng'|'grc'|'ara'}
-export interface Work {id:string;author:AuthorId;number?:number;title:string;/** directory under content/ */dir:string;source:string;chapters:Chapter[]}
+export interface Work {id:string;author:AuthorId;number?:number;title:string;/** directory under content/ */dir:string;/** the book the work is read in, for the reader header */book?:string;/** full edition, for credits */source:string;chapters:Chapter[]}
 export type FocusRole='primary'|'secondary';
 export interface Focus {role:FocusRole;concepts:string[]}
 export interface Lesson {id:string;work:string;file:string;title:string;/** what to look at and why, in Adam's words */theme:string;focus:Focus[];systems?:SystemId[];view?:View}
@@ -21,16 +21,17 @@ export const AUTHORS:Author[]=[
 /** Layers shown by lessons: the skeleton and every organ system, without the muscles, vessels and skin that would hide them. */
 export const STUDY_VIEW:SystemId[]=['skeletal','cardiac','respiratory','digestive','urinary','endocrine','reproductive','lymphatic','nervous','sensory'];
 
-const BOS='The Medical Works of Moses Maimonides, vol. 1, tr. Gerrit Bos (Brill, 2021)';
+const BOOK='The Medical Works of Moses Maimonides';
+const BOS=`${BOOK}, vol. 1, tr. Gerrit Bos (Brill, 2021)`;
 const ch=(file:string,title:string,subtitle?:string,page?:number):Chapter=>({file,title,subtitle,page,lang:'eng'});
 const num=(n:number)=>['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty','Twenty-First','Twenty-Second','Twenty-Third','Twenty-Fourth','Twenty-fifth'][n-1];
 const ordinal=(n:number)=>['first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth','eleventh','twelfth','thirteenth','fourteenth','fifteenth','sixteenth','seventeenth','eighteenth','nineteenth','twentieth','twenty-first','twenty-second','twenty-third','twenty-fourth','twenty-fifth'][n-1];
 
 /** The library. Other corpora can be generated into app/corpus.ts by scripts/build-corpus-index.mjs, but are not surfaced yet. */
 export const MAIMONIDES_WORKS:Work[]=[
- {id:'maimonides-front',author:'maimonides',number:0,title:'Editor’s preface and introduction',dir:'maimonides/00-front-matter',source:BOS,chapters:[
+ {id:'maimonides-front',author:'maimonides',number:0,title:'Editor’s preface and introduction',dir:'maimonides/00-front-matter',book:BOOK,source:BOS,chapters:[
   ch('02-preface.md','Preface',undefined,11),ch('03-introduction.md','Introduction','Gerrit Bos on the medical works, their transmission and this edition',1)]},
- {id:'maimonides-asthma',author:'maimonides',number:1,title:'On Asthma',dir:'maimonides/01-on-asthma',source:BOS,chapters:[
+ {id:'maimonides-asthma',author:'maimonides',number:1,title:'On Asthma',dir:'maimonides/01-on-asthma',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','Introduction','Maimonides describes the patient and the disease and sets out the plan of the treatise',13),
   ch('01-chapter-one.md','Chapter One','On the best regimen in general',16),
   ch('02-chapter-two.md','Chapter Two','On the provision of rules concerning the foods to be eaten or avoided in relation to this disease',17),
@@ -45,7 +46,7 @@ export const MAIMONIDES_WORKS:Work[]=[
   ch('11-chapter-eleven.md','Chapter Eleven','On the provision of rules for the treatment of this disease',45),
   ch('12-chapter-twelve.md','Chapter Twelve','On the composition of drugs necessary for every different kind of this disease',49),
   ch('13-chapter-thirteen.md','Chapter Thirteen','Rules, few in number but of great help, concerning the regimen of health and the healing of diseases; in hortatory form',57)]},
- {id:'maimonides-poisons',author:'maimonides',number:2,title:'On Poisons and the Protection against Lethal Drugs',dir:'maimonides/02-on-poisons-and-the-protection-against-lethal-drugs',source:BOS,chapters:[
+ {id:'maimonides-poisons',author:'maimonides',number:2,title:'On Poisons and the Protection against Lethal Drugs',dir:'maimonides/02-on-poisons-and-the-protection-against-lethal-drugs',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','Introduction',undefined,77),
   ch('01-the-first-chapter-of-the-first-part.md','Part I, Chapter One','Concerning the regimen of someone bitten in general',81),
   ch('02-the-second-chapter-of-the-first-part.md','Part I, Chapter Two','Concerning the simple and compound topical remedies put on the site of the bite',83),
@@ -57,7 +58,7 @@ export const MAIMONIDES_WORKS:Work[]=[
   ch('08-the-second-chapter-of-the-second-part.md','Part II, Chapter Two','Concerning the regimen of someone who took a deadly poison or suspects that he took it',99),
   ch('09-the-third-chapter-of-the-second-part.md','Part II, Chapter Three','Concerning the simple and compound remedies generally beneficial for someone who took poison',100),
   ch('10-the-fourth-chapter-of-the-second-part.md','Part II, Chapter Four','On the regimen for someone who knows which poison he took',101)]},
- {id:'maimonides-hemorrhoids',author:'maimonides',number:3,title:'On Hemorrhoids',dir:'maimonides/03-on-hemorrhoids',source:BOS,chapters:[
+ {id:'maimonides-hemorrhoids',author:'maimonides',number:3,title:'On Hemorrhoids',dir:'maimonides/03-on-hemorrhoids',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','Introduction',undefined,105),
   ch('01-chapter-one.md','Chapter One','A general discussion of the improvement of the digestions',106),
   ch('02-chapter-two.md','Chapter Two','On the food from which one should refrain because of this illness',108),
@@ -66,24 +67,24 @@ export const MAIMONIDES_WORKS:Work[]=[
   ch('05-chapter-five.md','Chapter Five','On topical remedies which should be taken repeatedly as well',112),
   ch('06-chapter-six.md','Chapter Six','On that which one should rely upon when this disease flares up',113),
   ch('07-chapter-seven.md','Chapter Seven','On the fumigations that should be prescribed for this illness',115)]},
- {id:'maimonides-rules',author:'maimonides',number:4,title:'On Rules Regarding the Practical Part of the Medical Art',dir:'maimonides/04-on-rules-regarding-the-practical-part-of-the-medical-art',source:BOS,chapters:[
+ {id:'maimonides-rules',author:'maimonides',number:4,title:'On Rules Regarding the Practical Part of the Medical Art',dir:'maimonides/04-on-rules-regarding-the-practical-part-of-the-medical-art',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','The treatise','A single treatise on the practice of medicine',117)]},
- {id:'maimonides-aphorisms',author:'maimonides',number:5,title:'Medical Aphorisms',dir:'maimonides/05-medical-aphorisms',source:BOS,chapters:[
+ {id:'maimonides-aphorisms',author:'maimonides',number:5,title:'Medical Aphorisms',dir:'maimonides/05-medical-aphorisms',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','Introduction',undefined,142),
   ...([
    ['the form of the organs of the human body and their functions and faculties',146],['the humors',160],['the principles of the art and general rules',166],['the pulse and the prognostic signs to be derived from it',186],['the prognostic signs to be derived from the urine',194],['the other prognostic signs',198],['the causes of diseases which are often not known or which are discussed in a confused way',215],['the correct regimen for the healing of diseases in general',231],['specific diseases',245],['fevers',270],['the periods and crisis of a disease',285],['evacuation by means of bloodletting',290],['evacuations by means of purgatives and enemas',299],['vomiting',309],['surgery',311],['women',324],['the regimen of health in general',330],['physical exercise',337],['bathing',340],['foods, beverages, and their consumption',346],['drugs',360],['the specific properties of remedies',382],['the differences between well-known diseases and the elucidation of technical terms',396],['curiosities and unusual, rare occurrences related in the medical books',412],['some doubts that befell me concerning Galen’s words',423],
   ] as [string,number][]).map(([subject,page],i)=>ch(`${String(i+1).padStart(2,'0')}-the-${ordinal(i+1)}-treatise.md`,`The ${num(i+1)} Treatise`,`Aphorisms concerning ${subject}`,page))]},
- {id:'maimonides-coitus',author:'maimonides',number:6,title:'On Coitus',dir:'maimonides/06-on-coitus',source:BOS,chapters:[
+ {id:'maimonides-coitus',author:'maimonides',number:6,title:'On Coitus',dir:'maimonides/06-on-coitus',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','The treatise','A single treatise on sexual intercourse, its benefits and harms',460)]},
- {id:'maimonides-regimen',author:'maimonides',number:7,title:'On the Regimen of Health',dir:'maimonides/07-on-the-regimen-of-health',source:BOS,chapters:[
+ {id:'maimonides-regimen',author:'maimonides',number:7,title:'On the Regimen of Health',dir:'maimonides/07-on-the-regimen-of-health',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','Introduction',undefined,468),
   ch('01-chapter-one.md','Chapter One','On the regimen of health in general, with respect to all people, in a few words',469),
   ch('02-chapter-two.md','Chapter Two','On the regimen of sick people in general, when no physician can be found',475),
   ch('03-chapter-three.md','Chapter Three','On the regimen of my Master in particular, according to the symptoms he complains about',480),
   ch('04-chapter-four.md','Chapter Four','Hortatory rules useful for healthy and sick people in all places and all times',488)]},
- {id:'maimonides-symptoms',author:'maimonides',number:8,title:'On the Elucidation of Some Symptoms and the Response to Them',dir:'maimonides/08-on-the-elucidation-of-some-symptoms-and-the-response-to-them',source:BOS,chapters:[
+ {id:'maimonides-symptoms',author:'maimonides',number:8,title:'On the Elucidation of Some Symptoms and the Response to Them',dir:'maimonides/08-on-the-elucidation-of-some-symptoms-and-the-response-to-them',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','The treatise','Formerly known as On the Causes of Symptoms',499)]},
- {id:'maimonides-hippocrates',author:'maimonides',number:9,title:'Commentary on Hippocrates’ Aphorisms',dir:'maimonides/09-commentary-on-hippocrates-aphorisms',source:BOS,chapters:[
+ {id:'maimonides-hippocrates',author:'maimonides',number:9,title:'Commentary on Hippocrates’ Aphorisms',dir:'maimonides/09-commentary-on-hippocrates-aphorisms',book:BOOK,source:BOS,chapters:[
   ch('00-index.md','Introduction',undefined,518),
   ...[522,537,549,557,573,586,598].map((page,i)=>ch(`${String(i+1).padStart(2,'0')}-the-${ordinal(i+1)}-part-of-the-commentary.md`,`The ${num(i+1)} Part`,`Commentary on the ${ordinal(i+1)} section of the Aphorisms`,page))]},
 ];
