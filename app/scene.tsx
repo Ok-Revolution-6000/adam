@@ -82,7 +82,8 @@ export default function AnatomyScene({atlas,state,onSelect,onProgress,onError}:P
    const distance=T.MathUtils.lerp(normalDistance,Math.max(.2,atlasDistance),extent);if(extent>.8)view='front';
    const current=camera.position.clone().sub(controls.target);
    const direction=keepDirection&&current.lengthSq()>1e-8?current.normalize():view==='front'?new T.Vector3(0,.02,1):view==='back'?new T.Vector3(0,.02,-1):view==='side'?new T.Vector3(1,.02,0):new T.Vector3(.35,.06,1).normalize();
-   const target=new T.Vector3(extent>.1&&el.clientWidth>767?-packingWidth*.12:0,extent>.1||mobile?.85:.68,0),position=target.clone().addScaledVector(direction,distance);
+   const cam=latest.current.camera;if(cam&&extent<=.1&&!keepDirection){const az=T.MathUtils.degToRad(cam.az),elv=T.MathUtils.degToRad(cam.el);direction.set(Math.sin(az)*Math.cos(elv),Math.sin(elv),Math.cos(az)*Math.cos(elv)).normalize();}
+   const target=new T.Vector3(extent>.1&&el.clientWidth>767?-packingWidth*.12:0,cam&&extent<=.1&&cam.ty!==undefined?cam.ty:(extent>.1||mobile?.85:.68),0),position=target.clone().addScaledVector(direction,cam&&extent<=.1&&cam.dist?cam.dist:distance);
    if(smooth){camGoal={target,position};camGoalAt=performance.now();}else{camGoal=null;controls.target.copy(target);camera.position.copy(position);controls.update();}dirty=true;
   };
   const resize=()=>{layoutKey='';lastState=null;renderer.setPixelRatio(Math.min(devicePixelRatio,el.clientWidth<768||el.clientHeight<600?1.5:2));camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix();renderer.setSize(el.clientWidth,el.clientHeight);fit(latest.current.view,amount);};const observer=new ResizeObserver(resize);observer.observe(el);
