@@ -53,6 +53,7 @@ The study validator checks that every atlas concept name referenced by lessons, 
 - `app/scene.tsx` — the selection texture now carries a role channel; the shader mixes teal for the structure under discussion and amber for related anatomy.
 - `vite.config.ts` — a development-only middleware that serves `content/` under `/content/`, refusing paths that escape it.
 - `scripts/build-corpus-index.mjs` — generates `app/corpus.ts` from the Greek and Arabic corpora.
+- `scripts/build-specimens.mjs` (`npm run specimens`) — cuts one small mesh per noted structure out of the atlas into `public/models/specimens/` and generates `app/specimens.ts`, for the Structures pages. Re-run after adding a note to `app/organ-notes.ts`.
 
 ## Roadmap
 

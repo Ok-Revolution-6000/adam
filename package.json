@@ -11,6 +11,7 @@
     "build:vercel": "vite build",
     "check": "tsc --noEmit",
     "corpus": "node scripts/build-corpus-index.mjs",
+    "specimens": "node scripts/build-specimens.mjs",
     "validate": "node scripts/validate-atlas.mjs && node scripts/validate-interactions.mjs && node scripts/validate-study.mjs"
   },
   "dependencies": {
