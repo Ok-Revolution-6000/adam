@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {LESSONS,MAIMONIDES_WORKS,AUTHORS,lessonsFor,workForUrl} from '../app/study.ts';
 import {CORPUS_WORKS} from '../app/corpus.ts';
+import {tierForDir} from '../shared/tiers.ts';
 const WORKS=MAIMONIDES_WORKS; // the library; CORPUS_WORKS is generated but not surfaced yet
 import {LEXICON} from '../app/lexicon.ts';
 import {ORGAN_NOTES} from '../app/organ-notes.ts';
@@ -15,6 +16,8 @@ const check=(where,list)=>{for(const n of list)if(!names.has(n))missing.add(`${w
 // Every concept name referenced by the study layer must resolve in the atlas.
 for(const [term,list] of Object.entries(LEXICON)){assert.equal(term,term.toLowerCase(),`lexicon key not lower-case: ${term}`);check(`lexicon "${term}"`,list);}
 for(const [name,n] of Object.entries(ORGAN_NOTES)){check('organ notes',[name]);assert.ok(n.classical?.note&&n.modern?.function&&n.modern?.type&&n.modern?.note,`organ note incomplete: ${name}`);}
+// Every work must resolve to a tier, or the content function would answer 404 for it.
+for(const w of [...WORKS,...CORPUS_WORKS]){assert.ok(tierForDir(w.dir),`no tier for ${w.dir}`);assert.equal(w.tier,tierForDir(w.dir),`stale tier on ${w.id}`);}
 const ids=new Set();
 for(const lesson of LESSONS){
  assert.ok(!ids.has(lesson.id),`duplicate lesson id ${lesson.id}`);ids.add(lesson.id);

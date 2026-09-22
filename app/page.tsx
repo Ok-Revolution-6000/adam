@@ -1,7 +1,7 @@
 import {flushSync} from 'react-dom';
 import {registerAtlasTools} from './agent-tools';
 import {useEffect,useMemo,useRef,useState} from 'react';
-import {Activity,ArrowUpRight,BookOpen,ChevronDown,ChevronLeft,ChevronRight,Eye,EyeOff,Focus,Info,Layers3,Pause,RotateCcw,RotateCw,Search,X} from 'lucide-react';
+import {Activity,ArrowUpRight,BookOpen,ChevronDown,ChevronLeft,ChevronRight,Eye,EyeOff,Focus,Info,Layers3,Lock,Pause,RotateCcw,RotateCw,Search,X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Badge} from '@/components/ui/badge';
 import {Slider} from '@/components/ui/slider';
@@ -12,14 +12,17 @@ import AnatomyScene from './scene';
 import Reader from './reader';
 import {organNote} from './organ-notes';
 import {AUTHORS,LESSONS,MAIMONIDES_WORKS,chapterUrl,lessonFor,workForUrl,type Lesson,type Work} from './study';
+import {CORPUS_WORKS} from './corpus';
+import {useEntitlement} from './account';
 import {DEFAULT_VISIBLE,SYSTEMS,EXPLANATIONS,explanation,type Atlas,type Concept,type SceneState,type SystemId,type View} from './anatomy';
 type Panel='layers'|'search'|'study'|null;
 interface Reading {work:Work;file:string}
-/** The study library. Only Maimonides for now; the other physicians appear as background information (see AUTHORS). */
-const WORKS:Work[]=MAIMONIDES_WORKS;
+/** The study library: Maimonides, free with an account, and the corpora indexed by scripts/build-corpus-index.mjs, open to Readers.
+ * Which is which is decided in shared/tiers.ts; a locked work still opens, and the reader explains. */
+const WORKS:Work[]=[...MAIMONIDES_WORKS,...CORPUS_WORKS];
 const initial:SceneState={explode:0,visible:DEFAULT_VISIBLE,selected:[],secondary:[],hidden:[],isolate:false,view:'three-quarter',rotate:false,reset:0};
 export default function Home(){
- const detailTitle=useRef<HTMLHeadingElement>(null);
+ const detailTitle=useRef<HTMLHeadingElement>(null),me=useEntitlement();
  const [atlas,setAtlas]=useState<Atlas|null>(null),[state,setState]=useState(initial),[progress,setProgress]=useState(0),[error,setError]=useState(''),[panel,setPanel]=useState<Panel>(null),[details,setDetails]=useState(false),[about,setAbout]=useState(false),[query,setQuery]=useState(''),[chosen,setChosen]=useState<Concept|null>(null);
  const [reading,setReading]=useState<Reading|null>(null),[openWork,setOpenWork]=useState<string|null>('maimonides-asthma'),[focusNote,setFocusNote]=useState<{term:string;concepts:Concept[];primary:string[];context:string[]}|null>(null);
  useEffect(()=>{const abort=new AbortController();setProgress(0);setError('');setAtlas(null);setChosen(null);setDetails(false);setState({...initial,visible:DEFAULT_VISIBLE});fetch('/models/atlas.json',{signal:abort.signal}).then(r=>{if(!r.ok)throw new Error('The anatomy catalogue could not be loaded.');return r.json();}).then(data=>setAtlas(data as Atlas)).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>abort.abort();},[]);
@@ -70,7 +73,7 @@ export default function Home(){
   </section>
   {panel==='study'&&<section className="study-panel glass mobile-open" aria-label="Study library">
    <div className="panel-heading"><span>Study</span><Button variant="ghost" className="icon-button" onClick={()=>setPanel(null)} aria-label="Close study"><X size={18}/></Button></div>
-   <div className="study-list">{AUTHORS.map(a=>{const works=WORKS.filter(w=>w.author===a.id);return <div className="author-group" key={a.id}><h3>{a.name}<span>{a.dates}</span></h3>{works.length===0&&<p className="study-note">{a.note}</p>}{works.map(w=><div key={w.id}><Button variant="ghost" className={`work-title ${openWork===w.id?'open':''}`} onClick={()=>setOpenWork(openWork===w.id?null:w.id)} aria-expanded={openWork===w.id}><ChevronDown size={14} className="work-chevron"/><span className="work-name">{w.number?`${w.number}. `:''}{w.title}</span><small>{w.chapters.length}</small></Button>{openWork===w.id&&<div className="chapter-list">{w.chapters.map(ch=>{const active=reading?.work.id===w.id&&reading.file===ch.file;return <button type="button" key={ch.file} className={`chapter ${active?'active':''} ${lessonFor(w.id,ch.file)?'mapped':''}`} onClick={()=>openChapter(w,ch.file)}><span>{ch.title}</span>{ch.subtitle&&<small>{ch.subtitle}</small>}</button>;})}</div>}</div>)}</div>;})}</div>
+   <div className="study-list">{AUTHORS.map(a=>{const works=WORKS.filter(w=>w.author===a.id);return <div className="author-group" key={a.id}><h3>{a.name}<span>{a.dates}</span></h3>{works.length===0&&<p className="study-note">{a.note}</p>}{works.map(w=><div key={w.id}><Button variant="ghost" className={`work-title ${openWork===w.id?'open':''}`} onClick={()=>setOpenWork(openWork===w.id?null:w.id)} aria-expanded={openWork===w.id}><ChevronDown size={14} className="work-chevron"/><span className="work-name">{w.number?`${w.number}. `:''}{w.title}</span>{!me.canRead(w.tier)&&<Lock size={11} className="work-lock" aria-label={w.tier==='all'?'Reader plan':'Sign in'}/>}<small>{w.chapters.length}</small></Button>{openWork===w.id&&<div className="chapter-list">{w.chapters.map(ch=>{const active=reading?.work.id===w.id&&reading.file===ch.file;return <button type="button" key={ch.file} className={`chapter ${active?'active':''} ${lessonFor(w.id,ch.file)?'mapped':''}`} onClick={()=>openChapter(w,ch.file)}><span>{ch.title}</span>{ch.subtitle&&<small>{ch.subtitle}</small>}</button>;})}</div>}</div>)}</div>;})}</div>
    <div className="panel-foot"><span><i className="focus-dot primary inline"/> chapter mapped to the body</span></div>
   </section>}
   {panel==='search'&&<section className="search-panel glass" aria-label="Find anatomy"><div className="panel-heading"><span>Find a structure</span><Button variant="ghost" className="icon-button" onClick={()=>setPanel(null)} aria-label="Close search"><X size={18}/></Button></div><Combobox<Concept> items={results} value={null} onValueChange={value=>{if(value)choose(value);}} inputValue={query} onInputValueChange={setQuery} itemToStringLabel={c=>c.name} filter={null} open onOpenChange={open=>{if(!open)setPanel(null);}}><ComboboxInput autoFocus placeholder="Heart, femur, cranial nerve…" aria-label="Search named anatomical structures" showTrigger={false}/><ComboboxContent className="anatomy-search-results"><ComboboxEmpty>No structures match your search.</ComboboxEmpty><ComboboxList>{(c:Concept)=><ComboboxItem key={c.id} value={c}><span className="search-result-name">{c.name}</span><span className="small-number">{c.elements.length} {c.elements.length===1?'piece':'pieces'}</span></ComboboxItem>}</ComboboxList></ComboboxContent></Combobox><p className="search-note">{query?'Showing up to 80 matches. Refine your search to find smaller structures.':'Start with a major organ, or search every named structure.'}</p></section>}

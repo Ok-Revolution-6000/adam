@@ -24,4 +24,8 @@ function studyContent():Plugin{
  }};
 }
 
-export default defineConfig({root:path('./web'),publicDir:path('./public'),plugins:[react(),studyContent()],resolve:{alias:{'@':path('./')}},css:{postcss:{plugins:[tailwindcss()]}},server:{watch:{usePolling:true}},build:{outDir:path('./dist'),emptyOutDir:true}});
+/** ADAM_CONTENT=remote turns the local corpus off, so `vercel dev` (or a proxied API) answers /content/ through api/content.ts as production does.
+ * VITE_API_ORIGIN proxies /api and /content to a running `vercel dev` while Vite serves the app on its own port. */
+const remote=process.env.ADAM_CONTENT==='remote',api=process.env.VITE_API_ORIGIN;
+const proxy=api?{'/api':{target:api,changeOrigin:true},...(remote?{'/content':{target:api,changeOrigin:true}}:{})}:undefined;
+export default defineConfig({root:path('./web'),publicDir:path('./public'),plugins:[react(),...(remote?[]:[studyContent()])],resolve:{alias:{'@':path('./')}},css:{postcss:{plugins:[tailwindcss()]}},envDir:path('./'),server:{watch:{usePolling:true},proxy},build:{outDir:path('./dist'),emptyOutDir:true}});

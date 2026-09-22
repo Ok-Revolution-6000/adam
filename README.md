@@ -4,6 +4,14 @@ An interactive 3D anatomy companion for studying the classical physicians. Read 
 
 Adam is a fork of [Human Atlas](https://github.com/ashemag/human-atlas) (MIT), which renders the BodyParts3D adult male reference as **2,234 individually selectable meshes** with 15 system layers, search and exploded views. Adam adds a study layer on top of it.
 
+## Accounts and the Reader plan
+
+Adam is free to open. The texts in the reader need an account (Clerk), and the physicians other than Maimonides need the **Reader** plan (Stripe, $30 a month or $248 a year). Who may read what is decided in `shared/tiers.ts`; the hash routes `#/sign-in`, `#/sign-up` and `#/membership` are the app's own pages, built on Clerk's hooks.
+
+In production the corpus is served by `api/content.ts` from a private R2 bucket, never from the static build: the function verifies the session token, checks the work's tier, and streams the chapter. `api/checkout.ts` and `api/portal.ts` open Stripe's pages; `api/webhook.ts` writes the subscription state onto the Clerk user (`publicMetadata.plan`), which is all the app and the function ever consult.
+
+Setup: copy `env.example` to `.env.local` (`clerk env pull` fills the Clerk keys), `npm run corpus:sync` to push `content/` to R2. Daily work is `npm run dev` with the local corpus and no gating; `npm run dev:vercel` runs the functions and reads from R2 like production, with `stripe listen --forward-to localhost:3000/api/webhook` for billing events.
+
 ## The study layer
 
 - **Works and chapters.** A library of texts, each chapter loading in a reading pane beside the body. The library is **Maimonides**: the nine medical works of volume 1, chapter by chapter. Hippocrates, Galen and Avicenna appear as background information only; their corpora can be registered later (see below) but are not surfaced.
