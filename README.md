@@ -10,7 +10,7 @@ Adam is free to open. The texts in the reader need an account (Clerk), and the p
 
 In production the corpus is served by `api/content.ts` from a private R2 bucket, never from the static build: the function verifies the session token, checks the work's tier, and streams the chapter. `api/checkout.ts` and `api/portal.ts` open Stripe's pages; `api/webhook.ts` writes the subscription state onto the Clerk user (`publicMetadata.plan`), which is all the app and the function ever consult.
 
-Setup: copy `env.example` to `.env.local` (`clerk env pull` fills the Clerk keys), `npm run corpus:sync` to push `content/` to R2. Daily work is `npm run dev` with the local corpus and no gating; `npm run dev:vercel` runs the functions and reads from R2 like production, with `stripe listen --forward-to localhost:3000/api/webhook` for billing events.
+Setup: copy `env.example` to `.env.local` (`clerk env pull` fills the Clerk keys), `npm run corpus:sync` to push `content/` to R2. Daily work is `npm run dev` with the local corpus and no gating; `npm run dev:vercel` runs the functions and reads from R2 like production, with `stripe listen --forward-to localhost:3030/api/webhook` for billing events.
 
 ## The study layer
 

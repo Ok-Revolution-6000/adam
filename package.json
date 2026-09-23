@@ -14,7 +14,7 @@
     "specimens": "node scripts/build-specimens.mjs",
     "validate": "node scripts/validate-atlas.mjs && node scripts/validate-interactions.mjs && node scripts/validate-study.mjs",
     "corpus:sync": "node --env-file=.env.local scripts/sync-corpus.mjs",
-    "dev:vercel": "ADAM_CONTENT=remote vercel dev --listen 3000"
+    "dev:vercel": "ADAM_CONTENT=remote vercel dev --listen 3030"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
