@@ -1,7 +1,7 @@
-import {HttpError,errorResponse,requireUser} from './_lib/clerk';
-import {json,origin} from './_lib/env';
-import {customerFor} from './_lib/entitlement';
-import {PRICES,stripe} from './_lib/stripe';
+import {HttpError,errorResponse,requireUser} from './_lib/clerk.js';
+import {json,origin} from './_lib/env.js';
+import {customerFor} from './_lib/entitlement.js';
+import {PRICES,stripe} from './_lib/stripe.js';
 /** POST {interval:'month'|'year'} → {url}: a Stripe Checkout session for the Reader plan. */
 export async function POST(req:Request){
  try{

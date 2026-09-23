@@ -1,7 +1,7 @@
-import {errorResponse,requireUser} from './_lib/clerk';
-import {json,origin} from './_lib/env';
-import {customerFor} from './_lib/entitlement';
-import {stripe} from './_lib/stripe';
+import {errorResponse,requireUser} from './_lib/clerk.js';
+import {json,origin} from './_lib/env.js';
+import {customerFor} from './_lib/entitlement.js';
+import {stripe} from './_lib/stripe.js';
 /** POST → {url}: Stripe's customer portal, where cards, invoices and cancellation are handled. */
 export async function POST(req:Request){
  try{

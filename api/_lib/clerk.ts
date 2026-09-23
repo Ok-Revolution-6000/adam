@@ -1,6 +1,6 @@
 import {createClerkClient,verifyToken} from '@clerk/backend';
-import type {Plan} from '../../shared/tiers.ts';
-import {env,json,origin} from './env';
+import type {Plan} from '../../shared/tiers.js';
+import {env,json,origin} from './env.js';
 export const clerk=createClerkClient({secretKey:env('CLERK_SECRET_KEY')});
 /** What Stripe has told us about a user, kept on the Clerk user. Public metadata reaches the browser; private does not. */
 export interface PublicMeta {plan?:Plan;periodEnd?:number|null;billing?:'ok'|'past_due'|null}

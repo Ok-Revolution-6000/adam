@@ -1,5 +1,5 @@
 import {AwsClient} from 'aws4fetch';
-import {env} from './env';
+import {env} from './env.js';
 /** The private corpus bucket, read with a signed S3 request. Nothing in it has a public URL. */
 let client:AwsClient|undefined;
 export const getObject=(key:string)=>{

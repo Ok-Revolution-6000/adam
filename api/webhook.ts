@@ -1,7 +1,7 @@
 import type Stripe from 'stripe';
-import {env,json} from './_lib/env';
-import {syncSubscription} from './_lib/entitlement';
-import {stripe} from './_lib/stripe';
+import {env,json} from './_lib/env.js';
+import {syncSubscription} from './_lib/entitlement.js';
+import {stripe} from './_lib/stripe.js';
 /** Stripe → Clerk. Every event that can change a subscription re-syncs it from Stripe; nothing is trusted from the
  * event body but the subscription id. Returns 500 only when Clerk could not be updated, so Stripe retries. */
 export async function POST(req:Request){

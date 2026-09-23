@@ -1,6 +1,6 @@
 import type Stripe from 'stripe';
-import {clerk,type PrivateMeta,type PublicMeta} from './clerk';
-import {stripe} from './stripe';
+import {clerk,type PrivateMeta,type PublicMeta} from './clerk.js';
+import {stripe} from './stripe.js';
 /** Brings a Clerk user's plan into line with one Stripe subscription. The subscription is re-read from Stripe, so
  * webhook re-deliveries and out-of-order events all converge on the same state; an event older than the last one
  * applied is ignored. Returns false when the subscription names no Clerk user. */

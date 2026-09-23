@@ -1,7 +1,7 @@
-import {tierForDir} from '../shared/tiers.ts';
-import {HttpError,errorResponse,requireUser} from './_lib/clerk';
-import {json} from './_lib/env';
-import {getObject} from './_lib/r2';
+import {tierForDir} from '../shared/tiers.js';
+import {HttpError,errorResponse,requireUser} from './_lib/clerk.js';
+import {json} from './_lib/env.js';
+import {getObject} from './_lib/r2.js';
 /** GET /content/<dir>/<file>.md, rewritten here by vercel.json. Checks who may read the work, then streams the chapter
  * from the private bucket. 401 means sign in, 402 means subscribe; the reader shows the matching prompt. */
 export async function GET(req:Request){
