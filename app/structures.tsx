@@ -46,6 +46,8 @@ function Index(){
 }
 function Detail({specimen,at}:{specimen:Specimen;at:number}){
  const note=ORGAN_NOTES[specimen.name],before=SPECIMENS[(at+SPECIMENS.length-1)%SPECIMENS.length],after=SPECIMENS[(at+1)%SPECIMENS.length];
+ // The arrow keys turn the page, as the arrows at either edge do.
+ useEffect(()=>{const key=(e:KeyboardEvent)=>{if(e.metaKey||e.ctrlKey||e.altKey||(e.target as HTMLElement).closest('input,textarea'))return;if(e.key==='ArrowLeft'){location.hash=`/structures/${before.slug}`;}else if(e.key==='ArrowRight'){location.hash=`/structures/${after.slug}`;}};addEventListener('keydown',key);return ()=>removeEventListener('keydown',key);},[before.slug,after.slug]);
  const rows:[string,string][]=[['System',system(specimen)],['Faculty',note.classical.faculty??'None recorded'],['Temperament',note.classical.temperament??'None recorded'],['Tissue',note.modern.type],['Pieces in the atlas',String(specimen.parts)],['Source triangles',specimen.triangles.toLocaleString()]];
  return <div className="page structure">
   <SiteBar current="structures"/>
@@ -57,8 +59,9 @@ function Detail({specimen,at}:{specimen:Specimen;at:number}){
     <h3>Modern anatomy</h3><p>{note.modern.note}</p>
     <h3>Classical view</h3><p>{note.classical.note}</p>
     <dl className="ledger">{rows.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-    <nav className="turn" aria-label="Other structures"><a href={`#/structures/${before.slug}`}><ArrowLeft size={14}/>{before.name}</a><a href={`#/structures/${after.slug}`}>{after.name}<ArrowRight size={14}/></a></nav>
    </section></main>
+   <a className="edge edge-prev" href={`#/structures/${before.slug}`} aria-label={`Previous: ${before.name}`}><ArrowLeft size={18}/><span>{before.name}</span><kbd>←</kbd></a>
+   <a className="edge edge-next" href={`#/structures/${after.slug}`} aria-label={`Next: ${after.name}`}><ArrowRight size={18}/><span>{after.name}</span><kbd>→</kbd></a>
    <aside className="plates is-single" aria-label="Specimen"><figure><div className="plate"><Specimen3D key={specimen.slug} specimen={specimen} turn drag className="specimen-stage"/><span className="plate-readout">{(specimen.extent*100).toFixed(1)} cm</span></div><figcaption><b>Fig. {number(at)}. {specimen.name}</b><span>Lifted out of the body, at its longest {(specimen.extent*100).toFixed(1)} cm. Drag to turn.</span></figcaption></figure></aside>
   </div>
  </div>;

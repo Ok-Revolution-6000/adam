@@ -25,12 +25,13 @@ export default function Membership(){
  ];
  return <div className="page membership">
   <SiteBar current="membership"/>
-  <header className="pricing-head"><h1>Read.</h1><div className="pricing-interval" role="radiogroup" aria-label="Billing interval">{(['month','year'] as const).map(i=><button key={i} type="button" role="radio" aria-checked={interval===i} onClick={()=>setInterval_(i)}><span className="box" aria-hidden="true">{interval===i?'×':''}</span>{i==='month'?'Monthly':'Annual (−17%)'}</button>)}</div><h1 className="right">Pricing</h1></header>
+  <header className="pricing-head"><h1>Read.</h1><h1 className="right">Pricing</h1></header>
   {me.loaded&&me.signedIn&&<div className="standing-strip"><span>{me.email}</span><span>Plan · <b>{me.plan==='all'?'Reader':'Free'}</b>{me.plan==='all'&&renews&&<> · {me.billing==='past_due'?'Payment overdue, access ends':'Renews'} {renews}</>}</span>{confirming&&<span className="auth-note">Confirming your membership with Stripe…</span>}{me.billing==='past_due'&&<span className="auth-error">Your last payment failed. Update your card in billing.</span>}<span className="standing-actions">{me.plan==='all'&&<button type="button" className="auth-alt" onClick={go('/api/portal')} disabled={!!busy}>{busy==='/api/portal'?'Opening…':'Manage billing'}</button>}<button type="button" className="auth-alt" onClick={()=>signOut({redirectUrl:'/'})}>Sign out</button></span></div>}
   {error&&<p className="auth-error pricing-error" role="alert">{error}</p>}
   <div className="tiers">{tiers.map(t=><section key={t.n} className={`tier ${t.vivid?'is-vivid':''}`}>
    <p className="tier-n">Tier {t.n}</p>
    <h2>{t.name[0]}<br/>{t.name[1]}</h2>
+   {t.vivid&&<div className="pricing-interval" role="radiogroup" aria-label="Billing interval">{(['month','year'] as const).map(i=><button key={i} type="button" role="radio" aria-checked={interval===i} onClick={()=>setInterval_(i)}><span className="box" aria-hidden="true">{interval===i?'×':''}</span>{i==='month'?'Monthly':'Annual (−17%)'}</button>)}</div>}
    <p className="tier-price">{t.price}<span>{t.unit}</span></p>
    <p className="tier-blurb">{t.blurb}</p>
    <dl className="tier-rows">{t.rows.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
