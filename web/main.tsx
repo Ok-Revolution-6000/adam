@@ -18,7 +18,7 @@ function Root(){
  useEffect(()=>{const sync=()=>{const next=route();if(last.current==='hero'&&next.page==='atlas')setVeil(true);last.current=next.page;setAt(next);};addEventListener('hashchange',sync);return ()=>removeEventListener('hashchange',sync);},[]);
  // Entering, the hero stays mounted while it fades so the atlas never flashes in beneath it.
  useEffect(()=>{if(!veil)return;const t=setTimeout(()=>setVeil(false),700);return ()=>clearTimeout(t);},[veil]);
- return <><Suspense fallback={null}>{at.page==='atlas'&&<Home/>}{at.page==='library'&&<Library/>}{at.page==='structures'&&<Structures slug={at.slug}/>}{at.page==='about'&&<About/>}{at.page==='membership'&&<Membership/>}{(at.page==='sign-in'||at.page==='sign-up')&&<Auth key={at.page} mode={at.page}/>}{at.page==='sso-callback'&&<SsoCallback/>}{at.page==='privacy'&&<Privacy/>}{at.page==='terms'&&<Terms/>}</Suspense>{(at.page==='hero'||veil)&&<Hero leaving={at.page!=='hero'}/>}</>;
+ return <><Suspense fallback={null}>{at.page==='atlas'&&<Home/>}{at.page==='library'&&<Library/>}{at.page==='structures'&&<Structures slug={at.slug}/>}{at.page==='about'&&<About open={at.slug==='mission'}/>}{at.page==='membership'&&<Membership/>}{(at.page==='sign-in'||at.page==='sign-up')&&<Auth key={at.page} mode={at.page}/>}{at.page==='sso-callback'&&<SsoCallback/>}{at.page==='privacy'&&<Privacy/>}{at.page==='terms'&&<Terms/>}</Suspense>{(at.page==='hero'||veil)&&<Hero leaving={at.page!=='hero'}/>}</>;
 }
 const key=(import.meta as unknown as {env:Record<string,string|undefined>}).env.VITE_CLERK_PUBLISHABLE_KEY;
 if(!key)console.warn('VITE_CLERK_PUBLISHABLE_KEY is not set: sign-in is unavailable.');

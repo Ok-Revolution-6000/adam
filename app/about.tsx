@@ -1,12 +1,15 @@
 import {SiteBar} from './site';
 import Helix from './helix';
 /** About: what Adam is, what it is not, and whose work it stands on. A single sheet: the text at left, the helix at right. */
-export default function About(){
- return <div className="page about">
+/** Two states: the helix alone in the centre with an invitation to read; then, opened, the essay at left with the helix
+ * moved to the right and the invitation gone. #/about/mission is the open state, so it can be linked and returned to. */
+export default function About({open=false}:{open?:boolean}){
+ return <div className={`page about ${open?'is-open':''}`}>
   <SiteBar current="about"/>
   <div className="about-strip"><span>Adomeh // Adam</span><span>Sequence: INS · Homo sapiens</span><span>Est. MMXXVI</span></div>
   <div className="about-body">
-   <div className="about-text">
+   <div className="about-text" aria-hidden={!open}>
+    <p className="kicker about-kicker">Mission</p>
     <h1>The body<br/>the physicians<br/>wrote about</h1>
     <p className="about-lede">Adomeh is an anatomical atlas for reading the classical physicians. Maimonides, Hippocrates, Galen and Avicenna, with the structures they discuss lit up on a three-dimensional human body, and the modern account of each organ set beside the classical one.</p>
     <dl className="about-notes">
@@ -19,6 +22,6 @@ export default function About(){
    </div>
    <Helix className="about-helix"/>
   </div>
-  <a className="about-enter" href="#/atlas"><span className="about-enter-label">Access the atlas</span><span className="about-enter-word">Enter <i>—</i></span></a>
+  <a className="about-enter" href="#/about/mission" aria-hidden={open} tabIndex={open?-1:0}><span className="about-enter-label">The mission</span><span className="about-enter-word">Read <i>—</i></span></a>
  </div>;
 }
