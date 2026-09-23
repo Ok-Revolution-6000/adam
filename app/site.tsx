@@ -1,6 +1,6 @@
 import {useUser} from '@clerk/react';
 /** The pages outside the atlas and the bar they share. Only "The Adam Atlas" and Enter lead into the atlas itself. */
-export type PageId='hero'|'atlas'|'library'|'structures'|'about'|'membership'|'sign-in'|'sign-up'|'sso-callback';
+export type PageId='hero'|'atlas'|'library'|'structures'|'about'|'membership'|'sign-in'|'sign-up'|'sso-callback'|'privacy'|'terms';
 export const NAV:{page:PageId;label:string;href:string}[]=[
  {page:'atlas',label:'The Adam Atlas',href:'#/atlas'},
  {page:'library',label:'Library',href:'#/library'},

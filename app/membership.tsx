@@ -41,7 +41,7 @@ export default function Membership(){
       {me.plan==='all'?<p className="auth-note">You are a Reader. Thank you.</p>:me.signedIn?<button type="button" className="enter" onClick={go('/api/checkout',{interval})} disabled={!!busy}>{busy==='/api/checkout'?'Opening…':'Subscribe'}</button>:<button type="button" className="enter" onClick={goSignIn}>Sign in to subscribe</button>}</div>
     </div>
     {error&&<p className="auth-error" role="alert">{error}</p>}
-    <p className="shelf-more">Cards are handled by Stripe; nothing about your card reaches Adomeh. Cancel at any time; access runs to the end of the period paid for.</p>
+    <p className="shelf-more">Cards are handled by Stripe; nothing about your card reaches Adomeh. Cancel at any time; access runs to the end of the period paid for. <a href="#/terms">Terms</a> · <a href="#/privacy">Privacy</a>.</p>
    </section></main>
    <aside className="plates is-single" aria-label="Note"><figure><div className="plate is-text"><p>“The physician should be a lover of the art, and the art a lover of the body.”</p><cite>after the Hippocratic <i>Precepts</i></cite></div></figure></aside>
   </div>
