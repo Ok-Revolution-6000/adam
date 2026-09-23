@@ -66,4 +66,4 @@ function takeReturnPeek(){try{return sessionStorage.getItem('adomeh.returnTo')||
 /** #/sso-callback: Clerk finishes the OAuth handshake here and forwards to redirectUrlComplete. */
 export function SsoCallback(){return <div className="page"><p className="kicker" style={{padding:'48px 0'}}>Signing you in…</p><AuthenticateWithRedirectCallback/></div>;}
 /** A signed-in reader's sign-out, used by the site bar's account link. */
-export function useSignOut(){const {signOut}=useClerk();return ()=>signOut({redirectUrl:'/#/'});}
+export function useSignOut(){const {signOut}=useClerk();return ()=>signOut({redirectUrl:'/'});}

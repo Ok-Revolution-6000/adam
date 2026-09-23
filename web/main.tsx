@@ -8,8 +8,11 @@ import '../app/globals.css';
 const Home=lazy(()=>import('../app/page')),Library=lazy(()=>import('../app/library')),Structures=lazy(()=>import('../app/structures')),About=lazy(()=>import('../app/about')),Membership=lazy(()=>import('../app/membership')),Auth=lazy(()=>import('../app/auth')),SsoCallback=lazy(()=>import('../app/auth').then(m=>({default:m.SsoCallback}))),Privacy=lazy(()=>import('../app/legal').then(m=>({default:m.Privacy}))),Terms=lazy(()=>import('../app/legal').then(m=>({default:m.Terms})));
 /** Hash routes: a bare URL is the hero, #/atlas (and the #capture deep links) the atlas, #/structures/<slug> one structure. */
 const PAGES=new Set<PageId>(['library','structures','about','membership','sign-in','sign-up','sso-callback','privacy','terms']);
-/** /privacy and /terms also answer as plain paths, which Google and app stores ask for. */
-const route=():{page:PageId;slug?:string}=>{const plain=location.pathname.match(/^\/(privacy|terms)\/?$/)?.[1];if(plain&&!location.hash)return {page:plain as PageId};const [,page,slug]=location.hash.match(/^#\/?([a-z-]+)(?:\/([\w-]+))?/)??[];return page==='atlas'||page==='capture'?{page:'atlas'}:PAGES.has(page as PageId)?{page:page as PageId,slug}:{page:'hero'};};
+/** /privacy and /terms also answer as plain paths, which Google asks for; they are folded into the hash routes on arrival so every link keeps working. */
+{const plain=location.pathname.match(/^\/(privacy|terms)\/?$/)?.[1];if(plain&&!location.hash)history.replaceState(null,'',`/#/${plain}`);}
+const route=():{page:PageId;slug?:string}=>{const [,page,slug]=location.hash.match(/^#\/?([a-z-]+)(?:\/([\w-]+))?/)??[];return page==='atlas'||page==='capture'?{page:'atlas'}:PAGES.has(page as PageId)?{page:page as PageId,slug}:{page:'hero'};};
+/** Home is the bare URL: pushing '/' and announcing it keeps the address clean, where `location.hash=''` would leave a '#'. */
+addEventListener('click',e=>{const a=(e.target as HTMLElement).closest('a[data-home]');if(!a||e.metaKey||e.ctrlKey)return;e.preventDefault();history.pushState(null,'','/');dispatchEvent(new HashChangeEvent('hashchange'));});
 function Root(){
  const [at,setAt]=useState(route),[veil,setVeil]=useState(false),last=useRef(at.page);
  useEffect(()=>{const sync=()=>{const next=route();if(last.current==='hero'&&next.page==='atlas')setVeil(true);last.current=next.page;setAt(next);};addEventListener('hashchange',sync);return ()=>removeEventListener('hashchange',sync);},[]);
@@ -19,4 +22,4 @@ function Root(){
 }
 const key=(import.meta as unknown as {env:Record<string,string|undefined>}).env.VITE_CLERK_PUBLISHABLE_KEY;
 if(!key)console.warn('VITE_CLERK_PUBLISHABLE_KEY is not set: sign-in is unavailable.');
-createRoot(document.getElementById('root')!).render(<ClerkProvider publishableKey={key??'pk_test_missing'} signInUrl="/#/sign-in" signUpUrl="/#/sign-up" afterSignOutUrl="/#/"><Root/></ClerkProvider>);
+createRoot(document.getElementById('root')!).render(<ClerkProvider publishableKey={key??'pk_test_missing'} signInUrl="/#/sign-in" signUpUrl="/#/sign-up" afterSignOutUrl="/"><Root/></ClerkProvider>);

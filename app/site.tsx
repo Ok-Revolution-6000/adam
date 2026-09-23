@@ -11,6 +11,6 @@ export const NAV:{page:PageId;label:string;href:string}[]=[
 export function SiteBar({current}:{current:PageId}){
  const {isLoaded,isSignedIn,user}=useUser();
  const plan=(user?.publicMetadata as {plan?:string}|undefined)?.plan;
- return <header className="site-bar"><a className="site-brand" href="#/"><img src="/icon-192.png" alt="" width="30" height="30"/>Adomeh</a><nav aria-label="Adomeh">{NAV.map(l=><a key={l.page} href={l.href} aria-current={l.page===current?'page':undefined}>{l.label}</a>)}</nav>
+ return <header className="site-bar"><a className="site-brand" href="/" data-home><img src="/icon-192.png" alt="" width="30" height="30"/>Adomeh</a><nav aria-label="Adomeh">{NAV.map(l=><a key={l.page} href={l.href} aria-current={l.page===current?'page':undefined}>{l.label}</a>)}</nav>
   <div className="site-actions">{isLoaded&&(isSignedIn?<a className="account" href="#/membership" title={user.primaryEmailAddress?.emailAddress}><span className={`account-dot ${plan==='all'?'is-reader':''}`}/>{plan==='all'?'Reader':'Account'}</a>:<a className="account" href="#/sign-in" onClick={()=>{try{sessionStorage.setItem('adomeh.returnTo',location.hash||'#/atlas');}catch{}}}>Sign in</a>)}<a className="enter" href="#/atlas">Enter</a></div></header>;
 }
