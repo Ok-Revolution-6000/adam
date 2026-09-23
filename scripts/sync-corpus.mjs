@@ -7,7 +7,7 @@ import {S3Client,ListObjectsV2Command,PutObjectCommand,DeleteObjectCommand} from
  * files (same MD5 as the bucket's ETag) are skipped.
  *   node --env-file=.env.local scripts/sync-corpus.mjs [--dry-run] [--delete] [--only <dir>]
  * Needs R2_ACCOUNT_ID, R2_BUCKET, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY. */
-const args=process.argv.slice(2),flag=f=>args.includes(f),only=args[args.indexOf('--only')+1];
+const args=process.argv.slice(2),flag=f=>args.includes(f),only=args.includes('--only')?args[args.indexOf('--only')+1]:undefined;
 const need=k=>{if(!process.env[k])throw new Error(`${k} is not set`);return process.env[k];};
 const bucket=need('R2_BUCKET'),s3=new S3Client({region:'auto',endpoint:`https://${need('R2_ACCOUNT_ID')}.r2.cloudflarestorage.com`,credentials:{accessKeyId:need('R2_ACCESS_KEY_ID'),secretAccessKey:need('R2_SECRET_ACCESS_KEY')}});
 const root=new URL('../content/',import.meta.url).pathname;
