@@ -7,7 +7,7 @@ import {CORPUS_WORKS} from './corpus';
 /** Membership: what is free, what the Reader plan opens, and the reader's own standing. Card entry and invoices
  * happen on Stripe's pages; this page only starts them. */
 const PRICE={month:30,year:248};
-const held=CORPUS_WORKS.length+97+19;
+const held=CORPUS_WORKS.length+97;
 export default function Membership(){
  const me=useEntitlement(),{getToken}=useAuth(),{user}=useUser(),{signOut}=useClerk();
  const [interval,setInterval_]=useState<'month'|'year'>('year'),[busy,setBusy]=useState(''),[error,setError]=useState(''),[confirming,setConfirming]=useState(new URLSearchParams(location.search).get('checkout')==='success');
@@ -16,9 +16,9 @@ export default function Membership(){
  const go=(path:string,body?:unknown)=>async()=>{setBusy(path);setError('');try{const r=await authedFetch(getToken,path,{method:'POST',headers:{'content-type':'application/json'},body:body?JSON.stringify(body):undefined});const d=await r.json().catch(()=>({})) as {url?:string;error?:string};if(!r.ok)throw new Error(d.error==='sign-in'?'Please sign in first.':d.error==='already-subscribed'?'You are already a Reader.':'Something went wrong. Please try again.');location.assign(d.url!);}catch(e){setError((e as Error).message);setBusy('');}};
  const renews=me.periodEnd?new Date(me.periodEnd*1000).toLocaleDateString(undefined,{day:'numeric',month:'long',year:'numeric'}):'';
  const tiers=[
-  {n:'01',name:['Free','Account'],price:'$0',unit:'',blurb:'Maimonides’ nine medical works in the atlas reader, chapter by chapter, with every anatomical term live on the body.',rows:[['Maimonides','9 works'],['Chapters mapped to the body',String(LESSONS.length)],['Atlas, Library, Structures','Included']],
+  {n:'01',name:['Free','Account'],price:'$0',unit:'',blurb:'Maimonides’ nine medical works and Avicenna in the atlas reader, chapter by chapter, with every anatomical term live on the body.',rows:[['Maimonides','9 works'],['Avicenna','Arabic'],['Chapters mapped to the body',String(LESSONS.length)],['Atlas, Library, Structures','Included']],
    action:me.signedIn?<span className="tier-btn is-quiet">{me.plan==='all'?'Included in Reader':'Your current plan'}</span>:<button type="button" className="tier-btn" onClick={goSignIn}>Make an account</button>},
-  {n:'02',name:['Reader','Edition'],price:`$${PRICE[interval]}`,unit:interval==='year'?'/ year':'/ month',blurb:'Every physician in the library. Hippocrates, Galen and Avicenna beside Maimonides, in Greek and Arabic beside the English, on the same body.',rows:[['Everything in Free','Included'],['Hippocrates · Galen · Avicenna',`${held} works`],['Greek and Arabic originals','Included'],['New physicians as added','Included']],vivid:true,
+  {n:'02',name:['Reader','Edition'],price:`$${PRICE[interval]}`,unit:interval==='year'?'/ year':'/ month',blurb:'The Greek physicians. Hippocrates and Galen beside Maimonides, the Greek beside the English, on the same body.',rows:[['Everything in Free','Included'],['Hippocrates · Galen',`${held} works`],['Greek originals','Included'],['New physicians as added','Included']],vivid:true,
    action:me.plan==='all'?<span className="tier-btn is-current">Current selection</span>:me.signedIn?<button type="button" className="tier-btn" onClick={go('/api/checkout',{interval})} disabled={!!busy}>{busy==='/api/checkout'?'Opening…':'Select plan'}</button>:<button type="button" className="tier-btn" onClick={goSignIn}>Sign in to subscribe</button>},
   {n:'03',name:['Institutions','Seminars'],price:'Quote',unit:'',blurb:'Reader access for a class, a yeshiva or a department, managed in one place, with invoicing rather than cards.',rows:[['Seats','Up to 50'],['Invoicing','Annual'],['Onboarding','With us']],
    action:<a className="tier-btn" href="mailto:menachemberrebi@gmail.com?subject=Adomeh%20for%20an%20institution">Contact</a>},

@@ -7,7 +7,8 @@
 export type Tier='public'|'free'|'all';
 export type Plan='all'|null;
 /** By the first path segment under content/. */
-export const AUTHOR_TIER:Record<string,Tier>={maimonides:'free',hippocrates:'all',galen:'all',avicenna:'all'};
+/** Avicenna is free because his text (OpenITI) is CC BY-NC-SA: it may be given away but never sold. */
+export const AUTHOR_TIER:Record<string,Tier>={maimonides:'free',hippocrates:'all',galen:'all',avicenna:'free'};
 /** Per-work overrides by full directory, e.g. {'hippocrates/13-iusiurandum':'public'} to give the Oath away. */
 export const WORK_TIER:Record<string,Tier>={};
 /** The tier of a work directory (`maimonides/01-on-asthma`) or chapter path; null when the corpus is unknown. */
