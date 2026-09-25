@@ -5,14 +5,14 @@ import {S3Client,ListObjectsV2Command,PutObjectCommand,DeleteObjectCommand} from
 /** Mirrors content/ (the gitignored study corpus, usually symlinks) into the private R2 bucket that api/content.ts
  * reads from. Keys mirror the tree: maimonides/01-on-asthma/01-chapter-one.md. Only .md files go up; unchanged
  * files (same MD5 as the bucket's ETag) are skipped.
- *   node --env-file=.env.local scripts/sync-corpus.mjs [--dry-run] [--delete] [--only <dir>]
+ *   node --env-file=.env.local scripts/sync-corpus.mjs [--dry-run] [--delete] [--only <dir or single file key>]
  * Needs R2_ACCOUNT_ID, R2_BUCKET, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY. */
 const args=process.argv.slice(2),flag=f=>args.includes(f),only=args.includes('--only')?args[args.indexOf('--only')+1]:undefined;
 const need=k=>{if(!process.env[k])throw new Error(`${k} is not set`);return process.env[k];};
 const bucket=need('R2_BUCKET'),s3=new S3Client({region:'auto',endpoint:`https://${need('R2_ACCOUNT_ID')}.r2.cloudflarestorage.com`,credentials:{accessKeyId:need('R2_ACCESS_KEY_ID'),secretAccessKey:need('R2_SECRET_ACCESS_KEY')}});
 const root=new URL('../content/',import.meta.url).pathname;
 const local=new Map();
-const walk=dir=>{for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);const real=e.isSymbolicLink()?fs.statSync(p):e;if(real.isDirectory())walk(p);else if(real.isFile()&&e.name.endsWith('.md')){const key=path.relative(root,p).split(path.sep).join('/');if(!only||key.startsWith(only+'/'))local.set(key,p);}}};
+const walk=dir=>{for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);const real=e.isSymbolicLink()?fs.statSync(p):e;if(real.isDirectory())walk(p);else if(real.isFile()&&e.name.endsWith('.md')){const key=path.relative(root,p).split(path.sep).join('/');if(!only||key===only||key.startsWith(only+'/'))local.set(key,p);}}};
 walk(root);
 const remote=new Map();
 for(let token;;){const r=await s3.send(new ListObjectsV2Command({Bucket:bucket,ContinuationToken:token,...(only?{Prefix:only+'/'}:{})}));for(const o of r.Contents??[])remote.set(o.Key,o.ETag?.replace(/"/g,''));if(!r.IsTruncated)break;token=r.NextContinuationToken;}

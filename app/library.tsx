@@ -14,7 +14,7 @@ const SHELVES:Shelf[]=[
  {id:'hippocrates',fig:'A',figure:'humours',plate:'Humours',caption:'Four humours in mixture; health is their balance.',name:'Hippocrates',dates:'c. 460–370 BCE',place:'Kos',language:'Greek',
   lede:'The father of the art, and less one author than a school.',
   body:'Some sixty treatises travel under his name, written by several hands across the fifth and fourth centuries BCE. They take disease out of the hands of the gods and give it to nature: the body is a mixture of humours, illness is that mixture disturbed, and the physician works chiefly through regimen, by food, air, exercise and rest. Maimonides comments on the Aphorisms and cites them throughout.',
-  status:'Greek with English translations · open to Readers',works:CORPUS_WORKS.map(w=>({title:w.title.replace(/ \([^)]*\)$/,'')}))},
+  status:'Francis Adams’s translation · open to Readers',works:CORPUS_WORKS.map(w=>({title:w.title.replace(/ \([^)]*\)$/,'')}))},
  {id:'galen',fig:'B',figure:'pneuma',plate:'Pneuma',caption:'Spirit carried by vein, artery and nerve from three principal organs.',name:'Galen',dates:'129–c. 216',place:'Pergamon and Rome',language:'Greek',
   lede:'The authority behind almost every physiological claim in these texts.',
   body:'Galen turned the Hippocratic inheritance into a physiology and defended it by dissection. Three principal organs, the liver, the heart and the brain, are each the seat of a faculty and the source of veins, arteries and nerves; the four qualities, hot, cold, moist and dry, give every organ its temperament. It is this body, more than any other, that the atlas sets beside the modern one.',

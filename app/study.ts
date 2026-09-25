@@ -14,7 +14,7 @@ export interface Lesson {id:string;work:string;file:string;title:string;/** what
 
 export const AUTHORS:Author[]=[
  {id:'maimonides',name:'Maimonides',dates:'1138–1204',note:'The medical works, in Gerrit Bos’s translation from the Arabic.'},
- {id:'hippocrates',name:'Hippocrates',dates:'c. 460–370 BCE',note:'The father of the art. Maimonides comments on his Aphorisms and cites him throughout. Background only for now; the library is Maimonides.'},
+ {id:'hippocrates',name:'Hippocrates',dates:'c. 460–370 BCE',note:'The father of the art. Maimonides comments on his Aphorisms and cites him throughout. The shelf holds the works Francis Adams judged genuine, in his translation.'},
  {id:'galen',name:'Galen',dates:'129–c. 216',note:'The authority behind almost every physiological claim in these texts: humours, faculties, pneuma, the three principal organs. Background only for now.'},
  {id:'avicenna',name:'Avicenna',dates:'980–1037',note:'Author of the Canon, the systematic summa of Galenic medicine that Maimonides’ contemporaries studied. Background only for now.'},
 ];
