@@ -40,7 +40,7 @@ export default function Auth({mode}:{mode:Mode}){
    <main className="sheet"><section className="sheet-section"><span className="folio">{mode==='sign-in'?'S':'N'}</span>
     <p className="kicker">{mode==='sign-in'?'Sign in':'New account'} · Adomeh</p>
     <h1>{mode==='sign-in'?'Welcome back':'Make an account'}</h1>
-    <p className="lede">{mode==='sign-in'?'Your place in the texts is kept with your account.':'Maimonides and Avicenna are free to read with an account. The Greek physicians are open to Readers.'}</p>
+    <p className="lede">{mode==='sign-in'?'Your place in the texts is kept with your account.':'Maimonides is free to read with an account. Hippocrates, Galen and Avicenna are open to Readers.'}</p>
     {stage==='start'?<form className="auth-form" onSubmit={start}>
      <label><span>Email</span><input type="email" autoComplete="email" required value={email} onChange={e=>setEmail(e.target.value)} autoFocus/></label>
      <label><span>Password <em>{mode==='sign-in'?'leave empty to get a code by email':'optional; you can always sign in with a code'}</em></span><input type="password" autoComplete={mode==='sign-in'?'current-password':'new-password'} value={password} onChange={e=>setPassword(e.target.value)} minLength={password?8:undefined}/></label>

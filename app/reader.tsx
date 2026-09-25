@@ -62,8 +62,8 @@ export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress}
   <div className="reader-body" ref={body} onClick={click} onScroll={()=>{if(status==='ready')report.current?.(position());}}>
    {status==='loading'&&<p className="reader-note">Opening the text…</p>}
    {status==='missing'&&<div className="reader-note"><p><strong>This text is not in this build.</strong></p><p>Adam keeps the study corpus outside the repository. Run the app locally with the texts placed under <code>content/</code> and this chapter will open here, with every anatomical term linked to the body.</p></div>}
-   {status==='unauthenticated'&&<div className="reader-note"><p><strong>Sign in to read.</strong></p><p>Maimonides and Avicenna are free to read with an account; Hippocrates and Galen are open to Readers. You will be brought straight back to this chapter.</p><p><button type="button" className="reader-cta" onClick={goSignIn}>Sign in or make an account</button></p></div>}
-   {status==='unentitled'&&<div className="reader-note"><p><strong>Open to Readers.</strong></p><p>Hippocrates and Galen are part of the Reader plan, $30 a month or $248 a year. Maimonides and Avicenna stay free.</p><p><a className="reader-cta" href="#/membership">See the Reader plan</a></p></div>}
+   {status==='unauthenticated'&&<div className="reader-note"><p><strong>Sign in to read.</strong></p><p>Maimonides is free to read with an account; Hippocrates, Galen and Avicenna are open to Readers. You will be brought straight back to this chapter.</p><p><button type="button" className="reader-cta" onClick={goSignIn}>Sign in or make an account</button></p></div>}
+   {status==='unentitled'&&<div className="reader-note"><p><strong>Open to Readers.</strong></p><p>Hippocrates, Galen and Avicenna are part of the Reader plan, $30 a month or $248 a year. Maimonides stays free.</p><p><a className="reader-cta" href="#/membership">See the Reader plan</a></p></div>}
    {status==='error'&&<p className="reader-note">The chapter could not be loaded. Check that the development server is running.</p>}
    <article className="prose-classical" ref={article} hidden={status!=='ready'}/>
   </div>

@@ -23,7 +23,7 @@ const SHELVES:Shelf[]=[
  {id:'avicenna',fig:'C',figure:'canon',plate:'Canon',caption:'A system of the whole art, bending to the particular case.',name:'Avicenna',dates:'980–1037',place:'Bukhara to Hamadan',language:'Arabic',
   lede:'Ibn Sīnā, who put Galenic medicine in order.',
   body:'The Canon of Medicine arranges what Galen left scattered across hundreds of treatises into one systematic book: principles, simple drugs, diseases organ by organ from head to foot, diseases of the whole body, and compound remedies. It was the textbook Maimonides’ contemporaries studied, and it was taught in Latin Europe into the seventeenth century.',
-  status:'Arabic · free with an account, as the corpus is indexed',more:`${AVICENNA_WORKS} works are held; the rest are philosophy (The Healing, The Salvation, Pointers and Reminders).`,
+  status:'The Canon in English · open to Readers, as it is translated',more:`${AVICENNA_WORKS} works are held; the rest are philosophy (The Healing, The Salvation, Pointers and Reminders).`,
   works:[{title:'The Canon of Medicine',detail:'al-Qānūn fī al-Ṭibb'},{title:'Poem on Medicine',detail:'al-Urjūza fī al-Ṭibb'}]},
  {id:'maimonides',fig:'D',figure:'regimen',plate:'Regimen',caption:'Striations turning with the breath: the regimen of asthma.',name:'Maimonides',dates:'1138–1204',place:'Córdoba to Fustat',language:'Arabic',
   lede:'Moses ben Maimon, court physician in Cairo, and the library’s first author.',
