@@ -300,3 +300,23 @@ html.capture .identity,html.capture .top-actions,html.capture .layers-panel,html
 @keyframes inquiry-orbit{to{transform:rotate(360deg)}}@keyframes inquiry-reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-height:560px){.inquiry-form .inquiry-project-choices label{padding:10px}.inquiry-project-choices{gap:6px}.inquiry-receipt-symbol{width:60px;height:60px;margin-bottom:14px}.inquiry-receipt h2{font-size:28px;margin-bottom:14px}.inquiry-receipt p{font-size:14px;margin-bottom:12px}}
 @media(prefers-reduced-motion:reduce){.inquiry-receipt,.inquiry-receipt-orbit{animation:none}}
+
+/* Mobile header: a larger brand and a single disclosure control. */
+.site-menu{display:contents}.site-menu-toggle{display:none}
+@media(max-width:860px){
+ .hero .hero-body{flex:0 0 auto;min-height:auto;grid-auto-rows:auto}
+ .hero .hero-figure{align-self:start;width:100%;height:auto;aspect-ratio:320/264}
+ .hero .hero-foot{flex:0 0 auto;flex-direction:column;align-items:flex-start;gap:14px;margin-top:28px;padding-top:20px;padding-bottom:env(safe-area-inset-bottom)}
+ .hero .hero-foot nav{flex-wrap:wrap;gap:12px 22px}
+}
+@media(max-width:860px){
+ .page .site-bar{height:80px;min-height:80px;padding:12px var(--gutter);grid-template-columns:minmax(0,1fr) auto;gap:16px;z-index:50;background:var(--paper)}
+ .page .site-brand{font-size:16px;gap:10px;letter-spacing:.2em;justify-self:start}.page .site-brand img{width:48px;height:48px;margin:0 0 0 -6px}
+ .site-menu-toggle{display:grid;place-items:center;justify-self:end;width:48px;height:48px;padding:0;border:0;background:transparent;color:var(--ink);cursor:pointer}.site-menu-toggle:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+ .site-menu{display:none;position:absolute;top:100%;left:0;right:0;max-height:calc(100dvh - 100px);overflow-y:auto;overscroll-behavior:contain;padding:12px var(--gutter) 24px;background:var(--paper);border-bottom:1px solid var(--rule);box-shadow:0 16px 24px #1212120c}
+ .menu-open .site-menu{display:block}
+ .page .site-bar .site-menu nav{display:flex;flex-direction:column;align-items:stretch;gap:0;flex-wrap:nowrap}
+ .site-menu nav a{display:flex;align-items:center;min-height:48px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px;letter-spacing:.12em}
+ .page .site-menu .site-actions{display:flex;justify-content:flex-start;flex-wrap:wrap;gap:16px 24px;margin-top:20px;font-size:12px;letter-spacing:.1em}
+ .page .site-menu .account{min-height:44px}.page .site-menu .enter{margin-left:auto;padding:14px 24px;font-size:12px}
+}
