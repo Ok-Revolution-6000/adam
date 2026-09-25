@@ -45,7 +45,11 @@ export async function handleInquiry(req:Request,config:InquiryConfig,send:typeof
  try{
   const response=await send('https://api.resend.com/emails/batch',{method:'POST',headers:{authorization:`Bearer ${config.apiKey}`,'content-type':'application/json','Idempotency-Key':`adam-inquiry-${idempotency}`},body:JSON.stringify(payload),signal:AbortSignal.timeout(8000)});
   const result=await response.json().catch(()=>null) as {data?:{id?:string}[]}|null;
-  if(!response.ok||!Array.isArray(result?.data)||result.data.length!==2||result.data.some(item=>!item.id))return json({error:'Your inquiry could not be sent. Please try again shortly.'},502);
+  if(!response.ok||!Array.isArray(result?.data)||result.data.length!==2||result.data.some(item=>!item.id)){
+   // Resend's error body names the cause (bad key, unverified sender, rate limit); it never contains the key.
+   console.error('inquiry: resend rejected the batch',response.status,JSON.stringify(result));
+   return json({error:'Your inquiry could not be sent. Please try again shortly.'},502);
+  }
   return json({ok:true});
- }catch{return json({error:'We could not confirm delivery. Please try again shortly.'},502);}
+ }catch(e){console.error('inquiry: resend request failed',(e as Error).name,(e as Error).message);return json({error:'We could not confirm delivery. Please try again shortly.'},502);}
 }
