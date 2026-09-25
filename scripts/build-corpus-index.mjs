@@ -35,7 +35,7 @@ for(const corpus of CORPORA){
   const number=Number(d.split('-')[0]);
   const latin=fm.title??d;
   const english=ENGLISH_TITLES[latin];
-  const title=corpus.author==='hippocrates'&&english?`${english} (${latin})`:latin;
+  const title=corpus.author==='hippocrates'&&english?english:latin;
   const chapters=[];
   const lines=index.split('\n');
   for(let i=0;i<lines.length;i++){
@@ -51,7 +51,8 @@ for(const corpus of CORPORA){
   if(corpus.keep){for(let i=chapters.length-1;i>=0;i--)if(!corpus.keep(d,chapters[i].file,chapters[i].subtitle??''))chapters.splice(i,1);}
   const rank=l=>l==='eng'?0:l==='grc'?1:2;
   chapters.sort((a,b)=>rank(a.lang)-rank(b.lang)||a.file.localeCompare(b.file));
-  if(chapters.length)works.push({id:`${corpus.author}-${d}`,author:corpus.author,number,title,dir:`${corpus.dir}/${d}`,source:corpus.source,chapters});
+  // Numbered 1, 2, 3… in shelf order: the folder numbers have gaps once works are filtered out.
+  if(chapters.length)works.push({id:`${corpus.author}-${d}`,author:corpus.author,number:works.filter(w=>w.author===corpus.author).length+1,title,dir:`${corpus.dir}/${d}`,source:corpus.source,chapters});
  }
  console.log(`content/${corpus.dir}: ${works.filter(w=>w.author===corpus.author).length} works`);
 }

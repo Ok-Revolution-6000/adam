@@ -5,7 +5,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
   id: "hippocrates-01-de-prisca-medicina",
   author: "hippocrates",
   number: 1,
-  title: "On Ancient Medicine (De prisca medicina)",
+  title: "On Ancient Medicine",
   dir: "hippocrates/01-de-prisca-medicina",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -21,7 +21,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
   id: "hippocrates-02-de-aere-aquis-locis",
   author: "hippocrates",
   number: 2,
-  title: "Airs, Waters, Places (De aere, aquis, locis)",
+  title: "Airs, Waters, Places",
   dir: "hippocrates/02-de-aere-aquis-locis",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -37,7 +37,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
   id: "hippocrates-03-prognosticon",
   author: "hippocrates",
   number: 3,
-  title: "Prognostic (Prognosticon)",
+  title: "Prognostic",
   dir: "hippocrates/03-prognosticon",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -53,7 +53,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
   id: "hippocrates-04-de-diaeta-in-morbis-acutis",
   author: "hippocrates",
   number: 4,
-  title: "Regimen in Acute Diseases (De diaeta in morbis acutis)",
+  title: "Regimen in Acute Diseases",
   dir: "hippocrates/04-de-diaeta-in-morbis-acutis",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -68,8 +68,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-06-epidemiarum",
   author: "hippocrates",
-  number: 6,
-  title: "Epidemics (Epidemiarum)",
+  number: 5,
+  title: "Epidemics",
   dir: "hippocrates/06-epidemiarum",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -84,8 +84,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-07-de-capitis-vulneribus",
   author: "hippocrates",
-  number: 7,
-  title: "On Wounds in the Head (De capitis vulneribus)",
+  number: 6,
+  title: "On Wounds in the Head",
   dir: "hippocrates/07-de-capitis-vulneribus",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -100,8 +100,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-08-de-officina-medici",
   author: "hippocrates",
-  number: 8,
-  title: "In the Surgery (De officina medici)",
+  number: 7,
+  title: "In the Surgery",
   dir: "hippocrates/08-de-officina-medici",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -116,8 +116,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-09-de-fracturis",
   author: "hippocrates",
-  number: 9,
-  title: "On Fractures (De fracturis)",
+  number: 8,
+  title: "On Fractures",
   dir: "hippocrates/09-de-fracturis",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -132,8 +132,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-10-de-articulis",
   author: "hippocrates",
-  number: 10,
-  title: "On Joints (De articulis)",
+  number: 9,
+  title: "On Joints",
   dir: "hippocrates/10-de-articulis",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -148,8 +148,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-11-vectiarius",
   author: "hippocrates",
-  number: 11,
-  title: "Instruments of Reduction (Vectiarius)",
+  number: 10,
+  title: "Instruments of Reduction",
   dir: "hippocrates/11-vectiarius",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -164,8 +164,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-12-aphorismi",
   author: "hippocrates",
-  number: 12,
-  title: "Aphorisms (Aphorismi)",
+  number: 11,
+  title: "Aphorisms",
   dir: "hippocrates/12-aphorismi",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -180,8 +180,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-13-iusiurandum",
   author: "hippocrates",
-  number: 13,
-  title: "The Oath (Iusiurandum)",
+  number: 12,
+  title: "The Oath",
   dir: "hippocrates/13-iusiurandum",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -196,8 +196,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-14-lex",
   author: "hippocrates",
-  number: 14,
-  title: "The Law (Lex)",
+  number: 13,
+  title: "The Law",
   dir: "hippocrates/14-lex",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -212,8 +212,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-26-de-morbo-sacro",
   author: "hippocrates",
-  number: 26,
-  title: "On the Sacred Disease (De morbo sacro)",
+  number: 14,
+  title: "On the Sacred Disease",
   dir: "hippocrates/26-de-morbo-sacro",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -228,8 +228,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-27-de-ulceribus",
   author: "hippocrates",
-  number: 27,
-  title: "On Ulcers (De ulceribus)",
+  number: 15,
+  title: "On Ulcers",
   dir: "hippocrates/27-de-ulceribus",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -244,8 +244,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-28-de-haemorrhoidibus",
   author: "hippocrates",
-  number: 28,
-  title: "On Haemorrhoids (De haemorrhoidibus)",
+  number: 16,
+  title: "On Haemorrhoids",
   dir: "hippocrates/28-de-haemorrhoidibus",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [
@@ -260,8 +260,8 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "hippocrates-29-de-fistulis",
   author: "hippocrates",
-  number: 29,
-  title: "On Fistulas (De fistulis)",
+  number: 17,
+  title: "On Fistulas",
   dir: "hippocrates/29-de-fistulis",
   source: "Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain",
   chapters: [

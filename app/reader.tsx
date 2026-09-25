@@ -11,11 +11,15 @@ export interface ReaderProps {
  onTerm:(term:string,concepts:string[])=>void;
  onNavigate:(url:string)=>void;
  header?:ReactNode;
+ /** Where to open the chapter, as a share of its length (0–1); the top when omitted. */
+ startAt?:number;
+ /** How far down the chapter the reader is (0–1), reported as they scroll; 1 when it fits without scrolling. */
+ onProgress?:(at:number)=>void;
 }
 /** 'unauthenticated' and 'unentitled' are the content function's 401 and 402: sign in, or subscribe. */
 export type ReaderStatus='loading'|'ready'|'missing'|'error'|'unauthenticated'|'unentitled';
 
-export default function Reader({url,onTerm,onNavigate,header}:ReaderProps){
+export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress}:ReaderProps){
  const body=useRef<HTMLDivElement>(null),{getToken,isLoaded,isSignedIn}=useAuth();
  const [html,setHtml]=useState(''),[status,setStatus]=useState<ReaderStatus>('loading');
  useEffect(()=>{
@@ -34,10 +38,17 @@ export default function Reader({url,onTerm,onNavigate,header}:ReaderProps){
   return()=>abort.abort();
  // A sign-in or sign-out refetches: the same URL answers differently to a different reader.
  },[url,isLoaded,isSignedIn]);
- const article=useRef<HTMLElement>(null);
+ const article=useRef<HTMLElement>(null),start=useRef(startAt),report=useRef(onProgress);
+ start.current=startAt;report.current=onProgress;
+ const position=()=>{const el=body.current;if(!el)return 0;const room=el.scrollHeight-el.clientHeight;return room<=4?1:Math.min(1,el.scrollTop/room);};
  // React 19 re-applies dangerouslySetInnerHTML on every render, which would erase the term links; the
  // article's content is therefore written here, once per chapter, and React never touches its children.
- useEffect(()=>{const el=article.current,scroller=body.current;if(!el)return;el.innerHTML=status==='ready'?html:'';if(status==='ready')linkTerms(el,LEXICON);if(scroller)scroller.scrollTop=0;},[html,status]);
+ useEffect(()=>{const el=article.current,scroller=body.current;if(!el)return;el.innerHTML=status==='ready'?html:'';if(status==='ready')linkTerms(el,LEXICON);if(!scroller)return;scroller.scrollTop=0;
+  if(status!=='ready')return;
+  // Open at the saved place once the text has been laid out, then report where the reader now is.
+  const frame=requestAnimationFrame(()=>{const at=start.current??0;if(at>0)scroller.scrollTop=at*(scroller.scrollHeight-scroller.clientHeight);report.current?.(position());});
+  return()=>cancelAnimationFrame(frame);
+ },[html,status]);
  const click=(e:MouseEvent<HTMLDivElement>)=>{
   const t=e.target as HTMLElement;
   const term=t.closest('button.term') as HTMLButtonElement|null;
@@ -48,7 +59,7 @@ export default function Reader({url,onTerm,onNavigate,header}:ReaderProps){
  };
  return <div className="reader glass" aria-label="Reading pane">
   {header}
-  <div className="reader-body" ref={body} onClick={click}>
+  <div className="reader-body" ref={body} onClick={click} onScroll={()=>{if(status==='ready')report.current?.(position());}}>
    {status==='loading'&&<p className="reader-note">Opening the text…</p>}
    {status==='missing'&&<div className="reader-note"><p><strong>This text is not in this build.</strong></p><p>Adam keeps the study corpus outside the repository. Run the app locally with the texts placed under <code>content/</code> and this chapter will open here, with every anatomical term linked to the body.</p></div>}
    {status==='unauthenticated'&&<div className="reader-note"><p><strong>Sign in to read.</strong></p><p>Maimonides and Avicenna are free to read with an account; Hippocrates and Galen are open to Readers. You will be brought straight back to this chapter.</p><p><button type="button" className="reader-cta" onClick={goSignIn}>Sign in or make an account</button></p></div>}
