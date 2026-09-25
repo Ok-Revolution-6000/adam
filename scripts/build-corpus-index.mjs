@@ -13,7 +13,9 @@ const CORPORA=[
  {author:'hippocrates',dir:'hippocrates',source:'Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain',
   keep:(dir,file,edition)=>!dir.startsWith('05-')&&file.startsWith('eng-')&&/Adams, Francis/.test(edition)},
  {author:'galen',dir:'galen',source:'First1KGreek, Kühn edition (CC-BY-SA-4.0)'},
- {author:'avicenna',dir:'avicenna',source:'OpenITI corpus (CC-BY-NC-SA-4.0)'},
+ // Avicenna: the Canon, Book I, in English, one lesson per chapter. The Arabic and the working files (_translate) stay local.
+ {author:'avicenna',dir:'avicenna',source:'Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)',
+  keep:(dir,file)=>file.startsWith('eng-'),lessons:true},
 ];
 const frontMatter=text=>{const m=text.match(/^---\r?\n([\s\S]*?)\r?\n---/);const out={};if(m)for(const line of m[1].split('\n')){const kv=line.match(/^([\w_]+):\s*"?(.*?)"?\s*$/);if(kv)out[kv[1]]=kv[2];}return out;};
 const versionLabel=(file,edition,label)=>{
@@ -42,7 +44,7 @@ for(const corpus of CORPORA){
    const m=lines[i].match(/^- \*\*\[([^\]]+)\]\(([^)]+\.md)\)\*\*/);if(!m)continue;
    const file=m[2],label=m[1],edition=(lines[i+1]??'').trim();
    if(!fs.existsSync(new URL(`${d}/${file}`,root)))continue;
-   chapters.push({file,title:versionLabel(file,edition,label),subtitle:edition||undefined,lang:file.split('-')[0]});
+   chapters.push({file,title:corpus.lessons?label:versionLabel(file,edition,label),subtitle:edition||undefined,lang:file.split('-')[0]});
   }
   // Any version file not listed in the index (e.g. a translation added later) is still registered.
   for(const f of fs.readdirSync(new URL(d+'/',root)).filter(f=>/^(eng|grc|ara)-.*\.md$/.test(f)).sort()){

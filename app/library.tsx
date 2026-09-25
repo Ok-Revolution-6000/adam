@@ -10,11 +10,12 @@ const treatises=MAIMONIDES_WORKS.filter(w=>w.number);
 const mapped=new Set(LESSONS.map(l=>l.work));
 /** Counts of the local corpora that are not indexed into the app yet (see the corpus README). */
 const GALEN_WORKS=97,AVICENNA_WORKS=19;
+const HIPPOCRATES_WORKS=CORPUS_WORKS.filter(w=>w.author==='hippocrates');
 const SHELVES:Shelf[]=[
  {id:'hippocrates',fig:'A',figure:'humours',plate:'Humours',caption:'Four humours in mixture; health is their balance.',name:'Hippocrates',dates:'c. 460–370 BCE',place:'Kos',language:'Greek',
   lede:'The father of the art, and less one author than a school.',
   body:'Some sixty treatises travel under his name, written by several hands across the fifth and fourth centuries BCE. They take disease out of the hands of the gods and give it to nature: the body is a mixture of humours, illness is that mixture disturbed, and the physician works chiefly through regimen, by food, air, exercise and rest. Maimonides comments on the Aphorisms and cites them throughout.',
-  status:'Francis Adams’s translation · open to Readers',works:CORPUS_WORKS.map(w=>({title:w.title.replace(/ \([^)]*\)$/,'')}))},
+  status:'Francis Adams’s translation · open to Readers',works:HIPPOCRATES_WORKS.map(w=>({title:w.title.replace(/ \([^)]*\)$/,'')}))},
  {id:'galen',fig:'B',figure:'pneuma',plate:'Pneuma',caption:'Spirit carried by vein, artery and nerve from three principal organs.',name:'Galen',dates:'129–c. 216',place:'Pergamon and Rome',language:'Greek',
   lede:'The authority behind almost every physiological claim in these texts.',
   body:'Galen turned the Hippocratic inheritance into a physiology and defended it by dissection. Three principal organs, the liver, the heart and the brain, are each the seat of a faculty and the source of veins, arteries and nerves; the four qualities, hot, cold, moist and dry, give every organ its temperament. It is this body, more than any other, that the atlas sets beside the modern one.',
@@ -30,7 +31,7 @@ const SHELVES:Shelf[]=[
   body:'Maimonides wrote his medical works in Arabic in the last decades of his life, most of them for particular patients: a treatise on asthma for a man of rank, a regimen of health for a sultan’s son. They are practical, sceptical and exact about food, air, sleep and the movements of the soul, and they assume the Galenic body at every step. Adam reads them in Gerrit Bos’s translation from the Arabic (Brill, 2021). The translations are in copyright and are not published here; the atlas reads them from a private study corpus.',
   status:'Free with an account',works:treatises.map(w=>({title:w.title,detail:`${w.chapters.length} ${w.chapters.length===1?'chapter':'chapters'}${mapped.has(w.id)?' · mapped to the body':''}`}))},
 ];
-const TOTAL=CORPUS_WORKS.length+GALEN_WORKS+AVICENNA_WORKS+treatises.length;
+const TOTAL=HIPPOCRATES_WORKS.length+GALEN_WORKS+AVICENNA_WORKS+treatises.length;
 const Fig=({to,fig}:{to:string;fig:string})=><a className="fig-ref" href={`#${to}`} onClick={e=>{e.preventDefault();document.getElementById(to)?.scrollIntoView({behavior:'smooth',block:'start'});}}>FIG {fig}</a>;
 export default function Library(){
  const [active,setActive]=useState('');

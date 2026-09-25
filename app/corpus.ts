@@ -272,5 +272,117 @@ export const CORPUS_WORKS:Work[]=withTiers([
     lang: "eng"
    }
   ]
+ },
+ {
+  id: "avicenna-01-canon-book-1",
+  author: "avicenna",
+  number: 1,
+  title: "The Canon of Medicine, Book I",
+  dir: "avicenna/01-canon-book-1",
+  source: "Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-00.md",
+    title: "Author's preface",
+    subtitle: "The Canon, 1",
+    lang: "eng"
+   },
+   {
+    file: "eng-101.md",
+    title: "Part 1, Lesson 1: The definition and subject-matter of medicine",
+    subtitle: "The Canon, 1.1.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-102.md",
+    title: "Part 1, Lesson 2: The elements",
+    subtitle: "The Canon, 1.1.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-103.md",
+    title: "Part 1, Lesson 3: Temperaments",
+    subtitle: "The Canon, 1.1.3",
+    lang: "eng"
+   },
+   {
+    file: "eng-104.md",
+    title: "Part 1, Lesson 4: The humours",
+    subtitle: "The Canon, 1.1.4",
+    lang: "eng"
+   },
+   {
+    file: "eng-105.md",
+    title: "Part 1, Lesson 5: The organs (anatomy)",
+    subtitle: "The Canon, 1.1.5",
+    lang: "eng"
+   },
+   {
+    file: "eng-106.md",
+    title: "Part 1, Lesson 6: The faculties and their actions",
+    subtitle: "The Canon, 1.1.6",
+    lang: "eng"
+   },
+   {
+    file: "eng-201.md",
+    title: "Part 2, Lesson 1: Diseases",
+    subtitle: "The Canon, 1.2.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-202.md",
+    title: "Part 2, Lesson 2: Causes",
+    subtitle: "The Canon, 1.2.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-203.md",
+    title: "Part 2, Lesson 3: Symptoms and signs",
+    subtitle: "The Canon, 1.2.3",
+    lang: "eng"
+   },
+   {
+    file: "eng-301.md",
+    title: "Part 3: The cause of health and disease, and the necessity of death",
+    subtitle: "The Canon, 1.3.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-302.md",
+    title: "Part 3, Lesson 1: Upbringing",
+    subtitle: "The Canon, 1.3.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-303.md",
+    title: "Part 3, Lesson 2: The regimen of adults",
+    subtitle: "The Canon, 1.3.3",
+    lang: "eng"
+   },
+   {
+    file: "eng-304.md",
+    title: "Part 3, Lesson 3: The regimen of the old",
+    subtitle: "The Canon, 1.3.4",
+    lang: "eng"
+   },
+   {
+    file: "eng-305.md",
+    title: "Part 3, Lesson 4: The regimen of unbalanced temperaments",
+    subtitle: "The Canon, 1.3.5",
+    lang: "eng"
+   },
+   {
+    file: "eng-306.md",
+    title: "Part 3, Lesson 5: Changes (seasons and travel)",
+    subtitle: "The Canon, 1.3.6",
+    lang: "eng"
+   },
+   {
+    file: "eng-400.md",
+    title: "Part 4: The kinds of treatment",
+    subtitle: "The Canon, 1.4",
+    lang: "eng"
+   }
+  ]
  }
 ]);
