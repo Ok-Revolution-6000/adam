@@ -1,8 +1,29 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {inquiryEmail,inquiryConfirmation} from '../api/_lib/inquiry-email.ts';
-import {handleInquiry} from '../api/_lib/institution-inquiry.ts';
-import {INQUIRY_CHOICES as choices,validateInquiry} from '../shared/institution-inquiry.ts';
+import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,dirname} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {after} from 'node:test';
+import ts from 'typescript';
+// Load JavaScript-only output like Vercel does, so .ts runtime imports fail here.
+const root=fileURLToPath(new URL('../',import.meta.url));
+const compiled=mkdtempSync(join(tmpdir(),'adam-inquiry-test-'));
+after(()=>rmSync(compiled,{recursive:true,force:true}));
+writeFileSync(join(compiled,'package.json'),JSON.stringify({type:'module'}));
+for(const file of ['shared/institution-inquiry.ts','api/_lib/inquiry-email.ts','api/_lib/institution-inquiry.ts','api/institution-inquiry.ts']){
+ const destination=join(compiled,file.replace(/\.ts$/,'.js'));
+ mkdirSync(dirname(destination),{recursive:true});
+ const {outputText}=ts.transpileModule(readFileSync(join(root,file),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}});
+ writeFileSync(destination,outputText);
+}
+const {inquiryEmail,inquiryConfirmation}=await import(pathToFileURL(join(compiled,'api/_lib/inquiry-email.js')).href);
+const {handleInquiry}=await import(pathToFileURL(join(compiled,'api/_lib/institution-inquiry.js')).href);
+const {INQUIRY_CHOICES:choices,validateInquiry}=await import(pathToFileURL(join(compiled,'shared/institution-inquiry.js')).href);
+const {POST}=await import(pathToFileURL(join(compiled,'api/institution-inquiry.js')).href);
+test('production entry point loads using emitted JavaScript only',async()=>{
+ assert.equal((await POST(new Request('https://adomeh.com/api/institution-inquiry'))).status,405);
+});
 const config={origin:'https://adomeh.com',apiKey:'test-key',from:'Adam <inquiries@example.com>'};
 const valid={name:'Alex Example',email:'alex@example.edu',mobile:'+1 (202) 555-0123',institution:'Example University',role:'Library director',project:[choices.project[0],choices.project[1]].join('; '),audience:choices.audience[4],works:'A collection of historical medical works',goals:'Build an atlas-linked experience for our medical history students.',rights:choices.rights[2],timeline:choices.timeline[1],budget:''};
 const request=(data=valid,origin=config.origin)=>new Request(`${config.origin}/api/institution-inquiry`,{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(data)});

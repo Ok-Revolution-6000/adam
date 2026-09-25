@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
-import {validateInquiry} from '../../shared/institution-inquiry.ts';
+import {validateInquiry} from '../../shared/institution-inquiry.js';
 
-import {inquiryEmail,inquiryConfirmation} from './inquiry-email.ts';
+import {inquiryEmail,inquiryConfirmation} from './inquiry-email.js';
 
 export interface InquiryConfig {apiKey?:string;from?:string;origin?:string}
 const RECIPIENT='menachem@renaissanceml.com';

@@ -1,4 +1,4 @@
-import {INQUIRY_FIELDS,type InquiryField,type InstitutionInquiry} from '../../shared/institution-inquiry.ts';
+import {INQUIRY_FIELDS,type InquiryField,type InstitutionInquiry} from '../../shared/institution-inquiry.js';
 const escape=(value:string)=>value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]!));
 const SECTIONS:{title:string;fields:InquiryField[]}[]=[
  {title:'Contact & institution',fields:['name','email','mobile','institution','role']},
