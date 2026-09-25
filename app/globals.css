@@ -320,3 +320,26 @@ html.capture .identity,html.capture .top-actions,html.capture .layers-panel,html
  .page .site-menu .site-actions{display:flex;justify-content:flex-start;flex-wrap:wrap;gap:16px 24px;margin-top:20px;font-size:12px;letter-spacing:.1em}
  .page .site-menu .account{min-height:44px}.page .site-menu .enter{margin-left:auto;padding:14px 24px;font-size:12px}
 }
+
+/* Authentication floats above the page the reader came from. */
+.auth-dialog{--paper:#f4f3ef;--ink:#121212;--grey:#6d6c68;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;--serif:'Iowan Old Style','Hoefler Text',Baskerville,'Times New Roman',serif;margin:auto;width:min(480px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:36px;border:1px solid #1113;background:var(--paper);color:var(--ink);box-shadow:0 30px 100px #0003;overscroll-behavior:contain}
+.auth-dialog::backdrop{background:#19191870;backdrop-filter:blur(7px)}
+.auth-dialog .auth-close{position:absolute;top:12px;right:12px;width:40px;height:40px;font-size:28px;font-weight:300;line-height:1}
+.auth-brand{display:flex;align-items:center;gap:12px;text-transform:uppercase;font-size:12px;font-weight:600;letter-spacing:.24em;margin-bottom:22px}
+.auth-dialog h1{font-family:var(--serif);font-size:40px;letter-spacing:-1.2px;line-height:1.1;margin:0 0 12px}
+.auth-intro{font-size:15px;line-height:1.6;color:var(--grey);margin:0 0 26px}
+.auth-dialog .auth-form{max-width:none}.auth-dialog .auth-form label em{display:block;margin:5px 0 0;font-size:11px;line-height:1.5}
+.auth-dialog .auth-form input{min-height:48px;border-color:#1114}.auth-dialog .auth-form input:focus-visible{outline:1px solid var(--ink);outline-offset:2px}
+.auth-dialog .auth-actions{display:grid;gap:12px;margin-top:24px}.auth-dialog .enter,.auth-dialog .auth-google{width:100%;min-height:48px;justify-content:center;display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em}
+.auth-dialog button.enter{background:var(--ink);color:var(--paper);padding:14px;text-transform:uppercase}.auth-dialog button.auth-google{border:1px solid #1114;background:#fff;color:#202124;letter-spacing:0;font-size:14px}
+.auth-dialog .auth-switch{font-size:13px;line-height:1.6;margin:24px 0;text-align:center}.auth-dialog .auth-switch a{text-underline-offset:4px}
+.auth-legal{margin:0;border-top:1px solid #1112;padding-top:18px;font-size:11px;line-height:1.7;color:var(--grey);text-align:center}.auth-legal a{text-underline-offset:3px}
+.top-actions .atlas-nav-link{display:flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;padding:12px;color:#515d69;background:#ffffffeb;border:1px solid #25384a17;border-radius:12px;text-decoration:none;font-size:14px}
+@media(max-width:1100px){.top-actions .atlas-nav-link span{display:none}}
+@media(max-width:767px){.top-actions{top:94px;left:20px;right:auto;gap:5px}.top-actions .atlas-nav-link{padding:10px}.search-panel{top:150px}.auth-dialog{padding:28px 24px}.auth-dialog h1{font-size:36px}}
+
+.auth-dialog .auth-error{padding:12px;border:1px solid #b84b3c;color:#9b392c;font-size:13px;line-height:1.5}
+@media(max-width:767px){.top-actions{top:max(116px,calc(env(safe-area-inset-top) + 104px));left:16px;right:auto}.view-controls{top:max(172px,calc(env(safe-area-inset-top) + 160px))}.search-panel{top:172px;z-index:32}.reader{top:172px}}
+@media(max-height:600px) and (orientation:landscape){.top-actions{top:16px;left:auto;right:12px}.top-actions span,.top-actions kbd{display:none}.view-controls{top:76px}}
+
+.reading-reset{position:relative;margin-left:auto;flex-shrink:0}.reading-reset-trigger{display:flex;align-items:center;justify-content:center;min-width:32px;min-height:32px;border-radius:6px;color:#697782}.reading-reset-options{position:absolute;z-index:40;right:0;top:38px;width:230px;max-width:calc(100vw - 64px);padding:14px;background:#fff;border:1px solid #25384a24;border-radius:10px;box-shadow:0 8px 30px #24334420;color:#364653}.reading-reset-options p{margin:0 0 6px;font-weight:600;font-size:13px}.reading-reset-options>span{display:block;font-size:12px;line-height:1.5;margin-bottom:8px;color:#66727f}.reading-reset-options button{display:block;width:100%;min-height:40px;padding:8px 0;text-align:left;font-size:12px;border-top:1px solid #25384a17}.reading-reset-notice:empty{display:none}.reading-reset-notice:not(:empty){position:absolute;right:0;top:38px;width:180px;padding:10px;background:#fff;border:1px solid #25384a24;border-radius:8px;z-index:40;font-size:12px}

@@ -15,7 +15,7 @@ export async function authedFetch(getToken:()=>Promise<string|null>,url:string,i
 }
 /** Where to go after signing in: the page that asked, or the atlas. */
 const KEY='adomeh.returnTo';
-export function rememberReturn(hash=location.hash){try{sessionStorage.setItem(KEY,hash&&!/^#\/?(sign-in|sign-up|sso-callback)/.test(hash)?hash:'#/atlas');}catch{}}
+export function rememberReturn(hash=location.hash){try{sessionStorage.setItem(KEY,!/^#\/?(sign-in|sign-up|sso-callback)/.test(hash)?hash||'#/':'#/atlas');}catch{}}
 export function takeReturn(){try{const h=sessionStorage.getItem(KEY);sessionStorage.removeItem(KEY);return h||'#/atlas';}catch{return '#/atlas';}}
 /** Sends the reader to sign in and brings them back here afterwards. */
 export function goSignIn(){rememberReturn();location.hash='/sign-in';}

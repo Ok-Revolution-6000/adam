@@ -1,5 +1,6 @@
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {useUser} from '@clerk/react';
+import {resetReadingProgress} from './progress-reset';
 import type {Work} from './study';
 /** Where a reader is in each book: the furthest point reached in every chapter (0–1) and one bookmark.
  * Kept on the Clerk user (unsafeMetadata.reading) so it follows the reader to any device; before signing in it lives
@@ -17,6 +18,7 @@ export function workPercent(work:Work,p?:WorkProgress){
 export function useReadingLog(){
  const {user,isLoaded}=useUser();
  const [log,setLog]=useState<ReadingLog>({});
+ const saves=useRef<Promise<unknown>>(Promise.resolve());
  const current=useRef<ReadingLog>({}),dirty=useRef(false),timer=useRef<number|undefined>(undefined);
  useEffect(()=>{
   if(!isLoaded)return;
@@ -30,7 +32,7 @@ export function useReadingLog(){
   if(!dirty.current)return;
   dirty.current=false;
   const reading=current.current;
-  if(user)user.update({unsafeMetadata:{...user.unsafeMetadata,reading}}).catch(()=>{dirty.current=true;});
+  if(user)saves.current=saves.current.then(()=>user.update({unsafeMetadata:{...user.unsafeMetadata,reading}})).catch(()=>{dirty.current=true;});
   else try{localStorage.setItem(LOCAL,JSON.stringify(reading));}catch{}
  },[user]);
  useEffect(()=>{addEventListener('pagehide',flush);return()=>{removeEventListener('pagehide',flush);flush();};},[flush]);
@@ -50,5 +52,9 @@ export function useReadingLog(){
   const {mark:_,...rest}=p;
   change({...l,[work]:place?{...rest,mark:{file:place.file,at:Math.round(place.at*1000)/1000},t:Date.now()}:{...rest,t:Date.now()}},true);
  },[change]);
- return {log,seen,mark};
+ /** Reset one chapter or the whole work; a saved bookmark is independent. */
+ const reset=useCallback((work:string,file?:string)=>{
+  change(resetReadingProgress(current.current,work,file),true);
+ },[change]);
+ return {log,seen,mark,reset};
 }
