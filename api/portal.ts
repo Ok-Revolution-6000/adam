@@ -6,7 +6,7 @@ import {stripe} from './_lib/stripe.js';
 export async function POST(req:Request){
  try{
   const {userId}=await requireUser(req);
-  const session=await stripe.billingPortal.sessions.create({customer:await customerFor(userId),return_url:`${origin()}/#/membership`});
+  const session=await stripe.billingPortal.sessions.create({customer:await customerFor(userId),return_url:`${origin()}/#/account`});
   return json({url:session.url});
  }catch(e){return errorResponse(e);}
 }

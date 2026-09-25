@@ -1,7 +1,8 @@
 import {useEffect,useRef,useState,type MouseEvent,type ReactNode} from 'react';
 import {useAuth} from '@clerk/react';
 import {marked} from 'marked';
-import {authedFetch,goSignIn} from './account';
+import {authedFetch,goSignIn,useEntitlement} from './account';
+import {tierForDir} from '../shared/tiers';
 import {LEXICON} from './lexicon';
 import {linkTerms,prepareMarkdown} from './reader-text';
 
@@ -21,9 +22,12 @@ export type ReaderStatus='loading'|'ready'|'missing'|'error'|'unauthenticated'|'
 
 export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress}:ReaderProps){
  const body=useRef<HTMLDivElement>(null),{getToken,isLoaded,isSignedIn}=useAuth();
+ const me=useEntitlement();
  const [html,setHtml]=useState(''),[status,setStatus]=useState<ReaderStatus>('loading');
  useEffect(()=>{
-  if(!isLoaded)return;
+  if(!isLoaded||!me.loaded)return;
+  const tier=tierForDir(url)??'all';
+  if(!me.canRead(tier)){setHtml('');setStatus(me.signedIn?'unentitled':'unauthenticated');return;}
   const abort=new AbortController();setStatus('loading');
   authedFetch(getToken,url,{signal:abort.signal}).then(async r=>{
    if(r.status===404){setHtml('');setStatus('missing');return;}
@@ -37,7 +41,7 @@ export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress}
   }).catch(e=>{if(e.name!=='AbortError'){setHtml('');setStatus('error');}});
   return()=>abort.abort();
  // A sign-in or sign-out refetches: the same URL answers differently to a different reader.
- },[url,isLoaded,isSignedIn]);
+ },[url,isLoaded,isSignedIn,me.loaded,me.plan]);
  const article=useRef<HTMLElement>(null),start=useRef(startAt),report=useRef(onProgress);
  start.current=startAt;report.current=onProgress;
  const position=()=>{const el=body.current;if(!el)return 0;const room=el.scrollHeight-el.clientHeight;return room<=4?1:Math.min(1,el.scrollTop/room);};
@@ -62,8 +66,8 @@ export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress}
   <div className="reader-body" ref={body} onClick={click} onScroll={()=>{if(status==='ready')report.current?.(position());}}>
    {status==='loading'&&<p className="reader-note">Opening the text…</p>}
    {status==='missing'&&<div className="reader-note"><p><strong>This text is not in this build.</strong></p><p>Adam keeps the study corpus outside the repository. Run the app locally with the texts placed under <code>content/</code> and this chapter will open here, with every anatomical term linked to the body.</p></div>}
-   {status==='unauthenticated'&&<div className="reader-note"><p><strong>Sign in to read.</strong></p><p>Maimonides is free to read with an account; Hippocrates, Galen and Avicenna are open to Readers. You will be brought straight back to this chapter.</p><p><button type="button" className="reader-cta" onClick={goSignIn}>Sign in or make an account</button></p></div>}
-   {status==='unentitled'&&<div className="reader-note"><p><strong>Open to Readers.</strong></p><p>Hippocrates, Galen and Avicenna are part of the Reader plan, $30 a month or $248 a year. Maimonides stays free.</p><p><a className="reader-cta" href="#/membership">See the Reader plan</a></p></div>}
+   {status==='unauthenticated'&&<div className="reader-note"><p><strong>Sign in to read.</strong></p><p>Reading Maimonides, Hippocrates, Galen and Avicenna requires an Adam Membership. You will be brought straight back to this chapter.</p><p><button type="button" className="reader-cta" onClick={goSignIn}>Sign in or make an account</button></p></div>}
+   {status==='unentitled'&&<div className="reader-note"><p><strong>Open to members.</strong></p><p>Maimonides, Hippocrates, Galen and Avicenna are included in Adam Membership, $248 a year.</p><p><a className="reader-cta" href="#/membership">See the Adam Membership</a></p></div>}
    {status==='error'&&<p className="reader-note">The chapter could not be loaded. Check that the development server is running.</p>}
    <article className="prose-classical" ref={article} hidden={status!=='ready'}/>
   </div>

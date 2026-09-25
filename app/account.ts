@@ -3,10 +3,10 @@ import {canRead as may,type Plan,type Tier} from '../shared/tiers.ts';
 /** Who is reading, and what they may open. The plan is what the Stripe webhook wrote onto the Clerk user. */
 export interface Entitlement {loaded:boolean;signedIn:boolean;plan:Plan;periodEnd:number|null;billing:'ok'|'past_due'|null;email:string;canRead:(tier:Tier)=>boolean}
 export function useEntitlement():Entitlement{
- const {isLoaded,isSignedIn}=useAuth(),{user}=useUser();
+ const {isLoaded,isSignedIn}=useAuth(),{user,isLoaded:userLoaded}=useUser();
  const meta=(user?.publicMetadata??{}) as {plan?:Plan;periodEnd?:number|null;billing?:'ok'|'past_due'|null};
  const plan=meta.plan??null,signedIn=!!isSignedIn;
- return {loaded:isLoaded,signedIn,plan,periodEnd:meta.periodEnd??null,billing:meta.billing??null,email:user?.primaryEmailAddress?.emailAddress??'',canRead:tier=>may(tier,signedIn,plan)};
+ return {loaded:isLoaded&&userLoaded,signedIn,plan,periodEnd:meta.periodEnd??null,billing:meta.billing??null,email:user?.primaryEmailAddress?.emailAddress??'',canRead:tier=>may(tier,signedIn,plan)};
 }
 /** A fetch that carries the session token, so the functions know who is asking. */
 export async function authedFetch(getToken:()=>Promise<string|null>,url:string,init:RequestInit={}){

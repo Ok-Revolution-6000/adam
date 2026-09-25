@@ -2,6 +2,7 @@ import {useState,type FormEvent} from 'react';
 import {AuthenticateWithRedirectCallback,useClerk,useSignIn,useSignUp} from '@clerk/react';
 import {SiteBar} from './site';
 import {takeReturn} from './account';
+import SsoLoading from './sso-loading';
 /** Sign in and sign up, in the monograph's own forms. Email with a code, or email and password; Google as a shortcut.
  * Clerk's hooks do the work; nothing of Clerk's own UI is shown. */
 type Mode='sign-in'|'sign-up';
@@ -40,7 +41,7 @@ export default function Auth({mode}:{mode:Mode}){
    <main className="sheet"><section className="sheet-section"><span className="folio">{mode==='sign-in'?'S':'N'}</span>
     <p className="kicker">{mode==='sign-in'?'Sign in':'New account'} · Adomeh</p>
     <h1>{mode==='sign-in'?'Welcome back':'Make an account'}</h1>
-    <p className="lede">{mode==='sign-in'?'Your place in the texts is kept with your account.':'Maimonides is free to read with an account. Hippocrates, Galen and Avicenna are open to Readers.'}</p>
+    <p className="lede">{mode==='sign-in'?'Your place in the texts is kept with your account.':'The atlas is free to explore. Reading Maimonides, Hippocrates, Galen and Avicenna requires an Adam Membership.'}</p>
     {stage==='start'?<form className="auth-form" onSubmit={start}>
      <label><span>Email</span><input type="email" autoComplete="email" required value={email} onChange={e=>setEmail(e.target.value)} autoFocus/></label>
      <label><span>Password <em>{mode==='sign-in'?'leave empty to get a code by email':'optional; you can always sign in with a code'}</em></span><input type="password" autoComplete={mode==='sign-in'?'current-password':'new-password'} value={password} onChange={e=>setPassword(e.target.value)} minLength={password?8:undefined}/></label>
@@ -55,7 +56,7 @@ export default function Auth({mode}:{mode:Mode}){
      <div className="auth-actions"><button type="submit" className="enter" disabled={busy}>{busy?'Checking…':'Verify'}</button><button type="button" className="auth-alt" onClick={()=>{setStage('start');setCode('');setError('');}}>Use another email</button></div>
     </form>}
     <p className="auth-switch">{mode==='sign-in'?'No account yet?':'Already have an account?'} <a href={`#/${other}`}>{other==='sign-in'?'Sign in':'Make one'}</a></p>
-    <dl className="ledger"><div><dt>Free with an account</dt><dd>Maimonides · 9 works</dd></div><div><dt>Reader plan</dt><dd><a href="#/membership">$30 a month · $248 a year</a></dd></div></dl>
+    <dl className="ledger"><div><dt>Free to explore</dt><dd>Atlas · Library · Structures</dd></div><div><dt>Adam Membership</dt><dd><a href="#/membership">$248 a year</a></dd></div></dl>
    </section></main>
    <aside className="plates is-single" aria-label="Note"><figure><div className="plate is-text"><p>“I will ascend above the heights of the clouds; I will resemble the Most High.”</p><cite>Isaiah 14:14</cite></div></figure></aside>
   </div>
@@ -64,6 +65,6 @@ export default function Auth({mode}:{mode:Mode}){
 /** Where Google should land afterwards, without consuming the stored return. */
 function takeReturnPeek(){try{return sessionStorage.getItem('adomeh.returnTo')||'#/atlas';}catch{return '#/atlas';}}
 /** #/sso-callback: Clerk finishes the OAuth handshake here and forwards to redirectUrlComplete. */
-export function SsoCallback(){return <div className="page"><p className="kicker" style={{padding:'48px 0'}}>Signing you in…</p><AuthenticateWithRedirectCallback/></div>;}
+export function SsoCallback(){return <><SsoLoading/><AuthenticateWithRedirectCallback/></>;}
 /** A signed-in reader's sign-out, used by the site bar's account link. */
 export function useSignOut(){const {signOut}=useClerk();return ()=>signOut({redirectUrl:'/'});}

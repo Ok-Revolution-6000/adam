@@ -4,13 +4,13 @@ An interactive 3D anatomy companion for studying the classical physicians. Read 
 
 Adam is a fork of [Human Atlas](https://github.com/ashemag/human-atlas) (MIT), which renders the BodyParts3D adult male reference as **2,234 individually selectable meshes** with 15 system layers, search and exploded views. Adam adds a study layer on top of it.
 
-## Accounts and the Reader plan
+## Accounts and Adam Membership
 
-Adam is free to open. The texts in the reader need an account (Clerk), and the physicians other than Maimonides need the **Reader** plan (Stripe, $30 a month or $248 a year). Who may read what is decided in `shared/tiers.ts`; the hash routes `#/sign-in`, `#/sign-up` and `#/membership` are the app's own pages, built on Clerk's hooks.
+Adam is free to open. Reading any physician’s texts requires an account (Clerk) and **Adam Membership** (Stripe, $248 a year). The atlas, Library browsing and Structures are free. New subscriptions are annual only; existing subscriptions retain their billing schedule. Who may read what is decided in `shared/tiers.ts`; the hash routes `#/sign-in`, `#/sign-up` `#/membership` and `#/account` are the app's own pages, built on Clerk's hooks.
 
 In production the corpus is served by `api/content.ts` from a private R2 bucket, never from the static build: the function verifies the session token, checks the work's tier, and streams the chapter. `api/checkout.ts` and `api/portal.ts` open Stripe's pages; `api/webhook.ts` writes the subscription state onto the Clerk user (`publicMetadata.plan`), which is all the app and the function ever consult.
 
-Setup: copy `env.example` to `.env.local` (`clerk env pull` fills the Clerk keys), `npm run corpus:sync` to push `content/` to R2. Daily work is `npm run dev` with the local corpus and no gating; `npm run dev:vercel` runs the functions and reads from R2 like production, with `stripe listen --forward-to localhost:3030/api/webhook` for billing events.
+Setup: copy `env.example` to `.env.local` (`clerk env pull` fills the Clerk keys), `npm run corpus:sync` to push `content/` to R2. Daily work is `npm run dev` with the local corpus and client-side membership checks; `npm run dev:vercel` runs the functions and reads from R2 like production, with `stripe listen --forward-to localhost:3030/api/webhook` for billing events.
 
 ## The study layer
 
@@ -75,3 +75,13 @@ The study validator checks that every atlas concept name referenced by lessons, 
 Adam's application code is MIT, as is the Human Atlas it forks (© Chaz Shemag). The anatomy is **BodyParts3D 4.0**, © The Database Center for Life Science, licensed CC BY 4.0; full credits and adaptation notes are in [ATTRIBUTION.md](public/ATTRIBUTION.md). Preserve the attribution when redistributing the data.
 
 The classical notes summarise Galenic physiology as the medieval physicians used it. They are historical explanations for study, not medical advice. This is an educational explorer, not a diagnostic or surgical tool.
+
+## Institution inquiry form
+
+`#/institutions` guides visitors through one question at a time, including work email and an optional mobile number, with a progress bar, Back navigation and an editable final review. It collects qualification details and posts to `/api/institution-inquiry`. The server sends a formatted HTML brief with a plain-text fallback to **menachem@renaissanceml.com**, with the visitor’s email as Reply-To. A second branded email confirms receipt to the submitter, signed by Menachem, with replies directed to menachem@renaissanceml.com. Both are submitted in one Resend batch with a shared idempotency key. It never accepts a destination from the client and does not save form submissions locally.
+
+Set `RESEND_API_KEY` from the existing RenaissanceML Resend account and `INQUIRY_FROM_EMAIL="Adomeh <hello@adomeh.com>"` (using the verified Adomeh domain) in `.env.local` and the Vercel environment. `APP_ORIGIN` must match the production website origin. Restart Vite after changing environment variables. Plain Vite serves this endpoint locally; when `VITE_API_ORIGIN` is set, it uses the existing API proxy instead. Missing configuration returns an explicit failure, never a success message.
+
+Validation, request-size limits, same-origin checks, a honeypot and per-instance email throttling guard the endpoint. Identical submissions use Resend idempotency keys to avoid duplicate mail on retries. The in-memory throttle is best effort across serverless instances; use platform rate limits if traffic warrants it.
+
+Run `node --experimental-strip-types --test scripts/institution-inquiry.test.mjs` to verify validation and mail handling without sending emails. Provider reference: https://resend.com/docs/api-reference/emails/send-email
