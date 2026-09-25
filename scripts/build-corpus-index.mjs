@@ -13,7 +13,7 @@ const CORPORA=[
  {author:'hippocrates',dir:'hippocrates',source:'Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain',
   keep:(dir,file,edition)=>!dir.startsWith('05-')&&file.startsWith('eng-')&&/Adams, Francis/.test(edition)},
  {author:'galen',dir:'galen',source:'First1KGreek, Kühn edition (CC-BY-SA-4.0)'},
- // Avicenna: the Canon, Book I, in English, one lesson per chapter. The Arabic and the working files (_translate) stay local.
+ // Avicenna: the Canon, Books I–II, in English, one lesson (Book II: one letter of the simple drugs) per chapter. The Arabic and the working files (_translate) stay local.
  {author:'avicenna',dir:'avicenna',source:'Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)',
   keep:(dir,file)=>file.startsWith('eng-'),lessons:true},
 ];

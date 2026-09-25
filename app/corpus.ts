@@ -384,5 +384,189 @@ export const CORPUS_WORKS:Work[]=withTiers([
     lang: "eng"
    }
   ]
+ },
+ {
+  id: "avicenna-02-canon-book-2",
+  author: "avicenna",
+  number: 2,
+  title: "The Canon of Medicine, Book II",
+  dir: "avicenna/02-canon-book-2",
+  source: "Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-100.md",
+    title: "Treatise 1: General rules on simple drugs",
+    subtitle: "The Canon, 2.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-200.md",
+    title: "Treatise 2: The tables of actions",
+    subtitle: "The Canon, 2.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-201.md",
+    title: "Simple drugs: Alif (ا)",
+    subtitle: "The Canon, 2.2.14.2.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-202.md",
+    title: "Simple drugs: Bāʾ (ب)",
+    subtitle: "The Canon, 2.2.14.2.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-203.md",
+    title: "Simple drugs: Tāʾ (ت)",
+    subtitle: "The Canon, 2.2.14.2.3",
+    lang: "eng"
+   },
+   {
+    file: "eng-204.md",
+    title: "Simple drugs: Thāʾ (ث)",
+    subtitle: "The Canon, 2.2.14.2.4",
+    lang: "eng"
+   },
+   {
+    file: "eng-205.md",
+    title: "Simple drugs: Jīm (ج)",
+    subtitle: "The Canon, 2.2.14.2.5",
+    lang: "eng"
+   },
+   {
+    file: "eng-206.md",
+    title: "Simple drugs: Ḥāʾ (ح)",
+    subtitle: "The Canon, 2.2.14.2.6",
+    lang: "eng"
+   },
+   {
+    file: "eng-207.md",
+    title: "Simple drugs: Khāʾ (خ)",
+    subtitle: "The Canon, 2.2.14.2.7",
+    lang: "eng"
+   },
+   {
+    file: "eng-208.md",
+    title: "Simple drugs: Dāl (د)",
+    subtitle: "The Canon, 2.2.14.2.8",
+    lang: "eng"
+   },
+   {
+    file: "eng-209.md",
+    title: "Simple drugs: Dhāl (ذ)",
+    subtitle: "The Canon, 2.2.14.2.9",
+    lang: "eng"
+   },
+   {
+    file: "eng-210.md",
+    title: "Simple drugs: Rāʾ (ر)",
+    subtitle: "The Canon, 2.2.14.2.10",
+    lang: "eng"
+   },
+   {
+    file: "eng-211.md",
+    title: "Simple drugs: Zāy (ز)",
+    subtitle: "The Canon, 2.2.14.2.11",
+    lang: "eng"
+   },
+   {
+    file: "eng-212.md",
+    title: "Simple drugs: Sīn (س)",
+    subtitle: "The Canon, 2.2.14.2.12",
+    lang: "eng"
+   },
+   {
+    file: "eng-213.md",
+    title: "Simple drugs: Shīn (ش)",
+    subtitle: "The Canon, 2.2.14.2.13",
+    lang: "eng"
+   },
+   {
+    file: "eng-214.md",
+    title: "Simple drugs: Ṣād (ص)",
+    subtitle: "The Canon, 2.2.14.2.14",
+    lang: "eng"
+   },
+   {
+    file: "eng-215.md",
+    title: "Simple drugs: Ḍād (ض)",
+    subtitle: "The Canon, 2.2.14.2.15",
+    lang: "eng"
+   },
+   {
+    file: "eng-216.md",
+    title: "Simple drugs: Ṭāʾ (ط)",
+    subtitle: "The Canon, 2.2.14.2.16",
+    lang: "eng"
+   },
+   {
+    file: "eng-217.md",
+    title: "Simple drugs: Ẓāʾ and ʿAyn (ظ ع)",
+    subtitle: "The Canon, 2.2.14.2.17",
+    lang: "eng"
+   },
+   {
+    file: "eng-218.md",
+    title: "Simple drugs: Ghayn (غ)",
+    subtitle: "The Canon, 2.2.14.2.18",
+    lang: "eng"
+   },
+   {
+    file: "eng-219.md",
+    title: "Simple drugs: Fāʾ (ف)",
+    subtitle: "The Canon, 2.2.14.2.19",
+    lang: "eng"
+   },
+   {
+    file: "eng-220.md",
+    title: "Simple drugs: Qāf (ق)",
+    subtitle: "The Canon, 2.2.14.2.20",
+    lang: "eng"
+   },
+   {
+    file: "eng-221.md",
+    title: "Simple drugs: Kāf (ك)",
+    subtitle: "The Canon, 2.2.14.2.21",
+    lang: "eng"
+   },
+   {
+    file: "eng-222.md",
+    title: "Simple drugs: Lām (ل)",
+    subtitle: "The Canon, 2.2.14.2.22",
+    lang: "eng"
+   },
+   {
+    file: "eng-223.md",
+    title: "Simple drugs: Mīm (م)",
+    subtitle: "The Canon, 2.2.14.2.23",
+    lang: "eng"
+   },
+   {
+    file: "eng-224.md",
+    title: "Simple drugs: Nūn (ن)",
+    subtitle: "The Canon, 2.2.14.2.24",
+    lang: "eng"
+   },
+   {
+    file: "eng-225.md",
+    title: "Simple drugs: Wāw (و)",
+    subtitle: "The Canon, 2.2.14.2.25",
+    lang: "eng"
+   },
+   {
+    file: "eng-226.md",
+    title: "Simple drugs: Hāʾ (ه)",
+    subtitle: "The Canon, 2.2.14.2.26",
+    lang: "eng"
+   },
+   {
+    file: "eng-227.md",
+    title: "Simple drugs: Yāʾ (ي)",
+    subtitle: "The Canon, 2.2.14.2.27",
+    lang: "eng"
+   }
+  ]
  }
 ]);
