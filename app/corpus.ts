@@ -568,5 +568,147 @@ export const CORPUS_WORKS:Work[]=withTiers([
     lang: "eng"
    }
   ]
+ },
+ {
+  id: "avicenna-03-canon-book-3",
+  author: "avicenna",
+  number: 3,
+  title: "The Canon of Medicine, Book III",
+  dir: "avicenna/03-canon-book-3",
+  source: "Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-100.md",
+    title: "The first treatise: on the general [rules of the] diseases of the head and the brain",
+    subtitle: "The Canon, 3.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-200.md",
+    title: "On the diseases of the nerves; it is a single treatise",
+    subtitle: "The Canon, 3.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-300.md",
+    title: "[The first treatise: a general statement on the first principles of the states of the eye, and on ophthalmia]",
+    subtitle: "The Canon, 3.3",
+    lang: "eng"
+   },
+   {
+    file: "eng-400.md",
+    title: "It is a single treatise",
+    subtitle: "The Canon, 3.4",
+    lang: "eng"
+   },
+   {
+    file: "eng-500.md",
+    title: "The first treatise: on smell, its harms, and the flows",
+    subtitle: "The Canon, 3.5",
+    lang: "eng"
+   },
+   {
+    file: "eng-600.md",
+    title: "Chapter on the [anatomy of the] mouth and tongue",
+    subtitle: "The Canon, 3.6",
+    lang: "eng"
+   },
+   {
+    file: "eng-700.md",
+    title: "Chapter: a ⟨general⟩ statement on the teeth",
+    subtitle: "The Canon, 3.7",
+    lang: "eng"
+   },
+   {
+    file: "eng-800.md",
+    title: "Chapter on the diseases of the gums",
+    subtitle: "The Canon, 3.8",
+    lang: "eng"
+   },
+   {
+    file: "eng-900.md",
+    title: "Chapter on the anatomy of the members of the throat",
+    subtitle: "The Canon, 3.9",
+    lang: "eng"
+   },
+   {
+    file: "eng-1000.md",
+    title: "Its first treatise: on voices and on breathing",
+    subtitle: "The Canon, 3.10",
+    lang: "eng"
+   },
+   {
+    file: "eng-1100.md",
+    title: "Its first treatise: on principles and foundations for that",
+    subtitle: "The Canon, 3.11",
+    lang: "eng"
+   },
+   {
+    file: "eng-1200.md",
+    title: "Chapter on the anatomy of the breast",
+    subtitle: "The Canon, 3.12",
+    lang: "eng"
+   },
+   {
+    file: "eng-1300.md",
+    title: "Its first treatise: on the conditions of the gullet ⟨and the stomach⟩, and on principles of the matter of the stomach",
+    subtitle: "The Canon, 3.13",
+    lang: "eng"
+   },
+   {
+    file: "eng-1400.md",
+    title: "The first treatise: on the generalities of the conditions of the liver",
+    subtitle: "The Canon, 3.14",
+    lang: "eng"
+   },
+   {
+    file: "eng-1500.md",
+    title: "On the states of the gall bladder and the spleen, and it is two treatises. The first treatise: on the anatomy of the gall bladder and the spleen, and on jaundice",
+    subtitle: "The Canon, 3.15",
+    lang: "eng"
+   },
+   {
+    file: "eng-1600.md",
+    title: "The first treatise: on their anatomy and on looseness in general",
+    subtitle: "The Canon, 3.16",
+    lang: "eng"
+   },
+   {
+    file: "eng-1700.md",
+    title: "On the disorders of the anus, and it is one treatise",
+    subtitle: "The Canon, 3.17",
+    lang: "eng"
+   },
+   {
+    file: "eng-1800.md",
+    title: "The first treatise: on the general rulings on the kidney, and on their detail",
+    subtitle: "The Canon, 3.18",
+    lang: "eng"
+   },
+   {
+    file: "eng-1900.md",
+    title: "The first treatise: on the states of the bladder",
+    subtitle: "The Canon, 3.19",
+    lang: "eng"
+   },
+   {
+    file: "eng-2000.md",
+    title: "The first treatise: on the general matters and on venery (bāh)",
+    subtitle: "The Canon, 3.20",
+    lang: "eng"
+   },
+   {
+    file: "eng-2100.md",
+    title: "The first treatise: on the principles, on conception, and on delivery",
+    subtitle: "The Canon, 3.21",
+    lang: "eng"
+   },
+   {
+    file: "eng-2200.md",
+    title: "The first treatise: on what befalls them of damages of size ⟨and position, and it is nine chapters⟩. The first: on the form of the omentum and the two membranes",
+    subtitle: "The Canon, 3.22",
+    lang: "eng"
+   }
+  ]
  }
 ]);

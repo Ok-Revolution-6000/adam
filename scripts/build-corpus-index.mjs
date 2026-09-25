@@ -13,7 +13,7 @@ const CORPORA=[
  {author:'hippocrates',dir:'hippocrates',source:'Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain',
   keep:(dir,file,edition)=>!dir.startsWith('05-')&&file.startsWith('eng-')&&/Adams, Francis/.test(edition)},
  {author:'galen',dir:'galen',source:'First1KGreek, Kühn edition (CC-BY-SA-4.0)'},
- // Avicenna: the Canon, Books I–II, in English, one lesson (Book II: one letter of the simple drugs) per chapter. The Arabic and the working files (_translate) stay local.
+ // Avicenna: the Canon, Books I–III, in English, one lesson (Book II: one letter of the simple drugs) per chapter. The Arabic and the working files (_translate) stay local.
  {author:'avicenna',dir:'avicenna',source:'Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)',
   keep:(dir,file)=>file.startsWith('eng-'),lessons:true},
 ];
@@ -41,7 +41,7 @@ for(const corpus of CORPORA){
   const chapters=[];
   const lines=index.split('\n');
   for(let i=0;i<lines.length;i++){
-   const m=lines[i].match(/^- \*\*\[([^\]]+)\]\(([^)]+\.md)\)\*\*/);if(!m)continue;
+   const m=lines[i].match(/^- \*\*\[(.+)\]\(([^)]+\.md)\)\*\*/);if(!m)continue;
    const file=m[2],label=m[1],edition=(lines[i+1]??'').trim();
    if(!fs.existsSync(new URL(`${d}/${file}`,root)))continue;
    chapters.push({file,title:corpus.lessons?label:versionLabel(file,edition,label),subtitle:edition||undefined,lang:file.split('-')[0]});
@@ -52,7 +52,7 @@ for(const corpus of CORPORA){
   }
   if(corpus.keep){for(let i=chapters.length-1;i>=0;i--)if(!corpus.keep(d,chapters[i].file,chapters[i].subtitle??''))chapters.splice(i,1);}
   const rank=l=>l==='eng'?0:l==='grc'?1:2;
-  chapters.sort((a,b)=>rank(a.lang)-rank(b.lang)||a.file.localeCompare(b.file));
+  chapters.sort((a,b)=>rank(a.lang)-rank(b.lang)||a.file.localeCompare(b.file,undefined,{numeric:true}));
   // Numbered 1, 2, 3… in shelf order: the folder numbers have gaps once works are filtered out.
   if(chapters.length)works.push({id:`${corpus.author}-${d}`,author:corpus.author,number:works.filter(w=>w.author===corpus.author).length+1,title,dir:`${corpus.dir}/${d}`,source:corpus.source,chapters});
  }
