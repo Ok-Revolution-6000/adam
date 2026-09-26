@@ -284,7 +284,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -300,7 +300,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -316,7 +316,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -332,7 +332,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -348,7 +348,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -364,7 +364,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -396,7 +396,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -412,7 +412,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
@@ -428,7 +428,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
    {
     file: "eng-claude.md",
     title: "English · Adomeh, from the Greek (machine translation)",
-    subtitle: "Rendered from the Greek in this repository; citation anchors preserved. Reading aid, not a scholarly edition.",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
