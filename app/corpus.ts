@@ -710,5 +710,63 @@ export const CORPUS_WORKS:Work[]=withTiers([
     lang: "eng"
    }
   ]
+ },
+ {
+  id: "avicenna-04-canon-book-4",
+  author: "avicenna",
+  number: 4,
+  title: "The Canon of Medicine, Book IV",
+  dir: "avicenna/04-canon-book-4",
+  source: "Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-100.md",
+    title: "[The first treatise:] the statement on fevers",
+    subtitle: "The Canon, 4.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-200.md",
+    title: "The first treatise: on crisis and the ways of inferring it, and good and evil. On crisis, what it is, and on its divisions and rulings",
+    subtitle: "The Canon, 4.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-300.md",
+    title: "On the times of crisis, its days and its cycles",
+    subtitle: "The Canon, 4.3",
+    lang: "eng"
+   },
+   {
+    file: "eng-400.md",
+    title: "The first treatise: on the hot and the corrupt of them",
+    subtitle: "The Canon, 4.4",
+    lang: "eng"
+   },
+   {
+    file: "eng-500.md",
+    title: "The first treatise: on wounds",
+    subtitle: "The Canon, 4.5",
+    lang: "eng"
+   },
+   {
+    file: "eng-600.md",
+    title: "The first treatise: on dislocation",
+    subtitle: "The Canon, 4.6",
+    lang: "eng"
+   },
+   {
+    file: "eng-700.md",
+    title: "The first treatise: on the principles of what is known of the states of drunk poisons, and the detailed saying on the treatments of poisons that are not animal",
+    subtitle: "The Canon, 4.7",
+    lang: "eng"
+   },
+   {
+    file: "eng-800.md",
+    title: "The first treatise: on the hair; and in it scurf",
+    subtitle: "The Canon, 4.8",
+    lang: "eng"
+   }
+  ]
  }
 ]);
