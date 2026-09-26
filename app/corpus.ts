@@ -768,5 +768,39 @@ export const CORPUS_WORKS:Work[]=withTiers([
     lang: "eng"
    }
   ]
+ },
+ {
+  id: "avicenna-05-canon-book-5",
+  author: "avicenna",
+  number: 5,
+  title: "The Canon of Medicine, Book V",
+  dir: "avicenna/05-canon-book-5",
+  source: "Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-00.md",
+    title: "Preface: the formulary",
+    subtitle: "The Canon, 5",
+    lang: "eng"
+   },
+   {
+    file: "eng-100.md",
+    title: "On the manner of compounding",
+    subtitle: "The Canon, 5.1",
+    lang: "eng"
+   },
+   {
+    file: "eng-200.md",
+    title: "Section 1: The established compounds (twelve treatises)",
+    subtitle: "The Canon, 5.2",
+    lang: "eng"
+   },
+   {
+    file: "eng-300.md",
+    title: "Section 2: Medicines tested disease by disease",
+    subtitle: "The Canon, 5.3",
+    lang: "eng"
+   }
+  ]
  }
 ]);
