@@ -5,7 +5,8 @@ export type Lexicon=Record<string,string[]>;
 export function prepareMarkdown(source:string){
  let md=source.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/,'');
  const navLine=/^\s*(\[[^\]]+\]\([^)]+\)\s*(\||·|$)\s*)+$/;
- md=md.split('\n').filter(line=>!/^\[\*\*Contents\*\*\]/.test(line)&&!navLine.test(line)).join('\n');
+ // "Other versions" points at the Greek and other files of the corpus, which are not on the shelf.
+ md=md.split('\n').filter(line=>!/^\[\*\*Contents\*\*\]/.test(line)&&!navLine.test(line)&&!/^\*\*Other versions:\*\*/.test(line)).join('\n');
  md=md.replace(/<!--\s*printed p\. ([^\s]+)\s*-->/g,(_,n)=>`<span class="pg" title="Printed page ${n}">${n}</span>`);
  // Greek and Arabic corpora: Perseus page breaks, OpenITI page references, and CTS citation anchors.
  md=md.replace(/<!--\s*page ([^\s]+)\s*-->/g,(_,n)=>`<span class="pg" title="Page ${n}">${n}</span>`);

@@ -274,6 +274,22 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-09-de-naturalibus-facultatibus",
+  author: "galen",
+  number: 1,
+  title: "On the Natural Faculties",
+  dir: "galen/09-de-naturalibus-facultatibus",
+  source: "Arthur John Brock, Galen: On the Natural Faculties (London 1916), public domain",
+  chapters: [
+   {
+    file: "eng-perseus-eng2.md",
+    title: "English · Brock 1916",
+    subtitle: "Galen. On the Natural Faculties. Brock, Arthur John, translator. London: William Heinemann Ltd.; Cambridge, MA.: Harvard University Press, 1916.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "avicenna-01-canon-book-1",
   author: "avicenna",
   number: 1,

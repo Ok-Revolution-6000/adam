@@ -6,13 +6,17 @@ import path from 'node:path';
 const content=new URL('../content/',import.meta.url);
 const ENGLISH_TITLES={
  'De prisca medicina':'On Ancient Medicine','De aere, aquis, locis':'Airs, Waters, Places','Prognosticon':'Prognostic','De diaeta in morbis acutis':'Regimen in Acute Diseases','De diaeta acutorum (spurium)':'Regimen in Acute Diseases (Appendix)','Epidemiarum':'Epidemics','De capitis vulneribus':'On Wounds in the Head','De officina medici':'In the Surgery','De fracturis':'On Fractures','De articulis':'On Joints','Vectiarius':'Instruments of Reduction','Aphorismi':'Aphorisms','Iusiurandum':'The Oath','Lex':'The Law','De humoribus':'On Humours','Prorrheticon I':'Prorrhetic I','Coa praesagia':'Coan Prognoses','De arte':'On the Art','De natura hominis':'On the Nature of Man','De salubri diaeta':'Regimen in Health','De flatibus':'On Breaths','De liquidorum usu':'On the Use of Liquids','De morbis i-iii':'On Diseases I–III','De affectionibus':'On Affections','De locis in homine':'On Places in Man','De morbo sacro':'On the Sacred Disease','De ulceribus':'On Ulcers','De haemorrhoidibus':'On Haemorrhoids','De fistulis':'On Fistulas','De diaeta':'On Regimen','De affectionibus interioribus':'On Internal Affections','De natura muliebri':'On the Nature of Women','De octimestri partu':'On the Eight-Months’ Child','De muliebribus':'Diseases of Women','De virginum morbis':'On the Diseases of Girls','De superfoetatione':'On Superfetation','De exsectione foetus':'On the Excision of the Fetus','De anatomia':'On Anatomy','De dentitione':'On Dentition','De glandulis':'On Glands','De carnibus':'On Fleshes','De corde':'On the Heart','De alimento':'On Nutriment','De visu':'On Sight','De natura ossium':'On the Nature of Bones','De medico':'On the Physician','De habitu decenti':'On Decorum','Praeceptiones':'Precepts','De crisibus':'On Crises','De diebus criticis':'On Critical Days','Epistulae, Decretum, Orationes':'Letters, Decree, Speeches',
+ 'De naturalibus facultatibus':'On the Natural Faculties',
 };
 const CORPORA=[
  // Hippocrates: for now only Francis Adams's Genuine Works (vols. 1–2). The Greek, Jones and the Claude translations stay in
  // the corpus but are not listed. Folder 05 is skipped: its Adams text is the Appendix already printed inside folder 04.
  {author:'hippocrates',dir:'hippocrates',source:'Francis Adams, The Genuine Works of Hippocrates (London 1849; New York 1886), public domain',
   keep:(dir,file,edition)=>!dir.startsWith('05-')&&file.startsWith('eng-')&&/Adams, Francis/.test(edition)},
- {author:'galen',dir:'galen',source:'First1KGreek, Kühn edition (CC-BY-SA-4.0)'},
+ // Galen: for now only On the Natural Faculties, Books I–III, in Brock's English (1916), Galen's text only; the version file
+ // is built from Project Gutenberg #43383 (_tools/brock_from_gutenberg.py). The 96 Greek-only works stay local.
+ {author:'galen',dir:'galen',source:'Arthur John Brock, Galen: On the Natural Faculties (London 1916), public domain',
+  keep:(dir,file)=>dir.startsWith('09-')&&file.startsWith('eng-')},
  // Avicenna: the Canon, Books I–V, in English, one lesson (Book II: one letter of the simple drugs) per chapter. The Arabic and the working files (_translate) stay local.
  {author:'avicenna',dir:'avicenna',source:'Machine translation from the Arabic by Adomeh (Claude), CC BY-SA 4.0; Arabic text: Arabic and Latin Corpus, ed. D. N. Hasse, University of Würzburg (CC BY-SA 4.0)',
   keep:(dir,file)=>file.startsWith('eng-'),lessons:true},
@@ -37,7 +41,7 @@ for(const corpus of CORPORA){
   const number=Number(d.split('-')[0]);
   const latin=fm.title??d;
   const english=ENGLISH_TITLES[latin];
-  const title=corpus.author==='hippocrates'&&english?english:latin;
+  const title=(corpus.author==='hippocrates'||corpus.author==='galen')&&english?english:latin;
   const chapters=[];
   const lines=index.split('\n');
   for(let i=0;i<lines.length;i++){
