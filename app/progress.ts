@@ -1,19 +1,21 @@
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {useUser} from '@clerk/react';
 import {resetReadingProgress} from './progress-reset';
+import {mergeReadingLogs,weightedPercent} from './progress-log';
+import {CHAPTER_WORDS} from './chapter-words';
 import type {Work} from './study';
 /** Where a reader is in each book: the furthest point reached in every chapter (0–1) and one bookmark.
  * Kept on the Clerk user (unsafeMetadata.reading) so it follows the reader to any device; before signing in it lives
- * in this browser. Writes are batched: scrolling saves a few seconds after the reader stops, a bookmark at once. */
+ * in this browser, and is folded into the account at sign-in. Writes are batched: scrolling saves a few seconds after
+ * the reader stops, a bookmark at once. */
 export interface WorkProgress {seen:Record<string,number>;mark?:{file:string;at:number};t:number}
 export type ReadingLog=Record<string,WorkProgress>;
 const LOCAL='adomeh.reading';
 const readLocal=():ReadingLog=>{try{return JSON.parse(localStorage.getItem(LOCAL)??'{}') as ReadingLog;}catch{return {};}};
-/** Share of the book read, 0–100: every chapter counts equally, each by how far into it the reader has been. */
+/** Share of the book read, 0–100: each chapter by how far into it the reader has been, weighed by its length. */
 export function workPercent(work:Work,p?:WorkProgress){
- if(!p||!work.chapters.length)return 0;
- const sum=work.chapters.reduce((n,c)=>n+Math.min(1,p.seen[c.file]??0),0);
- return Math.round(sum/work.chapters.length*100);
+ if(!p)return 0;
+ return weightedPercent(work.chapters.map(c=>c.file),work.chapters.map(c=>CHAPTER_WORDS[`${work.dir}/${c.file}`]),p.seen);
 }
 export function useReadingLog(){
  const {user,isLoaded}=useUser();
@@ -22,8 +24,13 @@ export function useReadingLog(){
  const current=useRef<ReadingLog>({}),dirty=useRef(false),timer=useRef<number|undefined>(undefined);
  useEffect(()=>{
   if(!isLoaded)return;
-  const loaded=user?((user.unsafeMetadata as {reading?:ReadingLog}).reading??{}):readLocal();
-  current.current=loaded;setLog(loaded);
+  if(!user){const loaded=readLocal();current.current=loaded;setLog(loaded);return;}
+  // Signed in: what was read in this browser before signing in joins the account, then leaves the browser, so a
+  // later reset on the account is not undone by stale browser history.
+  const account=(user.unsafeMetadata as {reading?:ReadingLog}).reading??{},merged=mergeReadingLogs(account,readLocal());
+  current.current=merged;setLog(merged);
+  if(merged!==account){dirty.current=true;clearTimeout(timer.current);timer.current=window.setTimeout(()=>flushRef.current(),0);}
+  try{localStorage.removeItem(LOCAL);}catch{}
  // Only a different reader reloads the log; the user object also changes after each of our own saves.
  // eslint-disable-next-line react-hooks/exhaustive-deps
  },[isLoaded,user?.id]);
@@ -35,6 +42,7 @@ export function useReadingLog(){
   if(user)saves.current=saves.current.then(()=>user.update({unsafeMetadata:{...user.unsafeMetadata,reading}})).catch(()=>{dirty.current=true;});
   else try{localStorage.setItem(LOCAL,JSON.stringify(reading));}catch{}
  },[user]);
+ const flushRef=useRef(flush);flushRef.current=flush;
  useEffect(()=>{addEventListener('pagehide',flush);return()=>{removeEventListener('pagehide',flush);flush();};},[flush]);
  const change=useCallback((next:ReadingLog,now:boolean)=>{
   current.current=next;dirty.current=true;setLog(next);

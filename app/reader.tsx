@@ -16,13 +16,16 @@ export interface ReaderProps {
  startAt?:number;
  /** Increment to restart the open chapter without reloading its text. */
  resetKey?:number;
- /** How far down the chapter the reader is (0–1), reported as they scroll; 1 when it fits without scrolling. */
- onProgress?:(at:number)=>void;
+ /** Increment to move to `startAt` again in the chapter already open (e.g. "Resume at your bookmark" from its own chapter). */
+ seekKey?:number;
+ /** Reported as the reader scrolls: `at`, where the top of the view is (0–1, for bookmarks), and `shown`, how much of
+ * the chapter has come into view (0–1, for progress); both 1 when the chapter fits without scrolling. */
+ onProgress?:(at:number,shown:number)=>void;
 }
 /** 'unauthenticated' and 'unentitled' are the content function's 401 and 402: sign in, or subscribe. */
 export type ReaderStatus='loading'|'ready'|'missing'|'error'|'unauthenticated'|'unentitled';
 
-export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress,resetKey=0}:ReaderProps){
+export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress,resetKey=0,seekKey=0}:ReaderProps){
  const body=useRef<HTMLDivElement>(null),{getToken,isLoaded,isSignedIn}=useAuth();
  const me=useEntitlement();
  const [html,setHtml]=useState(''),[status,setStatus]=useState<ReaderStatus>('loading');
@@ -51,14 +54,25 @@ export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress,
  const article=useRef<HTMLElement>(null),start=useRef(startAt),report=useRef(onProgress);
  start.current=startAt;report.current=onProgress;
  const position=()=>{const el=body.current;if(!el)return 0;const room=el.scrollHeight-el.clientHeight;return room<=4?1:Math.min(1,el.scrollTop/room);};
+ const shown=()=>{const el=body.current;if(!el)return 0;const room=el.scrollHeight-el.clientHeight;return room<=4?1:Math.min(1,(el.scrollTop+el.clientHeight)/el.scrollHeight);};
+ // The chapter whose text is on the page. For a moment after `url` changes the old text is still shown; scrolling
+ // then must not be counted against the new chapter.
+ const shownUrl=useRef('');
+ const reportNow=()=>{if(shownUrl.current===url&&!paused.current)report.current?.(position(),shown());};
  // React 19 re-applies dangerouslySetInnerHTML on every render, which would erase the term links; the
  // article's content is therefore written here, once per chapter, and React never touches its children.
- useEffect(()=>{const el=article.current,scroller=body.current;if(!el)return;el.innerHTML=status==='ready'?html:'';if(status==='ready')linkTerms(el,LEXICON);if(!scroller)return;scroller.scrollTop=0;
+ useEffect(()=>{const el=article.current,scroller=body.current;if(!el)return;el.innerHTML=status==='ready'?html:'';shownUrl.current=status==='ready'?url:'';if(status==='ready')linkTerms(el,LEXICON);if(!scroller)return;scroller.scrollTop=0;
   if(status!=='ready')return;
   // Open at the saved place once the text has been laid out, then report where the reader now is.
-  const frame=requestAnimationFrame(()=>{const at=start.current??0;if(at>0)scroller.scrollTop=at*(scroller.scrollHeight-scroller.clientHeight);if(!paused.current)report.current?.(position());});
+  const frame=requestAnimationFrame(()=>{const at=start.current??0;if(at>0)scroller.scrollTop=at*(scroller.scrollHeight-scroller.clientHeight);reportNow();});
   return()=>cancelAnimationFrame(frame);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
  },[html,status]);
+ const lastSeek=useRef(seekKey);
+ useEffect(()=>{if(lastSeek.current===seekKey)return;lastSeek.current=seekKey;const el=body.current;
+  if(!el||shownUrl.current!==url||start.current==null)return;paused.current=false;el.scrollTop=(start.current??0)*(el.scrollHeight-el.clientHeight);
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ },[seekKey]);
  const click=(e:MouseEvent<HTMLDivElement>)=>{
   const t=e.target as HTMLElement;
   const term=t.closest('button.term') as HTMLButtonElement|null;
@@ -69,7 +83,7 @@ export default function Reader({url,onTerm,onNavigate,header,startAt,onProgress,
  };
  return <div className="reader glass" aria-label="Reading pane">
   {header}
-  <div className="reader-body" ref={body} tabIndex={0} aria-label="Chapter text" onWheel={resumeProgress} onTouchMove={resumeProgress} onPointerDown={resumeProgress} onKeyDown={event=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))resumeProgress();}} onClick={click} onScroll={()=>{if(status==='ready'&&!paused.current)report.current?.(position());}}>
+  <div className="reader-body" ref={body} tabIndex={0} aria-label="Chapter text" onWheel={resumeProgress} onTouchMove={resumeProgress} onPointerDown={resumeProgress} onKeyDown={event=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))resumeProgress();}} onClick={click} onScroll={()=>{if(status==='ready')reportNow();}}>
    {status==='loading'&&<p className="reader-note">Opening the text…</p>}
    {status==='missing'&&<div className="reader-note"><p><strong>This text is not in this build.</strong></p><p>Adam keeps the study corpus outside the repository. Run the app locally with the texts placed under <code>content/</code> and this chapter will open here, with every anatomical term linked to the body.</p></div>}
    {status==='unauthenticated'&&<div className="reader-note"><p><strong>Sign in to read.</strong></p><p>Reading Maimonides, Hippocrates, Galen and Avicenna requires an Adam Membership. You will be brought straight back to this chapter.</p><p><button type="button" className="reader-cta" onClick={goSignIn}>Sign in or make an account</button></p></div>}
