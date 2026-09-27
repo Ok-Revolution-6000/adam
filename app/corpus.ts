@@ -274,9 +274,105 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
-  id: "galen-09-de-naturalibus-facultatibus",
+  id: "galen-01-adhortatio-ad-artes-addiscendas",
   author: "galen",
   number: 1,
+  title: "Exhortation to Study the Arts",
+  dir: "galen/01-adhortatio-ad-artes-addiscendas",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-02-de-optima-doctrina",
+  author: "galen",
+  number: 2,
+  title: "On the Best Method of Teaching",
+  dir: "galen/02-de-optima-doctrina",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-03-quod-optimus-medicus-sit-quoque-philosophus",
+  author: "galen",
+  number: 3,
+  title: "The Best Doctor Is Also a Philosopher",
+  dir: "galen/03-quod-optimus-medicus-sit-quoque-philosophus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-04-de-sectis-ad-eos-qui-introducuntur",
+  author: "galen",
+  number: 4,
+  title: "On Sects for Beginners",
+  dir: "galen/04-de-sectis-ad-eos-qui-introducuntur",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-05-de-constitutione-artis-medicae-ad-patrophilum",
+  author: "galen",
+  number: 5,
+  title: "The Constitution of the Art of Medicine",
+  dir: "galen/05-de-constitutione-artis-medicae-ad-patrophilum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-06-ars-medica",
+  author: "galen",
+  number: 6,
+  title: "The Art of Medicine",
+  dir: "galen/06-ars-medica",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-09-de-naturalibus-facultatibus",
+  author: "galen",
+  number: 7,
   title: "On the Natural Faculties",
   dir: "galen/09-de-naturalibus-facultatibus",
   source: "Arthur John Brock, Galen: On the Natural Faculties (London 1916), public domain",
@@ -285,6 +381,54 @@ export const CORPUS_WORKS:Work[]=withTiers([
     file: "eng-perseus-eng2.md",
     title: "English · Brock 1916",
     subtitle: "Galen. On the Natural Faculties. Brock, Arthur John, translator. London: William Heinemann Ltd.; Cambridge, MA.: Harvard University Press, 1916.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-78-institutio-logica",
+  author: "galen",
+  number: 8,
+  title: "Introduction to Logic",
+  dir: "galen/78-institutio-logica",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-79-de-sophismatis-seu-captionibus-penes-dictionem",
+  author: "galen",
+  number: 9,
+  title: "Linguistic Sophisms",
+  dir: "galen/79-de-sophismatis-seu-captionibus-penes-dictionem",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-96-de-experientia-medica",
+  author: "galen",
+  number: 10,
+  title: "On Medical Experience (fragment)",
+  dir: "galen/96-de-experientia-medica",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
     lang: "eng"
    }
   ]
