@@ -546,9 +546,25 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
-  id: "galen-19-de-utilitate-respirationis",
+  id: "galen-18-de-victu-attenuante",
   author: "galen",
   number: 18,
+  title: "On the Thinning Diet",
+  dir: "galen/18-de-victu-attenuante",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-19-de-utilitate-respirationis",
+  author: "galen",
+  number: 19,
   title: "On the Use of Breathing",
   dir: "galen/19-de-utilitate-respirationis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -564,7 +580,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-20-de-semine",
   author: "galen",
-  number: 19,
+  number: 20,
   title: "On Semen",
   dir: "galen/20-de-semine",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -580,7 +596,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-21-de-foetuum-formatione",
   author: "galen",
-  number: 20,
+  number: 21,
   title: "On the Formation of the Foetus",
   dir: "galen/21-de-foetuum-formatione",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -596,7 +612,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-22-an-in-arteriis-sanguis-contineatur",
   author: "galen",
-  number: 21,
+  number: 22,
   title: "Whether Blood Is Contained in the Arteries",
   dir: "galen/22-an-in-arteriis-sanguis-contineatur",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -610,9 +626,41 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-23-de-optima-corporis-nostri-constitutione",
+  author: "galen",
+  number: 23,
+  title: "On the Best Constitution of Our Bodies",
+  dir: "galen/23-de-optima-corporis-nostri-constitutione",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-24-de-bono-habitu",
+  author: "galen",
+  number: 24,
+  title: "On Good Condition",
+  dir: "galen/24-de-bono-habitu",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-25-quod-animi-mores-corporis-temperamenta-sequantur",
   author: "galen",
-  number: 22,
+  number: 25,
   title: "That the Faculties of the Soul Follow the Mixtures of the Body",
   dir: "galen/25-quod-animi-mores-corporis-temperamenta-sequantur",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -626,9 +674,41 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-26-de-propriorum-animi-cuiuslibet-affectuum-dignotione-et-curat",
+  author: "galen",
+  number: 26,
+  title: "On the Affections of the Soul",
+  dir: "galen/26-de-propriorum-animi-cuiuslibet-affectuum-dignotione-et-curat",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-27-de-animi-cuiuslibet-peccatorum-dignotione-et-curatione",
+  author: "galen",
+  number: 27,
+  title: "On the Errors of the Soul",
+  dir: "galen/27-de-animi-cuiuslibet-peccatorum-dignotione-et-curatione",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-28-de-atra-bile",
   author: "galen",
-  number: 23,
+  number: 28,
   title: "On Black Bile",
   dir: "galen/28-de-atra-bile",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -644,7 +724,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-29-de-usu-pulsuum",
   author: "galen",
-  number: 24,
+  number: 29,
   title: "On the Use of Pulses",
   dir: "galen/29-de-usu-pulsuum",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -660,7 +740,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-30-de-placitis-hippocratis-et-platonis",
   author: "galen",
-  number: 25,
+  number: 30,
   title: "On the Doctrines of Hippocrates and Plato",
   dir: "galen/30-de-placitis-hippocratis-et-platonis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -674,9 +754,121 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-31-thrasybulus-sive-utrum-medicinae-sit-an-gymnasticae-hygieine",
+  author: "galen",
+  number: 31,
+  title: "Thrasybulus: Is Health a Matter of Medicine or Gymnastics?",
+  dir: "galen/31-thrasybulus-sive-utrum-medicinae-sit-an-gymnasticae-hygieine",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-32-de-parvae-pilae-exercitio",
+  author: "galen",
+  number: 32,
+  title: "On Exercise with the Small Ball",
+  dir: "galen/32-de-parvae-pilae-exercitio",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-33-de-venereis",
+  author: "galen",
+  number: 33,
+  title: "On Sexual Activity",
+  dir: "galen/33-de-venereis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-34-de-sanitate-tuenda",
+  author: "galen",
+  number: 34,
+  title: "On the Preservation of Health",
+  dir: "galen/34-de-sanitate-tuenda",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-35-de-alimentorum-facultatibus",
+  author: "galen",
+  number: 35,
+  title: "On the Powers of Foods",
+  dir: "galen/35-de-alimentorum-facultatibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-36-de-rebus-boni-malique-suci",
+  author: "galen",
+  number: 36,
+  title: "On Good and Bad Juices",
+  dir: "galen/36-de-rebus-boni-malique-suci",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-37-de-ptisana",
+  author: "galen",
+  number: 37,
+  title: "On Barley Gruel",
+  dir: "galen/37-de-ptisana",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-78-institutio-logica",
   author: "galen",
-  number: 26,
+  number: 38,
   title: "Introduction to Logic",
   dir: "galen/78-institutio-logica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -692,7 +884,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-79-de-sophismatis-seu-captionibus-penes-dictionem",
   author: "galen",
-  number: 27,
+  number: 39,
   title: "Linguistic Sophisms",
   dir: "galen/79-de-sophismatis-seu-captionibus-penes-dictionem",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -708,7 +900,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-81-de-substantia-facultatum-naturalium-fragmentum",
   author: "galen",
-  number: 28,
+  number: 40,
   title: "On the Substance of the Natural Faculties (fragment)",
   dir: "galen/81-de-substantia-facultatum-naturalium-fragmentum",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -724,7 +916,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-94-de-musculorum-dissectione-ad-tirones",
   author: "galen",
-  number: 29,
+  number: 41,
   title: "On the Dissection of Muscles for Beginners",
   dir: "galen/94-de-musculorum-dissectione-ad-tirones",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -738,9 +930,25 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-95-de-consuetudinibus",
+  author: "galen",
+  number: 42,
+  title: "On Habits",
+  dir: "galen/95-de-consuetudinibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-96-de-experientia-medica",
   author: "galen",
-  number: 30,
+  number: 43,
   title: "On Medical Experience (fragment)",
   dir: "galen/96-de-experientia-medica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -756,7 +964,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-97-de-causis-respirationis",
   author: "galen",
-  number: 31,
+  number: 44,
   title: "On the Causes of Breathing",
   dir: "galen/97-de-causis-respirationis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
