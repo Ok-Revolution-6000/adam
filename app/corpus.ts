@@ -370,9 +370,41 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
-  id: "galen-09-de-naturalibus-facultatibus",
+  id: "galen-07-de-elementis-ex-hippocrate",
   author: "galen",
   number: 7,
+  title: "On the Elements According to Hippocrates",
+  dir: "galen/07-de-elementis-ex-hippocrate",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-08-de-temperamentis",
+  author: "galen",
+  number: 8,
+  title: "On Mixtures",
+  dir: "galen/08-de-temperamentis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-09-de-naturalibus-facultatibus",
+  author: "galen",
+  number: 9,
   title: "On the Natural Faculties",
   dir: "galen/09-de-naturalibus-facultatibus",
   source: "Arthur John Brock, Galen: On the Natural Faculties (London 1916), public domain",
@@ -386,9 +418,233 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-11-de-ossibus-ad-tirones",
+  author: "galen",
+  number: 10,
+  title: "On Bones for Beginners",
+  dir: "galen/11-de-ossibus-ad-tirones",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-12-de-venarum-arteriarumque-dissectione",
+  author: "galen",
+  number: 11,
+  title: "On the Dissection of Veins and Arteries",
+  dir: "galen/12-de-venarum-arteriarumque-dissectione",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-13-de-nervorum-dissectione",
+  author: "galen",
+  number: 12,
+  title: "On the Dissection of Nerves",
+  dir: "galen/13-de-nervorum-dissectione",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-14-de-instrumento-odoratus",
+  author: "galen",
+  number: 13,
+  title: "On the Organ of Smell",
+  dir: "galen/14-de-instrumento-odoratus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-15-de-uteri-dissectione",
+  author: "galen",
+  number: 14,
+  title: "On the Dissection of the Womb",
+  dir: "galen/15-de-uteri-dissectione",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-17-de-motu-musculorum",
+  author: "galen",
+  number: 15,
+  title: "On the Motion of Muscles",
+  dir: "galen/17-de-motu-musculorum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-19-de-utilitate-respirationis",
+  author: "galen",
+  number: 16,
+  title: "On the Use of Breathing",
+  dir: "galen/19-de-utilitate-respirationis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-20-de-semine",
+  author: "galen",
+  number: 17,
+  title: "On Semen",
+  dir: "galen/20-de-semine",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-21-de-foetuum-formatione",
+  author: "galen",
+  number: 18,
+  title: "On the Formation of the Foetus",
+  dir: "galen/21-de-foetuum-formatione",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-22-an-in-arteriis-sanguis-contineatur",
+  author: "galen",
+  number: 19,
+  title: "Whether Blood Is Contained in the Arteries",
+  dir: "galen/22-an-in-arteriis-sanguis-contineatur",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-25-quod-animi-mores-corporis-temperamenta-sequantur",
+  author: "galen",
+  number: 20,
+  title: "That the Faculties of the Soul Follow the Mixtures of the Body",
+  dir: "galen/25-quod-animi-mores-corporis-temperamenta-sequantur",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-28-de-atra-bile",
+  author: "galen",
+  number: 21,
+  title: "On Black Bile",
+  dir: "galen/28-de-atra-bile",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-29-de-usu-pulsuum",
+  author: "galen",
+  number: 22,
+  title: "On the Use of Pulses",
+  dir: "galen/29-de-usu-pulsuum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-30-de-placitis-hippocratis-et-platonis",
+  author: "galen",
+  number: 23,
+  title: "On the Doctrines of Hippocrates and Plato",
+  dir: "galen/30-de-placitis-hippocratis-et-platonis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-78-institutio-logica",
   author: "galen",
-  number: 8,
+  number: 24,
   title: "Introduction to Logic",
   dir: "galen/78-institutio-logica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -404,7 +660,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-79-de-sophismatis-seu-captionibus-penes-dictionem",
   author: "galen",
-  number: 9,
+  number: 25,
   title: "Linguistic Sophisms",
   dir: "galen/79-de-sophismatis-seu-captionibus-penes-dictionem",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -418,11 +674,59 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-81-de-substantia-facultatum-naturalium-fragmentum",
+  author: "galen",
+  number: 26,
+  title: "On the Substance of the Natural Faculties (fragment)",
+  dir: "galen/81-de-substantia-facultatum-naturalium-fragmentum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-94-de-musculorum-dissectione-ad-tirones",
+  author: "galen",
+  number: 27,
+  title: "On the Dissection of Muscles for Beginners",
+  dir: "galen/94-de-musculorum-dissectione-ad-tirones",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-96-de-experientia-medica",
   author: "galen",
-  number: 10,
+  number: 28,
   title: "On Medical Experience (fragment)",
   dir: "galen/96-de-experientia-medica",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-97-de-causis-respirationis",
+  author: "galen",
+  number: 29,
+  title: "On the Causes of Breathing",
+  dir: "galen/97-de-causis-respirationis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
   chapters: [
    {
