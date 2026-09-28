@@ -866,9 +866,25 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
-  id: "galen-39-de-morborum-differentiis",
+  id: "galen-38-de-dignotione-ex-insomniis",
   author: "galen",
   number: 38,
+  title: "On Diagnosis from Dreams",
+  dir: "galen/38-de-dignotione-ex-insomniis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-39-de-morborum-differentiis",
+  author: "galen",
+  number: 39,
   title: "On the Differences of Diseases",
   dir: "galen/39-de-morborum-differentiis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -884,7 +900,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-40-de-causis-morborum",
   author: "galen",
-  number: 39,
+  number: 40,
   title: "On the Causes of Diseases",
   dir: "galen/40-de-causis-morborum",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -900,7 +916,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-41-de-symptomatum-differentiis",
   author: "galen",
-  number: 40,
+  number: 41,
   title: "On the Differences of Symptoms",
   dir: "galen/41-de-symptomatum-differentiis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -916,7 +932,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-42-de-symptomatum-causis",
   author: "galen",
-  number: 41,
+  number: 42,
   title: "On the Causes of Symptoms",
   dir: "galen/42-de-symptomatum-causis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -932,7 +948,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-43-de-differentiis-febrium",
   author: "galen",
-  number: 42,
+  number: 43,
   title: "On the Differences of Fevers",
   dir: "galen/43-de-differentiis-febrium",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -946,9 +962,73 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-44-de-morborum-temporibus",
+  author: "galen",
+  number: 44,
+  title: "On the Opportune Moments in Diseases",
+  dir: "galen/44-de-morborum-temporibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-45-de-totius-morbi-temporibus",
+  author: "galen",
+  number: 45,
+  title: "On the Opportune Moments in the Whole Disease",
+  dir: "galen/45-de-totius-morbi-temporibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-46-de-typis",
+  author: "galen",
+  number: 46,
+  title: "On Disease Patterns",
+  dir: "galen/46-de-typis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-47-adversus-eos-qui-de-typis-scripserunt-vel-de-circuitibus",
+  author: "galen",
+  number: 47,
+  title: "Against Those Who Wrote on Disease Patterns or Periods",
+  dir: "galen/47-adversus-eos-qui-de-typis-scripserunt-vel-de-circuitibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-48-de-plenitudine",
   author: "galen",
-  number: 43,
+  number: 48,
   title: "On Plethora",
   dir: "galen/48-de-plenitudine",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -964,7 +1044,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-49-de-tremore-palpitatione-convulsione-et-rigore",
   author: "galen",
-  number: 44,
+  number: 49,
   title: "On Tremor, Palpitation, Convulsion and Rigor",
   dir: "galen/49-de-tremore-palpitatione-convulsione-et-rigore",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -980,7 +1060,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-50-de-comate-secundum-hippocratem",
   author: "galen",
-  number: 45,
+  number: 50,
   title: "On Coma according to Hippocrates",
   dir: "galen/50-de-comate-secundum-hippocratem",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -996,7 +1076,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-51-de-marcore",
   author: "galen",
-  number: 46,
+  number: 51,
   title: "On Marasmus",
   dir: "galen/51-de-marcore",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1012,7 +1092,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-52-de-tumoribus-praeter-naturam",
   author: "galen",
-  number: 47,
+  number: 52,
   title: "On Swellings Contrary to Nature",
   dir: "galen/52-de-tumoribus-praeter-naturam",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1028,7 +1108,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-53-de-inaequali-intemperie",
   author: "galen",
-  number: 48,
+  number: 53,
   title: "On the Uneven Bad Mixture",
   dir: "galen/53-de-inaequali-intemperie",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1042,9 +1122,169 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-54-de-difficultate-respirationis",
+  author: "galen",
+  number: 54,
+  title: "On Difficulty in Breathing",
+  dir: "galen/54-de-difficultate-respirationis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-55-de-locis-affectis",
+  author: "galen",
+  number: 55,
+  title: "On the Affected Places",
+  dir: "galen/55-de-locis-affectis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-56-de-pulsibus-ad-tirones",
+  author: "galen",
+  number: 56,
+  title: "On the Pulse for Beginners",
+  dir: "galen/56-de-pulsibus-ad-tirones",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-57-de-differentiis-pulsuum",
+  author: "galen",
+  number: 57,
+  title: "On the Differences of Pulses",
+  dir: "galen/57-de-differentiis-pulsuum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-58-de-dignoscendis-pulsibus",
+  author: "galen",
+  number: 58,
+  title: "On Diagnosis by the Pulse",
+  dir: "galen/58-de-dignoscendis-pulsibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-59-de-causis-pulsuum",
+  author: "galen",
+  number: 59,
+  title: "On the Causes of Pulses",
+  dir: "galen/59-de-causis-pulsuum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-60-de-praesagitione-ex-pulsibus",
+  author: "galen",
+  number: 60,
+  title: "On Prognosis from the Pulse",
+  dir: "galen/60-de-praesagitione-ex-pulsibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-61-synopsis-librorum-suorum-de-pulsibus",
+  author: "galen",
+  number: 61,
+  title: "Synopsis of His Own Books on the Pulse",
+  dir: "galen/61-synopsis-librorum-suorum-de-pulsibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-62-de-crisibus",
+  author: "galen",
+  number: 62,
+  title: "On Crises",
+  dir: "galen/62-de-crisibus",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-63-de-diebus-decretoriis",
+  author: "galen",
+  number: 63,
+  title: "On Critical Days",
+  dir: "galen/63-de-diebus-decretoriis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-78-institutio-logica",
   author: "galen",
-  number: 49,
+  number: 64,
   title: "Introduction to Logic",
   dir: "galen/78-institutio-logica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1060,7 +1300,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-79-de-sophismatis-seu-captionibus-penes-dictionem",
   author: "galen",
-  number: 50,
+  number: 65,
   title: "Linguistic Sophisms",
   dir: "galen/79-de-sophismatis-seu-captionibus-penes-dictionem",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1074,9 +1314,25 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
+  id: "galen-80-de-praenotione-ad-epigenem",
+  author: "galen",
+  number: 66,
+  title: "On Prognosis, to Epigenes",
+  dir: "galen/80-de-praenotione-ad-epigenem",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
   id: "galen-81-de-substantia-facultatum-naturalium-fragmentum",
   author: "galen",
-  number: 51,
+  number: 67,
   title: "On the Substance of the Natural Faculties (fragment)",
   dir: "galen/81-de-substantia-facultatum-naturalium-fragmentum",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1092,7 +1348,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-94-de-musculorum-dissectione-ad-tirones",
   author: "galen",
-  number: 52,
+  number: 68,
   title: "On the Dissection of Muscles for Beginners",
   dir: "galen/94-de-musculorum-dissectione-ad-tirones",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1108,7 +1364,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-95-de-consuetudinibus",
   author: "galen",
-  number: 53,
+  number: 69,
   title: "On Habits",
   dir: "galen/95-de-consuetudinibus",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1124,7 +1380,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-96-de-experientia-medica",
   author: "galen",
-  number: 54,
+  number: 70,
   title: "On Medical Experience (fragment)",
   dir: "galen/96-de-experientia-medica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1140,7 +1396,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-97-de-causis-respirationis",
   author: "galen",
-  number: 55,
+  number: 71,
   title: "On the Causes of Breathing",
   dir: "galen/97-de-causis-respirationis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
