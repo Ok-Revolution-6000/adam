@@ -1282,9 +1282,121 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
-  id: "galen-78-institutio-logica",
+  id: "galen-64-de-methodo-medendi",
   author: "galen",
   number: 64,
+  title: "On the Therapeutic Method",
+  dir: "galen/64-de-methodo-medendi",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-65-ad-glauconem-de-methodo-medendi",
+  author: "galen",
+  number: 65,
+  title: "The Therapeutic Method, to Glaucon",
+  dir: "galen/65-ad-glauconem-de-methodo-medendi",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-66-de-venae-sectione-adversus-erasistratum",
+  author: "galen",
+  number: 66,
+  title: "On Venesection, against Erasistratus",
+  dir: "galen/66-de-venae-sectione-adversus-erasistratum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-67-de-venae-sectione-adversus-erasistrateos-romae-degentes",
+  author: "galen",
+  number: 67,
+  title: "On Venesection, against the Erasistrateans at Rome",
+  dir: "galen/67-de-venae-sectione-adversus-erasistrateos-romae-degentes",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-68-de-curandi-ratione-per-venae-sectionem",
+  author: "galen",
+  number: 68,
+  title: "On Treatment by Venesection",
+  dir: "galen/68-de-curandi-ratione-per-venae-sectionem",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-69-de-hirudinibus-revulsione-cucurbitula-incisione-et-scarifica",
+  author: "galen",
+  number: 69,
+  title: "On Leeches, Revulsion, Cupping, Incision and Scarification",
+  dir: "galen/69-de-hirudinibus-revulsione-cucurbitula-incisione-et-scarifica",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-72-pro-puero-epileptico-consilium",
+  author: "galen",
+  number: 70,
+  title: "Advice for an Epileptic Boy",
+  dir: "galen/72-pro-puero-epileptico-consilium",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-78-institutio-logica",
+  author: "galen",
+  number: 71,
   title: "Introduction to Logic",
   dir: "galen/78-institutio-logica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1300,7 +1412,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-79-de-sophismatis-seu-captionibus-penes-dictionem",
   author: "galen",
-  number: 65,
+  number: 72,
   title: "Linguistic Sophisms",
   dir: "galen/79-de-sophismatis-seu-captionibus-penes-dictionem",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1316,7 +1428,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-80-de-praenotione-ad-epigenem",
   author: "galen",
-  number: 66,
+  number: 73,
   title: "On Prognosis, to Epigenes",
   dir: "galen/80-de-praenotione-ad-epigenem",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1332,7 +1444,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-81-de-substantia-facultatum-naturalium-fragmentum",
   author: "galen",
-  number: 67,
+  number: 74,
   title: "On the Substance of the Natural Faculties (fragment)",
   dir: "galen/81-de-substantia-facultatum-naturalium-fragmentum",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1348,7 +1460,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-94-de-musculorum-dissectione-ad-tirones",
   author: "galen",
-  number: 68,
+  number: 75,
   title: "On the Dissection of Muscles for Beginners",
   dir: "galen/94-de-musculorum-dissectione-ad-tirones",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1364,7 +1476,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-95-de-consuetudinibus",
   author: "galen",
-  number: 69,
+  number: 76,
   title: "On Habits",
   dir: "galen/95-de-consuetudinibus",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1380,7 +1492,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-96-de-experientia-medica",
   author: "galen",
-  number: 70,
+  number: 77,
   title: "On Medical Experience (fragment)",
   dir: "galen/96-de-experientia-medica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1396,7 +1508,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-97-de-causis-respirationis",
   author: "galen",
-  number: 71,
+  number: 78,
   title: "On the Causes of Breathing",
   dir: "galen/97-de-causis-respirationis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
