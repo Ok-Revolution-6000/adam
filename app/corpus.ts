@@ -1458,9 +1458,201 @@ export const CORPUS_WORKS:Work[]=withTiers([
   ]
  },
  {
-  id: "galen-94-de-musculorum-dissectione-ad-tirones",
+  id: "galen-82-in-hippocratis-de-natura-hominis",
   author: "galen",
   number: 75,
+  title: "Commentary on Hippocrates’ Nature of Man",
+  dir: "galen/82-in-hippocratis-de-natura-hominis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-83-in-hippocratis-vel-polybi-opus-de-salubri-victus-ratione-pri",
+  author: "galen",
+  number: 76,
+  title: "Commentary on Hippocrates’ Regimen in Health",
+  dir: "galen/83-in-hippocratis-vel-polybi-opus-de-salubri-victus-ratione-pri",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-84-in-hippocratis-de-victu-acutorum",
+  author: "galen",
+  number: 77,
+  title: "Commentary on Hippocrates’ Regimen in Acute Diseases",
+  dir: "galen/84-in-hippocratis-de-victu-acutorum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-85-in-hippocratis-epidemiarum-i",
+  author: "galen",
+  number: 78,
+  title: "Commentaries on Hippocrates’ Epidemics I, III and VI",
+  dir: "galen/85-in-hippocratis-epidemiarum-i",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-86-in-hippocratis-aphorismos-commentarii-vii",
+  author: "galen",
+  number: 79,
+  title: "Commentary on Hippocrates’ Aphorisms",
+  dir: "galen/86-in-hippocratis-aphorismos-commentarii-vii",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-87-adversus-lycum",
+  author: "galen",
+  number: 80,
+  title: "Against Lycus",
+  dir: "galen/87-adversus-lycum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-88-adversus-ea-quae-juliano-in-hippocratis-aphorismos-enuntiata",
+  author: "galen",
+  number: 81,
+  title: "Against Julian",
+  dir: "galen/88-adversus-ea-quae-juliano-in-hippocratis-aphorismos-enuntiata",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-89-in-hippocratis-de-articulis",
+  author: "galen",
+  number: 82,
+  title: "Commentary on Hippocrates’ On Joints",
+  dir: "galen/89-in-hippocratis-de-articulis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-90-de-humero-iis-modis-prolapso-quos-hippocrates-non-vidit",
+  author: "galen",
+  number: 83,
+  title: "On Dislocations of the Shoulder Not Seen by Hippocrates",
+  dir: "galen/90-de-humero-iis-modis-prolapso-quos-hippocrates-non-vidit",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-91-in-hippocratis-prognosticum",
+  author: "galen",
+  number: 84,
+  title: "Commentary on Hippocrates’ Prognostic",
+  dir: "galen/91-in-hippocratis-prognosticum",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-92-in-hippocratis-de-fracturis",
+  author: "galen",
+  number: 85,
+  title: "Commentary on Hippocrates’ On Fractures",
+  dir: "galen/92-in-hippocratis-de-fracturis",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-93-in-hippocratis-de-officina-medici",
+  author: "galen",
+  number: 86,
+  title: "Commentary on Hippocrates’ In the Surgery",
+  dir: "galen/93-in-hippocratis-de-officina-medici",
+  source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
+  chapters: [
+   {
+    file: "eng-claude.md",
+    title: "English · Adomeh, from the Greek (machine translation)",
+    subtitle: "Adomeh’s English from the Greek; section and page references kept.",
+    lang: "eng"
+   }
+  ]
+ },
+ {
+  id: "galen-94-de-musculorum-dissectione-ad-tirones",
+  author: "galen",
+  number: 87,
   title: "On the Dissection of Muscles for Beginners",
   dir: "galen/94-de-musculorum-dissectione-ad-tirones",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1476,7 +1668,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-95-de-consuetudinibus",
   author: "galen",
-  number: 76,
+  number: 88,
   title: "On Habits",
   dir: "galen/95-de-consuetudinibus",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1492,7 +1684,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-96-de-experientia-medica",
   author: "galen",
-  number: 77,
+  number: 89,
   title: "On Medical Experience (fragment)",
   dir: "galen/96-de-experientia-medica",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
@@ -1508,7 +1700,7 @@ export const CORPUS_WORKS:Work[]=withTiers([
  {
   id: "galen-97-de-causis-respirationis",
   author: "galen",
-  number: 78,
+  number: 90,
   title: "On the Causes of Breathing",
   dir: "galen/97-de-causis-respirationis",
   source: "Machine translation from the Greek by Adomeh (Claude), CC BY-SA 4.0; Greek text: Kühn and later editions as digitised by the First Thousand Years of Greek project (CC BY-SA 4.0)",
