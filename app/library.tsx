@@ -9,7 +9,9 @@ interface Shelf {id:string;fig:string;figure:FigureId;plate:string;caption:strin
 const treatises=MAIMONIDES_WORKS.filter(w=>w.number);
 const mapped=new Set(LESSONS.map(l=>l.work));
 /** Counts of the local corpora that are not indexed into the app yet (see the corpus README). */
-const GALEN_WORKS=97,AVICENNA_WORKS=19;
+const GALEN_WORKS=97;
+/** Avicenna is represented by the Canon alone: the five books are what the app holds in English. */
+const AVICENNA_BOOKS=CORPUS_WORKS.filter(w=>w.author==='avicenna');
 const HIPPOCRATES_WORKS=CORPUS_WORKS.filter(w=>w.author==='hippocrates');
 const SHELVES:Shelf[]=[
  {id:'hippocrates',fig:'A',figure:'humours',plate:'Humours',caption:'Four humours in mixture; health is their balance.',name:'Hippocrates',dates:'c. 460–370 BCE',place:'Kos',language:'Greek',
@@ -27,15 +29,15 @@ const SHELVES:Shelf[]=[
   lede:'Ibn Sīnā, who put Galenic medicine in order.',
   bio:'Born near Bukhara in 980, he had mastered medicine and philosophy by eighteen, when curing the Samanid emir opened the royal library to him. After the Samanids fell he moved from court to court across Iran, served the Buyid ruler of Hamadan as physician and vizier, wrote much of his work on the road and in hiding, and died at Hamadan in 1037.',
   body:'The Canon of Medicine arranges what Galen left scattered across hundreds of treatises into one systematic book: principles, simple drugs, diseases organ by organ from head to foot, diseases of the whole body, and compound remedies. It was the textbook Maimonides’ contemporaries studied, and it was taught in Latin Europe into the seventeenth century.',
-  status:'The Canon in English · open to members, as it is translated',more:`${AVICENNA_WORKS} works are held; the rest are philosophy (The Healing, The Salvation, Pointers and Reminders).`,
-  works:[{title:'The Canon of Medicine',detail:'al-Qānūn fī al-Ṭibb'},{title:'Poem on Medicine',detail:'al-Urjūza fī al-Ṭibb'}]},
+  status:'The Canon of Medicine, all five books, in Adomeh’s English from the Arabic · open to members',
+  works:AVICENNA_BOOKS.map((w,i)=>({title:w.title.replace(/^The Canon of Medicine, /,''),detail:['General principles','Simple drugs','Diseases organ by organ','Diseases of the whole body','Compound remedies'][i]}))},
  {id:'maimonides',fig:'D',figure:'regimen',plate:'Regimen',caption:'Striations turning with the breath: the regimen of asthma.',name:'Maimonides',dates:'1138–1204',place:'Córdoba to Fustat',language:'Arabic',
   lede:'Moses ben Maimon, court physician in Cairo, and the library’s first author.',
   bio:'Born in Córdoba in 1138, he left Spain with his family when the Almohads came to power, lived for some years in Fez, and settled around 1166 in Fustat, Old Cairo. When his brother David drowned at sea with the family’s fortune he took up medicine for a living, rising to physician at the court of Saladin’s son al-Afdal; he led Egypt’s Jews, wrote the Mishneh Torah and the Guide of the Perplexed, and died in 1204.',
   body:'Maimonides wrote his medical works in Arabic in the last decades of his life, most of them for particular patients: a treatise on asthma for a man of rank, a regimen of health for a sultan’s son. They are practical, sceptical and exact about food, air, sleep and the movements of the soul, and they assume the Galenic body at every step. Adam reads them in Gerrit Bos’s translation from the Arabic (Brill, 2021). The translations are in copyright and are not published here; the atlas reads them from a private study corpus.',
   status:'Included in Adam Membership',works:treatises.map(w=>({title:w.title,detail:`${w.chapters.length} ${w.chapters.length===1?'chapter':'chapters'}${mapped.has(w.id)?' · mapped to the body':''}`}))},
 ];
-const TOTAL=HIPPOCRATES_WORKS.length+GALEN_WORKS+AVICENNA_WORKS+treatises.length;
+const TOTAL=HIPPOCRATES_WORKS.length+GALEN_WORKS+1+treatises.length;
 const Fig=({to,fig}:{to:string;fig:string})=><a className="fig-ref" href={`#${to}`} onClick={e=>{e.preventDefault();document.getElementById(to)?.scrollIntoView({behavior:'smooth',block:'start'});}}>FIG {fig}</a>;
 export default function Library(){
  const [active,setActive]=useState('');
