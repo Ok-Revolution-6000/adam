@@ -9,7 +9,7 @@ interface Shelf {id:string;fig:string;figure:FigureId;plate:string;caption:strin
 const treatises=MAIMONIDES_WORKS.filter(w=>w.number);
 const mapped=new Set(LESSONS.map(l=>l.work));
 /** Counts of the local corpora that are not indexed into the app yet (see the corpus README). */
-const GALEN_WORKS=97;
+const GALEN_WORKS=96;
 /** Avicenna is represented by the Canon alone: the five books are what the app holds in English. */
 const AVICENNA_BOOKS=CORPUS_WORKS.filter(w=>w.author==='avicenna');
 const HIPPOCRATES_WORKS=CORPUS_WORKS.filter(w=>w.author==='hippocrates');
