@@ -53,7 +53,8 @@ const regimen:Draw=(c,s,t,p)=>{
  return `θ=${theta.toFixed(3)}rad`;
 };
 const make:Record<FigureId,()=>Draw>={humours,pneuma:()=>pneuma,canon:()=>canon,regimen:()=>regimen};
-export default function Figure({id}:{id:FigureId}){
+/** A portrait, when given, lies over the plate and is drawn in (top to bottom) once `revealed` is set. */
+export default function Figure({id,portrait,alt,revealed}:{id:FigureId;portrait?:string;alt?:string;revealed?:boolean}){
  const canvas=useRef<HTMLCanvasElement>(null),readout=useRef<HTMLSpanElement>(null);
  useEffect(()=>{
   const el=canvas.current!,c=el.getContext('2d')!,draw=make[id](),still=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -65,5 +66,5 @@ export default function Figure({id}:{id:FigureId}){
   el.addEventListener('pointermove',move);el.addEventListener('pointerleave',leave);
   return ()=>{cancelAnimationFrame(frame);watch.disconnect();el.removeEventListener('pointermove',move);el.removeEventListener('pointerleave',leave);};
  },[id]);
- return <div className="plate"><canvas ref={canvas} aria-hidden="true"/><span ref={readout} className="plate-readout"/></div>;
+ return <div className={`plate${revealed?' is-revealed':''}`}><canvas ref={canvas} aria-hidden="true"/><span ref={readout} className="plate-readout"/>{portrait&&<img className="plate-portrait" src={portrait} alt={alt??''} loading="lazy" decoding="async" aria-hidden={!revealed}/>}</div>;
 }
