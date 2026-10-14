@@ -240,7 +240,8 @@ html.capture .identity,html.capture .top-actions,html.capture .layers-panel,html
 .account-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .account-card{padding:clamp(20px,2.4vw,32px);border:1px solid var(--rule);display:flex;flex-direction:column;gap:clamp(12px,1.8vh,18px)}
 .account-card h2{font-size:clamp(24px,2.6vw,32px);line-height:1.15;letter-spacing:-.02em;margin:0;overflow-wrap:anywhere}
-.account-card h2.is-member{color:var(--coral)}
+.account-card h2.plan-name{font-weight:700;color:var(--ink)}
+.account-card h2.plan-name.is-member{color:var(--coral)}
 .account-card p{margin:0;line-height:1.6}
 .account-card dl{margin:0}.account-card dl div{padding:10px 0;border-bottom:1px solid var(--rule)}
 .account-card dt{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey);margin-bottom:8px}
@@ -355,3 +356,7 @@ html.capture .identity,html.capture .top-actions,html.capture .layers-panel,html
 @media (prefers-reduced-motion:reduce){.plate-portrait{transition:opacity .3s}}
 /* Account on short laptop screens: the whole page stays within the viewport. */
 @media(min-width:861px) and (max-height:820px){.account-main{padding-top:14px}.account-head{padding-bottom:12px;margin-bottom:14px}.account-head h1{font-size:44px;margin-top:4px}.account-card{padding:18px 26px;gap:10px}.account-card p{line-height:1.45}.account-card dl div{padding:7px 0}.account-card dt{margin-bottom:4px}.account-card .tier-btn{padding:8px}.account-footer{padding:12px 0}}
+/* GitHub in the site bar: the mark alone on desktop, with its name in the phone menu. */
+.site-github{display:inline-flex;align-items:center;gap:10px;color:var(--grey);text-decoration:none}
+.site-github:hover{color:var(--ink)}
+@media(min-width:861px){.site-github span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
