@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "projectDir": "/tmp/adam-atlas-audit/adam-capture",
+  "url": "http://127.0.0.1:3016/#/structures/brain",
+  "httpStatus": 200,
+  "title": "Adomeh",
+  "screenshots": 1,
+  "assets": 0,
+  "dropped": {
+    "size-floor": 0,
+    "budget-exhausted": 0,
+    "cap-reached": 0,
+    "unavailable": 0
+  },
+  "detectedSections": 0,
+  "fonts": [
+    "Inter",
+    "Iowan Old Style"
+  ],
+  "fontsDetailed": [
+    {
+      "family": "Inter",
+      "weights": [
+        400,
+        700,
+        800
+      ],
+      "variable": false
+    },
+    {
+      "family": "Iowan Old Style",
+      "weights": [
+        400
+      ],
+      "variable": false
+    }
+  ],
+  "animations": {
+    "webAnimations": 0,
+    "cssDeclarations": 10,
+    "scrollTargets": 1,
+    "cdpAnimations": 0,
+    "canvases": 1
+  },
+  "warnings": [],
+  "lastPhase": {
+    "schema": "hyperframes.capture.phase.v1",
+    "phase": "complete",
+    "status": "completed",
+    "remainingMs": 21074
+  }
+}

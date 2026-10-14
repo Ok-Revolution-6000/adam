@@ -1,0 +1,31 @@
+{
+  "checked_date": "2026-10-14",
+  "upstream_sha": "1c38bf35c254a891200d3cedecfd57abebe83d8d",
+  "references": {
+    "HEAD": {
+      "sha": "4bc54e6381313cc49eb0649b2acfd3a3b0c68a39",
+      "ahead": 60,
+      "behind": 0
+    },
+    "main": {
+      "sha": "42a68f9f8baff389db1dab0cf012d2bd55ec73f3",
+      "ahead": 59,
+      "behind": 0
+    },
+    "origin/main": {
+      "sha": "da1b422ba20611a4559b8f6d30083b95e9274e89",
+      "ahead": 63,
+      "behind": 0
+    }
+  },
+  "core_atlas_diff": "",
+  "video": {
+    "path": "/Users/ilprinceps/Downloads/d195f1a06d6e484f9e00588403e38704.MP4",
+    "seconds": 34.6,
+    "width": 720,
+    "height": 1280,
+    "fps": 30
+  },
+  "astra_bundle_url": "https://app.astra-ai.co/_next/static/immutable/chunks/3m_u64eops2ad.js",
+  "astra_asset_download": "HTTP 403; asset metadata and rights unverified"
+}

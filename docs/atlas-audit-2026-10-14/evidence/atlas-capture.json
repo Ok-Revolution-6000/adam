@@ -1,0 +1,46 @@
+{
+  "ok": true,
+  "projectDir": "/tmp/adam-atlas-audit/atlas-capture",
+  "url": "http://127.0.0.1:3016/#capture&select=brain&isolate=1&view=side&hide=ui",
+  "httpStatus": 200,
+  "title": "Adomeh",
+  "screenshots": 1,
+  "assets": 0,
+  "dropped": {
+    "size-floor": 0,
+    "budget-exhausted": 0,
+    "cap-reached": 0,
+    "unavailable": 0
+  },
+  "detectedSections": 0,
+  "fonts": [
+    "Inter"
+  ],
+  "fontsDetailed": [
+    {
+      "family": "Inter",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "variable": false
+    }
+  ],
+  "animations": {
+    "webAnimations": 0,
+    "cssDeclarations": 48,
+    "scrollTargets": 0,
+    "cdpAnimations": 0,
+    "canvases": 1
+  },
+  "warnings": [
+    "Page has very little text content (0 chars) — may be blocked or a client-rendered SPA that needs more time"
+  ],
+  "lastPhase": {
+    "schema": "hyperframes.capture.phase.v1",
+    "phase": "complete",
+    "status": "completed",
+    "remainingMs": 4259
+  }
+}
