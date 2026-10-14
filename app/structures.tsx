@@ -10,8 +10,9 @@ import {drawSpecimen,loadSpecimen} from './specimen';
 const REST=-.55;
 const number=(i:number)=>String(i+1).padStart(2,'0');
 const system=(s:Specimen)=>SYSTEMS.find(x=>x.id===s.system)?.name??s.system;
-/** A specimen drawn into a 2D canvas. It loads when it scrolls into view; `turn` spins it (the index on hover, the large viewer always) and `drag` lets the reader turn it by hand. */
-function Specimen3D({specimen,turn,drag,className}:{specimen:Specimen;turn:boolean;drag?:boolean;className?:string}){
+/** A specimen drawn into a 2D canvas. It loads when it scrolls into view; `turn` spins it (the index on hover, the large viewer always) and `drag` lets the reader turn it by hand.
+ * With `detail`, the unsimplified surface (where the specimen has one) replaces the small one once it arrives. */
+function Specimen3D({specimen,turn,drag,detail,className}:{specimen:Specimen;turn:boolean;drag?:boolean;detail?:boolean;className?:string}){
  const canvas=useRef<HTMLCanvasElement>(null),turning=useRef(turn),rouse=useRef(()=>{}),[failed,setFailed]=useState(false);
  turning.current=turn;
  useEffect(()=>{if(turn)rouse.current();},[turn]);
@@ -20,12 +21,12 @@ function Specimen3D({specimen,turn,drag,className}:{specimen:Specimen;turn:boole
   let geometry:Awaited<ReturnType<typeof loadSpecimen>>|null=null,azimuth=REST,elevation=.18,frame=0,last=0,held:{x:number;y:number}|null=null,gone=false;
   const paint=(now:number)=>{frame=0;if(!geometry)return;const dt=Math.min(now-(last||now),50);last=now;const spin=turning.current&&!held&&!still;if(spin)azimuth+=dt*.0006;drawSpecimen(el,geometry,azimuth,elevation);if(spin)frame=requestAnimationFrame(paint);else last=0;};
   const wake=()=>{if(!frame)frame=requestAnimationFrame(paint);};rouse.current=wake;
-  const watch=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;watch.disconnect();loadSpecimen(specimen).then(g=>{if(gone)return;geometry=g;wake();},()=>setFailed(true));},{rootMargin:'200px'});watch.observe(el);
+  const watch=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;watch.disconnect();loadSpecimen(specimen).then(g=>{if(gone)return;geometry=g;wake();if(detail&&specimen.detail)loadSpecimen(specimen,true).then(g=>{if(!gone){geometry=g;wake();}},()=>{});},()=>setFailed(true));},{rootMargin:'200px'});watch.observe(el);
   const resize=new ResizeObserver(wake);resize.observe(el);
   const enter=()=>wake(),down=(e:PointerEvent)=>{if(!drag)return;held={x:e.clientX,y:e.clientY};el.setPointerCapture(e.pointerId);},move=(e:PointerEvent)=>{if(!held)return;azimuth-=(e.clientX-held.x)*.008;elevation=Math.max(-1.2,Math.min(1.2,elevation+(e.clientY-held.y)*.006));held={x:e.clientX,y:e.clientY};wake();},up=()=>{held=null;wake();};
   el.addEventListener('pointerenter',enter);el.addEventListener('pointerdown',down);el.addEventListener('pointermove',move);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
   return ()=>{gone=true;cancelAnimationFrame(frame);watch.disconnect();resize.disconnect();el.removeEventListener('pointerenter',enter);el.removeEventListener('pointerdown',down);el.removeEventListener('pointermove',move);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);};
- },[specimen,drag]);
+ },[specimen,drag,detail]);
  return failed?<div className={`${className} specimen-failed`}>Not loaded</div>:<canvas ref={canvas} className={className} aria-hidden="true"/>;
 }
 function Index(){
@@ -62,7 +63,7 @@ function Detail({specimen,at}:{specimen:Specimen;at:number}){
    </section></main>
    <a className="edge edge-prev" href={`#/structures/${before.slug}`} aria-label={`Previous: ${before.name}`}><ArrowLeft size={18}/><span>{before.name}</span><kbd>←</kbd></a>
    <a className="edge edge-next" href={`#/structures/${after.slug}`} aria-label={`Next: ${after.name}`}><ArrowRight size={18}/><span>{after.name}</span><kbd>→</kbd></a>
-   <aside className="plates is-single" aria-label="Specimen"><figure><div className="plate"><Specimen3D key={specimen.slug} specimen={specimen} turn drag className="specimen-stage"/><span className="plate-readout">{(specimen.extent*100).toFixed(1)} cm</span></div><figcaption><b>Fig. {number(at)}. {specimen.name}</b><span>Lifted out of the body, at its longest {(specimen.extent*100).toFixed(1)} cm. Drag to turn.</span></figcaption></figure></aside>
+   <aside className="plates is-single" aria-label="Specimen"><figure><div className="plate"><Specimen3D key={specimen.slug} specimen={specimen} turn drag detail className="specimen-stage"/><span className="plate-readout">{(specimen.extent*100).toFixed(1)} cm</span></div><figcaption><b>Fig. {number(at)}. {specimen.name}</b><span>Lifted out of the body, at its longest {(specimen.extent*100).toFixed(1)} cm. Drag to turn.</span></figcaption></figure></aside>
   </div>
  </div>;
 }

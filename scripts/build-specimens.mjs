@@ -4,11 +4,14 @@ await MeshoptSimplifier.ready;
 /** Cuts one small mesh per noted structure (app/organ-notes.ts) out of the atlas chunks, so the Structures page can show
  * a heart or a liver without downloading the whole body. Each specimen merges its parts, is simplified to a triangle
  * budget, and is packed as: uint16 positions (unit cube), int8 normals, uint8 system colours, then indices; each block 4-byte aligned.
- * Writes public/models/specimens/<slug>.bin and the generated index app/specimens.ts. */
+ * Writes public/models/specimens/<slug>.bin and the generated index app/specimens.ts.
+ * The structures named in DETAIL also get <slug>-detail.bin, welded but not simplified, which the specimen's own page loads after the small file. */
 /** Triangles per specimen: a tenth of the source, but never fewer than an organ needs nor more than a whole system (every muscle, every bone) can use. */
 const budget=triangles=>Math.round(Math.min(48000,Math.max(16000,triangles*.1))),ERROR=.05;
 /** Where the surface count misfiles a structure: the skull's finely modelled eyes outweigh its bones, the liver's veins its lobes, the heart the veins that drain into it. */
 const FILED={skull:'skeletal',liver:'digestive','systemic venous system':'venous'};
+/** Structures whose page swaps in the full atlas surface once it has loaded. */
+const DETAIL=new Set(['brain']);
 const root=new URL('../',import.meta.url),dir=new URL('public/models/',root),out=new URL('specimens/',dir);
 const atlas=JSON.parse(fs.readFileSync(new URL('atlas.json',dir),'utf8'));
 const chunks=atlas.chunks.map(c=>fs.readFileSync(new URL(c.url.split('/').pop(),dir)));
@@ -19,6 +22,20 @@ const parts=new Map(atlas.parts.map(p=>[p.id,p])),concepts=new Map(atlas.concept
 const align=n=>n+(4-n%4)%4;
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
 const index=[];let total=0;
+/** Packs the welded vertices that `indices` uses into public/models/specimens/<file>, in a unit cube of their own. */
+function pack(indices,pos,normal,colour,welded,file){
+ const [remap,unique]=MeshoptSimplifier.compactMesh(indices);
+ const min=[Infinity,Infinity,Infinity],max=[-Infinity,-Infinity,-Infinity];
+ for(let k=0;k<welded;k++)if(remap[k]!==0xffffffff)for(let a=0;a<3;a++){const x=pos[k*3+a];if(x<min[a])min[a]=x;if(x>max[a])max[a]=x;}
+ const extent=Math.max(max[0]-min[0],max[1]-min[1],max[2]-min[2]),wide=unique>65535;
+ const P=new Uint16Array(unique*3),N=new Int8Array(unique*3),C=new Uint8Array(unique*3);
+ for(let k=0;k<welded;k++){const t=remap[k];if(t===0xffffffff)continue;for(let a=0;a<3;a++){P[t*3+a]=Math.round((pos[k*3+a]-min[a])/extent*65535);N[t*3+a]=Math.round(normal[k*3+a]/32767*127);C[t*3+a]=colour[k*3+a];}}
+ const I=wide?indices:Uint16Array.from(indices);
+ const blocks=[P,N,C,I],bytes=Buffer.alloc(blocks.reduce((n,b)=>align(n)+b.byteLength,0));let at=0;
+ for(const b of blocks){at=align(at);Buffer.from(b.buffer,b.byteOffset,b.byteLength).copy(bytes,at);at+=b.byteLength;}
+ fs.writeFileSync(new URL(file,out),bytes);total+=bytes.length;
+ return {vertices:unique,indices:indices.length,wide,min:min.map(x=>+x.toFixed(5)),extent:+extent.toFixed(5),bytes:bytes.length};
+}
 for(const name of names){
  const concept=concepts.get(name);if(!concept)throw new Error(`No atlas concept named "${name}".`);
  const own=concept.elements.map(id=>parts.get(id)).filter(Boolean),vertices=own.reduce((n,p)=>n+p.vertexCount,0),count=own.reduce((n,p)=>n+p.indexCount,0);
@@ -37,34 +54,28 @@ for(const name of names){
  for(let k=0;k<vertices;k++){const key=`${pos[k*3]},${pos[k*3+1]},${pos[k*3+2]}`;let t=seen.get(key);if(t===undefined){t=welded++;seen.set(key,t);pos.copyWithin(t*3,k*3,k*3+3);colour.copyWithin(t*3,k*3,k*3+3);sum.push(0,0,0);}weld[k]=t;for(let a=0;a<3;a++)sum[t*3+a]+=normal[k*3+a];}
  for(let t=0;t<welded;t++){const length=Math.hypot(sum[t*3],sum[t*3+1],sum[t*3+2])||1;for(let a=0;a<3;a++)normal[t*3+a]=Math.round(sum[t*3+a]/length*32767);}
  for(let k=0;k<indices.length;k++)indices[k]=weld[indices[k]];
- const BUDGET=budget(count/3);
+ const slug=name.replace(/\s+/g,'-'),BUDGET=budget(count/3),full=indices;
  if(count/3>BUDGET){
   indices=MeshoptSimplifier.simplify(indices,pos.subarray(0,welded*3),3,BUDGET*3,ERROR)[0];
   // Last resort for a mesh that still will not come down: the sloppy pass ignores topology and always lands on budget.
   if(indices.length/3>BUDGET*3)indices=MeshoptSimplifier.simplifySloppy(indices,pos.subarray(0,welded*3),3,null,BUDGET*6,ERROR)[0];
  }
- const [remap,unique]=MeshoptSimplifier.compactMesh(indices);
- const min=[Infinity,Infinity,Infinity],max=[-Infinity,-Infinity,-Infinity];
- for(let k=0;k<welded;k++)if(remap[k]!==0xffffffff)for(let a=0;a<3;a++){const x=pos[k*3+a];if(x<min[a])min[a]=x;if(x>max[a])max[a]=x;}
- const extent=Math.max(max[0]-min[0],max[1]-min[1],max[2]-min[2]),wide=unique>65535;
- const P=new Uint16Array(unique*3),N=new Int8Array(unique*3),C=new Uint8Array(unique*3);
- for(let k=0;k<welded;k++){const t=remap[k];if(t===0xffffffff)continue;for(let a=0;a<3;a++){P[t*3+a]=Math.round((pos[k*3+a]-min[a])/extent*65535);N[t*3+a]=Math.round(normal[k*3+a]/32767*127);C[t*3+a]=colour[k*3+a];}}
- const I=wide?indices:Uint16Array.from(indices);
- const blocks=[P,N,C,I],file=Buffer.alloc(blocks.reduce((n,b)=>align(n)+b.byteLength,0));let at=0;
- for(const b of blocks){at=align(at);Buffer.from(b.buffer,b.byteOffset,b.byteLength).copy(file,at);at+=b.byteLength;}
- const slug=name.replace(/\s+/g,'-');fs.writeFileSync(new URL(`${slug}.bin`,out),file);total+=file.length;
+ const small=pack(indices,pos,normal,colour,welded,`${slug}.bin`);
+ const detail=DETAIL.has(name)?pack(full,pos,normal,colour,welded,`${slug}-detail.bin`):null;
  // The system with the most surface, setting aside the vessels that run through an organ (a lung is respiratory) unless vessels are nearly all there is.
  const ranked=Object.entries(weight).sort((a,b)=>b[1]-a[1]),solid=ranked.filter(([id])=>id!=='arterial'&&id!=='venous'),share=solid.reduce((n,[,w])=>n+w,0)/count;
  const system=FILED[name]??(share>.15?solid:ranked)[0][0];
- index.push({slug,name,system,parts:own.length,triangles:count/3,vertices:unique,indices:indices.length,wide,min:min.map(x=>+x.toFixed(5)),extent:+extent.toFixed(5),bytes:file.length});
+ index.push({slug,name,system,parts:own.length,triangles:count/3,...small,...detail&&{detail:{vertices:detail.vertices,indices:detail.indices,wide:detail.wide,bytes:detail.bytes}}});
 }
 const ts=`// Generated by scripts/build-specimens.mjs from the atlas and app/organ-notes.ts. Do not edit by hand.
 import type {SystemId} from './anatomy';
 /** One noted structure cut out of the atlas: \`parts\` and \`triangles\` describe the source anatomy, the rest locate and unpack /models/specimens/<slug>.bin. */
-export interface Specimen {slug:string;name:string;system:SystemId;parts:number;triangles:number;vertices:number;indices:number;wide:boolean;min:[number,number,number];extent:number;bytes:number}
+export interface Specimen {slug:string;name:string;system:SystemId;parts:number;triangles:number;vertices:number;indices:number;wide:boolean;min:[number,number,number];extent:number;bytes:number;detail?:SpecimenFile}
+/** The unsimplified surface, for the structures that have one: /models/specimens/<slug>-detail.bin. */
+export interface SpecimenFile {vertices:number;indices:number;wide:boolean;bytes:number}
 export const SPECIMENS:Specimen[]=[
 ${index.map(s=>' '+JSON.stringify(s)).join(',\n')},
 ] as Specimen[];
 `;
 fs.writeFileSync(new URL('app/specimens.ts',root),ts);
-console.log(`${index.length} specimens · ${(total/1e6).toFixed(1)} MB · largest ${index.slice().sort((a,b)=>b.bytes-a.bytes).slice(0,3).map(s=>`${s.name} ${(s.bytes/1e3).toFixed(0)} kB`).join(', ')}`);
+console.log(`${index.length} specimens (${index.filter(s=>s.detail).length} with detail) · ${(total/1e6).toFixed(1)} MB · largest ${index.slice().sort((a,b)=>b.bytes-a.bytes).slice(0,3).map(s=>`${s.name} ${(s.bytes/1e3).toFixed(0)} kB`).join(', ')}`);
