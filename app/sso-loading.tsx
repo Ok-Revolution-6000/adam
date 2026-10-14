@@ -13,7 +13,7 @@ export default function SsoLoading(){
      <g className="sso-orbit-turn"><circle className="sso-orbit-arc" cx="80" cy="80" r="70"/><circle cx="80" cy="10" r="3" fill="currentColor"/></g>
      <g className="sso-orbit-counter"><circle className="sso-orbit-inner" cx="80" cy="80" r="57"/></g>
     </svg>
-    <img className="sso-mark" src="/icon-192.png" alt="" width="68" height="68"/>
+    <img className="sso-mark" src="/icon-192.png" alt="" width="120" height="120"/>
    </div>
    <div className="sso-copy">
     <p className="sso-wordmark">Adomeh</p>
