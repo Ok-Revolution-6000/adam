@@ -28,4 +28,7 @@ function Root(){
 }
 const key=(import.meta as unknown as {env:Record<string,string|undefined>}).env.VITE_CLERK_PUBLISHABLE_KEY;
 if(!key)console.warn('VITE_CLERK_PUBLISHABLE_KEY is not set: sign-in is unavailable.');
-createRoot(document.getElementById('root')!).render(<ClerkProvider publishableKey={key??'pk_test_missing'} signInUrl="/#/sign-in" signUpUrl="/#/sign-up" afterSignOutUrl="/"><Root/></ClerkProvider>);
+/** Development only: #/loader-preview shows the sign-in loader on its own, without a Google round trip. */
+const loaderPreview=(import.meta as unknown as {env:{DEV?:boolean}}).env.DEV&&location.hash==='#/loader-preview';
+if(loaderPreview)createRoot(document.getElementById('root')!).render(<SsoLoading/>);
+else createRoot(document.getElementById('root')!).render(<ClerkProvider publishableKey={key??'pk_test_missing'} signInUrl="/#/sign-in" signUpUrl="/#/sign-up" afterSignOutUrl="/"><Root/></ClerkProvider>);
