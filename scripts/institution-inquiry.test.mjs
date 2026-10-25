@@ -96,9 +96,8 @@ test('email has grouped HTML and escapes submitted text',()=>{
 test('requires acceptance of both emails and safely formats the confirmation',async()=>{
  const partial=await handleInquiry(request({...valid,email:'partial@example.edu'}),config,async()=>new Response(JSON.stringify({data:[{id:'only-one'}]})));
  assert.equal(partial.status,502);
- const confirmation=inquiryConfirmation({...valid,name:'<img src=x>'});
- assert.ok(confirmation.html.includes('&lt;img src=x&gt;'));
- assert.ok(!confirmation.html.includes('<img src=x>'));
+ const confirmation=inquiryConfirmation();
+ assert.ok(!confirmation.html.includes(valid.name)&&!confirmation.text.includes(valid.name));
  assert.ok(confirmation.text.includes('just reply to this email'));
 });
 

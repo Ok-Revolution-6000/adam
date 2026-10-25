@@ -9,6 +9,13 @@ const MAX_BYTES=32768;
 const json=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','cache-control':'no-store'}});
 // Best-effort per-instance throttling. The provider also deduplicates identical retries.
 const recent=new Map<string,{count:number;until:number}>();
+// Each inquiry also mails the (unverified) submitter address, so cap the total per instance as well: rotating addresses
+// gets past the per-address limit. Real institutional inquiries arrive a few a week.
+const HOURLY_CAP=20;let hourStart=0,hourCount=0;
+function globallyLimited(){
+ const now=Date.now();if(now-hourStart>3600000){hourStart=now;hourCount=0;}
+ return ++hourCount>HOURLY_CAP;
+}
 function limited(email:string){
  const now=Date.now();for(const [key,value] of recent)if(value.until<=now)recent.delete(key);
  const key=createHash('sha256').update(email.toLowerCase()).digest('hex'),entry=recent.get(key);
@@ -36,10 +43,10 @@ export async function handleInquiry(req:Request,config:InquiryConfig,send:typeof
  const {data,errors}=validateInquiry(raw);
  if(Object.keys(errors).length)return json({error:'Please check the highlighted fields.',fields:errors},400);
  if(!config.apiKey||!config.from)return json({error:'Inquiries are temporarily unavailable. Your details have not been sent. Please try again later.'},503);
- if(limited(data.email))return json({error:'Please wait a few minutes before submitting another inquiry.'},429);
+ if(limited(data.email)||globallyLimited())return json({error:'Please wait a few minutes before submitting another inquiry.'},429);
  const payload=[
   {from:config.from,to:[RECIPIENT],reply_to:data.email,subject:`Adam institution inquiry: ${data.institution}`,...inquiryEmail(data)},
-  {from:config.from,to:[data.email],reply_to:RECIPIENT,subject:'We received your inquiry · Adomeh',...inquiryConfirmation(data)},
+  {from:config.from,to:[data.email],reply_to:RECIPIENT,subject:'We received your inquiry · Adomeh',...inquiryConfirmation()},
  ];
  const idempotency=createHash('sha256').update(JSON.stringify(payload)).digest('hex');
  try{
