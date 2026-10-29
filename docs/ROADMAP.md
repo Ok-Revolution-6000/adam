@@ -1,5 +1,9 @@
 # Adomeh roadmap
 
+## Onboarding (research, 2026-10-14)
+
+Not started. As a reference, the full Astra AI sign-up and first-run flow is in `docs/onboarding-research-2026-10-14/`: 31 screens in order, plus the patterns worth taking.
+
 ## R&D: realistic specimens (parked 2026-10-14)
 
 **Decision:** the atlas and the Structures specimens stay as they are. Everything below is for later.

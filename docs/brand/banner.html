@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=EB+Garamond:ital,wght@1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f3ef;--ink:#121212;--rule:#1212120c;--pad:190px}
+*{box-sizing:border-box;margin:0}
+html,body{width:2520px;background-color:#f7f6f3;background-image:linear-gradient(var(--rule) 2px,transparent 2px),linear-gradient(90deg,var(--rule) 2px,transparent 2px);background-size:44px 44px}
+.banner{display:grid;grid-template-columns:1fr 940px 1fr;align-items:stretch}
+.side{display:flex;justify-content:center;align-items:flex-start;gap:40px;padding:var(--pad) 0}
+.center{position:relative;padding:var(--pad) 0;display:flex;flex-direction:column;align-items:center;justify-content:stretch;text-align:center;background:radial-gradient(ellipse at center,#fbf3ec 0%,var(--paper) 70%);border-left:2px solid var(--ink);border-right:2px solid var(--ink)}
+.mark{position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--pad) + 30px - 34px - 150px);width:150px;height:150px;object-fit:contain;display:block}
+h1{font:800 188px/0.74 Inter,sans-serif;letter-spacing:-.035em;text-transform:uppercase;color:var(--ink)}
+.lede{font:italic 400 50px/1.15 'EB Garamond',serif;white-space:nowrap;margin-top:22px}
+.ledger{white-space:nowrap;margin-top:30px;font:400 19px 'IBM Plex Mono',monospace;letter-spacing:.03em;display:flex;gap:18px;padding-top:14px;border-top:2px solid var(--ink)}
+.ledger b{font-weight:500}
+figure{width:330px}
+.plate{width:330px;height:330px;border:2px solid var(--ink);background:var(--paper);overflow:hidden}
+.plate img{width:100%;height:100%;object-fit:cover;display:block}
+figcaption{margin-top:16px}
+figcaption b{display:block;font:600 28px Inter,sans-serif}
+figcaption span{display:block;margin-top:6px;font:400 20px 'IBM Plex Mono',monospace}
+.words{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:0}
+.head{display:flex;flex-direction:column;align-items:center;margin-top:62px}
+</style></head><body><div class="banner" id="banner">
+<div class="side">
+ <figure><div class="plate"><img src="hippocrates.webp"></div><figcaption><b>A. Hippocrates</b><span>c. 460–370 BCE · Kos</span></figcaption></figure>
+ <figure><div class="plate"><img src="galen.webp"></div><figcaption><b>B. Galen</b><span>129–c. 216 · Pergamon</span></figcaption></figure>
+</div>
+<div class="center">
+ <img class="mark" src="logo.png" alt="">
+ <div class="words"><div class="head"><h1>Adomeh</h1><p class="lede">The classical physicians, read against the body.</p>
+ <div class="ledger"><span>Greek &amp; Arabic → English</span><span>·</span><b>Four physicians, one body</b><span>·</span><span>adomeh.com</span></div></div></div>
+</div>
+<div class="side">
+ <figure><div class="plate"><img src="avicenna.webp"></div><figcaption><b>C. Avicenna</b><span>980–1037 · Bukhara</span></figcaption></figure>
+ <figure><div class="plate"><img src="maimonides.webp"></div><figcaption><b>D. Maimonides</b><span>1138–1204 · Córdoba</span></figcaption></figure>
+</div>
+</div></body></html>
